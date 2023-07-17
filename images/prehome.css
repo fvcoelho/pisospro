@@ -1,0 +1,400 @@
+/* line 1, ../../scss/pages/prehome.scss */
+body {
+  overflow-x: hidden;
+}
+
+/* line 6, ../../scss/pages/prehome.scss */
+section {
+  width: 100vw;
+  min-height: 100vh;
+  color: #003057;
+}
+/* line 12, ../../scss/pages/prehome.scss */
+section #logo {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+@media screen and (min-width: 769px) {
+  /* line 12, ../../scss/pages/prehome.scss */
+  section #logo {
+    top: 60px;
+    left: 90px;
+    transform: none;
+  }
+}
+/* line 28, ../../scss/pages/prehome.scss */
+section a {
+  transition: all 0.25s ease-in-out;
+}
+/* line 33, ../../scss/pages/prehome.scss */
+section #prehome-collab {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+/* line 46, ../../scss/pages/prehome.scss */
+section #prehome-collab--contents {
+  border: 2px solid white;
+  padding: 24px 100px;
+  background-color: #103D62;
+  width: auto;
+  height: auto;
+  min-height: initial;
+  text-align: center;
+  color: white;
+  background-image: url("../../img/prehome/collab.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 90%;
+}
+@media screen and (min-width: 769px) {
+  /* line 46, ../../scss/pages/prehome.scss */
+  section #prehome-collab--contents {
+    max-width: initial;
+  }
+}
+/* line 66, ../../scss/pages/prehome.scss */
+section #prehome-collab--contents p {
+  font-family: 'TradeGothicLTStd-Cn18';
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-top: 60px;
+}
+@media screen and (min-width: 769px) {
+  /* line 66, ../../scss/pages/prehome.scss */
+  section #prehome-collab--contents p {
+    font-size: 36px;
+  }
+}
+/* line 79, ../../scss/pages/prehome.scss */
+section #prehome-collab--contents--site {
+  font-size: 22px;
+  text-decoration: underline;
+  font-family: 'TradeGothicLTStd-Cn18';
+  text-transform: uppercase;
+  display: block;
+}
+/* line 88, ../../scss/pages/prehome.scss */
+section #prehome-collab--contents--collab {
+  font-size: 22px;
+  text-decoration: underline;
+  margin-top: 60px;
+  font-family: 'TradeGothicLTStd-BdCn20';
+  display: block;
+}
+/* line 99, ../../scss/pages/prehome.scss */
+section #website {
+  position: fixed;
+  top: 60px;
+  right: 90px;
+  z-index: 10;
+  display: none;
+}
+@media screen and (min-width: 769px) {
+  /* line 99, ../../scss/pages/prehome.scss */
+  section #website {
+    display: block;
+  }
+}
+/* line 112, ../../scss/pages/prehome.scss */
+section #website a {
+  color: white;
+  font-family: 'TradeGothicLTStd-Cn18';
+  font-size: 16px;
+  text-transform: uppercase;
+}
+/* line 119, ../../scss/pages/prehome.scss */
+section #website a:hover {
+  opacity: 0.5;
+}
+/* line 126, ../../scss/pages/prehome.scss */
+section h2 {
+  font-size: 28px;
+  text-transform: uppercase;
+  font-family: 'TradeGothicLTStd-BdCn20';
+  margin: 0 0 24px 0;
+}
+/* line 134, ../../scss/pages/prehome.scss */
+section p {
+  font-family: 'TradeGothicLTStd-Cn18';
+  font-size: 16px;
+}
+@media screen and (min-width: 769px) {
+  /* line 140, ../../scss/pages/prehome.scss */
+  section .prehome-split {
+    flex-wrap: nowrap;
+    display: flex;
+  }
+}
+/* line 148, ../../scss/pages/prehome.scss */
+section .prehome-split > div {
+  width: 100%;
+}
+@media screen and (min-width: 769px) {
+  /* line 148, ../../scss/pages/prehome.scss */
+  section .prehome-split > div {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 50%;
+  }
+}
+/* line 161, ../../scss/pages/prehome.scss */
+section .prehome-contents {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+/* line 168, ../../scss/pages/prehome.scss */
+section .prehome-button {
+  border: 2px solid white;
+  padding: 10px 16px;
+  font-family: 'TradeGothicLTStd-Cn18';
+  font-size: 16px;
+}
+/* line 176, ../../scss/pages/prehome.scss */
+section #prehome-intro {
+  background-image: url("../../img/prehome/intro.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+/* line 185, ../../scss/pages/prehome.scss */
+section #prehome-intro::before {
+  content: "";
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 1;
+  position: absolute;
+  display: block;
+}
+/* line 199, ../../scss/pages/prehome.scss */
+section #prehome-intro .prehome-contents {
+  width: 100vw;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  z-index: 2;
+  position: relative;
+}
+/* line 208, ../../scss/pages/prehome.scss */
+section #prehome-intro .prehome-contents h1 {
+  font-family: 'TradeGothicLTStd-BdCn20';
+  font-style: normal;
+  font-size: 30px;
+  line-height: 36px;
+  text-transform: uppercase;
+  margin: 0;
+}
+@media screen and (min-width: 769px) {
+  /* line 208, ../../scss/pages/prehome.scss */
+  section #prehome-intro .prehome-contents h1 {
+    font-size: 50px;
+    line-height: 60px;
+  }
+}
+/* line 224, ../../scss/pages/prehome.scss */
+section #prehome-intro .prehome-contents p {
+  font-size: 16px;
+}
+@media screen and (min-width: 769px) {
+  /* line 224, ../../scss/pages/prehome.scss */
+  section #prehome-intro .prehome-contents p {
+    font-size: 24px;
+  }
+}
+/* line 234, ../../scss/pages/prehome.scss */
+section #prehome-intro .prehome-contents a {
+  margin-top: 36px;
+  display: block;
+}
+/* line 245, ../../scss/pages/prehome.scss */
+section #prehome-inspiring img,
+section #prehome-well-being img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+/* line 252, ../../scss/pages/prehome.scss */
+section #prehome-inspiring .prehome-contents,
+section #prehome-well-being .prehome-contents {
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 100px;
+  max-width: calc(50% + 200px);
+}
+/* line 262, ../../scss/pages/prehome.scss */
+section #prehome-concerns {
+  padding: 40px 0;
+  background-image: url("../../img/prehome/forest.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  position: relative;
+}
+@media screen and (min-width: 769px) {
+  /* line 262, ../../scss/pages/prehome.scss */
+  section #prehome-concerns {
+    padding: 0;
+  }
+}
+/* line 276, ../../scss/pages/prehome.scss */
+section #prehome-concerns::before {
+  content: "";
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 1;
+  position: absolute;
+  display: block;
+}
+/* line 290, ../../scss/pages/prehome.scss */
+section #prehome-concerns .prehome-contents {
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+  position: relative;
+}
+/* line 300, ../../scss/pages/prehome.scss */
+section #prehome-concerns .prehome-contents .prehome-columned-text p {
+  line-height: 28px;
+}
+@media screen and (min-width: 769px) {
+  /* line 300, ../../scss/pages/prehome.scss */
+  section #prehome-concerns .prehome-contents .prehome-columned-text p {
+    column-count: 3;
+    column-gap: 60px;
+  }
+}
+/* line 314, ../../scss/pages/prehome.scss */
+section #prehome-video {
+  background-image: url("../../img/prehome/values.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  position: relative;
+}
+/* line 318, ../../scss/pages/prehome.scss */
+section #prehome-video.video video {
+  display: block;
+}
+/* line 330, ../../scss/pages/prehome.scss */
+section #prehome-video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 9;
+  display: none;
+}
+/* line 342, ../../scss/pages/prehome.scss */
+section #prehome-video::before {
+  content: "";
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 1;
+  position: absolute;
+  display: block;
+}
+/* line 356, ../../scss/pages/prehome.scss */
+section #prehome-video a {
+  font-family: 'TradeGothicLTStd-Cn18';
+  font-size: 16px;
+}
+/* line 358, ../../scss/pages/prehome.scss */
+section #prehome-video a::before {
+  content: "";
+  display: block;
+  width: 133px;
+  height: 133px;
+  background-image: url("../../img/prehome/play.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+}
+/* line 373, ../../scss/pages/prehome.scss */
+section #prehome-video a:hover {
+  color: white;
+  opacity: 0.5;
+}
+/* line 380, ../../scss/pages/prehome.scss */
+section #prehome-video .prehome-contents {
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+  position: relative;
+}
+/* line 389, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet {
+  background-color: #003057;
+  color: white;
+}
+/* line 396, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet > div:nth-child(1) {
+  position: relative;
+  padding: 0 40px;
+  text-align: center;
+}
+/* line 403, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet > div h2 {
+  margin-bottom: 0;
+}
+/* line 408, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet > div a {
+  margin-top: 24px;
+}
+/* line 414, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+/* line 421, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet .prehome-contents {
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+/* line 429, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet #prehome-social {
+  position: absolute;
+  bottom: 24px;
+  z-index: 2;
+  left: 0;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+/* line 439, ../../scss/pages/prehome.scss */
+section #prehome-indusparquet #prehome-social a {
+  font-size: 20px;
+  margin-right: 16px;
+  display: inline-block;
+}
