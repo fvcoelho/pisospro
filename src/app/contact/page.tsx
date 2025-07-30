@@ -7,46 +7,46 @@ export const metadata: Metadata = {
   keywords: 'contato pisos-pro, orcamento pisos, estimativa gratuita, consultoria pisos, contato empreiteiro pisos, solicitar orcamento',
   openGraph: {
     title: 'Contato Pisos-Pró - Orçamento Gratuito',
-    description: 'Get your free flooring consultation and quote today. Expert advice and transparent pricing.',
+    description: 'Obtenha sua consulta e orçamento gratuitos hoje mesmo. Assessoria especializada e preços transparentes.',
     type: 'website',
   },
 }
 
 const contactInfo = [
   {
-    type: 'Phone',
-    value: '(555) 123-4567',
-    description: 'Call us for immediate assistance',
+    type: 'Telefone',
+    value: '(11) 9999-9999',
+    description: 'Ligue para atendimento imediato',
     icon: '📞',
-    href: 'tel:555-123-4567'
+    href: 'tel:11-9999-9999'
   },
   {
-    type: 'Email',
+    type: 'E-mail',
     value: 'contato@pisospro.com.br',
-    description: 'Send us your questions anytime',
+    description: 'Envie suas dúvidas a qualquer momento',
     icon: '✉️',
     href: 'mailto:contato@pisospro.com.br'
   },
   {
-    type: 'Address',
-    value: '123 Main Street\nYour City, ST 12345',
-    description: 'Visit our showroom',
+    type: 'Endereço',
+    value: 'Rua Principal, 123\nSão Paulo, SP 01234-567',
+    description: 'Visite nosso showroom',
     icon: '📍',
     href: 'https://maps.google.com'
   },
   {
-    type: 'Hours',
-    value: 'Mon-Fri: 8AM-6PM\nSat: 9AM-4PM\nSun: Closed',
-    description: 'Business hours',
+    type: 'Horário',
+    value: 'Seg-Sex: 8h às 18h\nSáb: 9h às 16h\nDom: Fechado',
+    description: 'Horário de funcionamento',
     icon: '🕒',
     href: null
   }
 ]
 
 const serviceAreas = [
-  'Downtown Area', 'North Valley', 'East Side', 'West Hills',
-  'Suburban Districts', 'Industrial Zone', 'Riverside', 'Hillcrest',
-  'Garden District', 'Oak Park', 'Pine Ridge', 'Maple Heights'
+  'Centro', 'Zona Norte', 'Zona Leste', 'Zona Oeste',
+  'Zona Sul', 'ABC Paulista', 'Alphaville', 'Moema',
+  'Vila Mariana', 'Pinheiros', 'Perdizes', 'Morumbi'
 ]
 
 export default function ContactPage() {
@@ -56,11 +56,11 @@ export default function ContactPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Get Your Free Quote
+            Obtenha seu Orçamento Gratuito
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to transform your space? Contact us today for a free consultation 
-            and detailed quote tailored to your project needs.
+            Pronto para transformar seu espaço? Entre em contato hoje mesmo para uma consulta gratuita 
+            e orçamento detalhado personalizado para as necessidades do seu projeto.
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export default function ContactPage() {
           {/* Quote Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Request a Quote</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Solicitar Orçamento</h2>
               <QuoteForm />
             </div>
           </div>
@@ -77,7 +77,7 @@ export default function ContactPage() {
           <div className="space-y-8">
             {/* Contact Info Cards */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Contact Information</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Informações de Contato</h3>
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start space-x-3">
@@ -103,22 +103,22 @@ export default function ContactPage() {
 
             {/* Emergency Service */}
             <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-red-800 mb-3">🚨 Emergency Service</h3>
+              <h3 className="text-lg font-bold text-red-800 mb-3">🚨 Serviço de Emergência</h3>
               <p className="text-red-700 mb-4">
-                Flood damage? Urgent repair needed? We offer 24/7 emergency flooring services.
+                Danos por enchente? Reparo urgente necessário? Oferecemos serviços de pisos 24/7 para emergências.
               </p>
               <a 
-                href="tel:555-999-0000"
+                href="tel:11-9999-8888"
                 className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors inline-block"
               >
-                Call Emergency Line
+                Ligar para Emergência
               </a>
             </div>
 
             {/* Service Areas */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Service Areas</h3>
-              <p className="text-gray-600 mb-4">We proudly serve the greater metropolitan area including:</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Áreas de Atendimento</h3>
+              <p className="text-gray-600 mb-4">Atendemos com orgulho a grande região metropolitana incluindo:</p>
               <div className="grid grid-cols-2 gap-2">
                 {serviceAreas.map((area, index) => (
                   <div key={index} className="text-sm text-gray-600 flex items-center">
@@ -128,20 +128,20 @@ export default function ContactPage() {
                 ))}
               </div>
               <p className="text-sm text-gray-500 mt-4">
-                Don't see your area? Contact us anyway - we may still be able to help!
+                Não vê sua região? Entre em contato mesmo assim - ainda podemos ajudar!
               </p>
             </div>
 
             {/* Financing */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-blue-800 mb-3">💳 Financing Available</h3>
+              <h3 className="text-lg font-bold text-blue-800 mb-3">💳 Financiamento Disponível</h3>
               <p className="text-blue-700 mb-4">
-                Flexible payment options and financing plans available for qualified customers.
+                Opções flexíveis de pagamento e planos de financiamento disponíveis para clientes qualificados.
               </p>
               <ul className="text-sm text-blue-600 space-y-1">
-                <li>• 0% APR for 12 months</li>
-                <li>• Extended payment plans</li>
-                <li>• Quick approval process</li>
+                <li>• 0% de juros por 12 meses</li>
+                <li>• Planos de pagamento estendido</li>
+                <li>• Processo de aprovação rápido</li>
               </ul>
             </div>
           </div>
@@ -155,23 +155,23 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-5xl mb-4">⚡</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Fast Response</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Resposta Rápida</h3>
               <p className="text-gray-600">
-                We respond to all inquiries within 24 hours and can often schedule consultations within 48 hours.
+                Respondemos a todas as consultas em até 24 horas e frequentemente agendamos consultas em até 48 horas.
               </p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-4">💰</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Transparent Pricing</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Preços Transparentes</h3>
               <p className="text-gray-600">
-                No hidden fees or surprise charges. Our detailed quotes include everything you need to know.
+                Sem taxas ocultas ou cobranças surpresa. Nossos orçamentos detalhados incluem tudo que você precisa saber.
               </p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-4">🔒</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Satisfaction Guaranteed</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Satisfação Garantida</h3>
               <p className="text-gray-600">
-                We stand behind our work with comprehensive warranties and a 100% satisfaction guarantee.
+                Garantimos nosso trabalho com garantias abrangentes e 100% de satisfação garantida.
               </p>
             </div>
           </div>

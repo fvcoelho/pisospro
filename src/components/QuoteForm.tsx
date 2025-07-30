@@ -55,7 +55,7 @@ export default function QuoteForm() {
           }}
           className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
         >
-          Submit Another Request
+          Enviar Outra Solicitação
         </button>
       </div>
     )
@@ -66,7 +66,7 @@ export default function QuoteForm() {
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            Full Name *
+            Nome Completo *
           </label>
           <input
             type="text"
@@ -76,13 +76,13 @@ export default function QuoteForm() {
             value={formData.name}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Your full name"
+            placeholder="Seu nome completo"
           />
         </div>
         
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            Email Address *
+            Endereço de E-mail *
           </label>
           <input
             type="email"
@@ -92,7 +92,7 @@ export default function QuoteForm() {
             value={formData.email}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="your@email.com"
+            placeholder="seu@email.com"
           />
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function QuoteForm() {
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-            Phone Number
+            Número de Telefone
           </label>
           <input
             type="tel"
@@ -109,13 +109,13 @@ export default function QuoteForm() {
             value={formData.phone}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="(555) 123-4567"
+            placeholder="(11) 9999-9999"
           />
         </div>
         
         <div>
           <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
-            Project Type *
+            Tipo de Projeto *
           </label>
           <select
             id="projectType"
@@ -125,22 +125,22 @@ export default function QuoteForm() {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="">Select project type</option>
-            <option value="hardwood">Hardwood Installation</option>
-            <option value="tile">Tile & Stone</option>
-            <option value="laminate">Laminate Flooring</option>
-            <option value="vinyl">Vinyl & LVP</option>
-            <option value="carpet">Carpet Installation</option>
-            <option value="refinishing">Floor Refinishing</option>
-            <option value="repair">Floor Repair</option>
-            <option value="multiple">Multiple Services</option>
+            <option value="">Selecione o tipo de projeto</option>
+            <option value="hardwood">Instalação de Madeira</option>
+            <option value="tile">Cerâmica e Pedra</option>
+            <option value="laminate">Piso Laminado</option>
+            <option value="vinyl">Vinílico e LVT</option>
+            <option value="carpet">Instalação de Carpete</option>
+            <option value="refinishing">Restauração de Pisos</option>
+            <option value="repair">Reparo de Pisos</option>
+            <option value="multiple">Vários Serviços</option>
           </select>
         </div>
       </div>
 
       <div>
         <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-          Project Address
+          Endereço do Projeto
         </label>
         <input
           type="text"
@@ -149,14 +149,14 @@ export default function QuoteForm() {
           value={formData.address}
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Street address, city, state"
+          placeholder="Endereço, cidade, estado"
         />
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
         <div>
           <label htmlFor="roomSize" className="block text-sm font-medium text-gray-700 mb-2">
-            Approximate Size
+            Tamanho Aproximado
           </label>
           <input
             type="text"
@@ -165,13 +165,13 @@ export default function QuoteForm() {
             value={formData.roomSize}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="e.g., 200 sq ft"
+            placeholder="ex: 20 m²"
           />
         </div>
         
         <div>
           <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
-            Timeline
+            Cronograma
           </label>
           <select
             id="timeline"
@@ -180,18 +180,18 @@ export default function QuoteForm() {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="">Select timeframe</option>
-            <option value="asap">ASAP</option>
-            <option value="1-2weeks">1-2 weeks</option>
-            <option value="1month">Within 1 month</option>
-            <option value="2-3months">2-3 months</option>
-            <option value="planning">Just planning</option>
+            <option value="">Selecione o prazo</option>
+            <option value="asap">O mais rápido possível</option>
+            <option value="1-2weeks">1-2 semanas</option>
+            <option value="1month">Em até 1 mês</option>
+            <option value="2-3months">2-3 meses</option>
+            <option value="planning">Apenas planejando</option>
           </select>
         </div>
         
         <div>
           <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-            Budget Range
+            Faixa de Orçamento
           </label>
           <select
             id="budget"
@@ -200,19 +200,19 @@ export default function QuoteForm() {
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="">Select budget</option>
-            <option value="under5k">Under $5,000</option>
-            <option value="5k-10k">$5,000 - $10,000</option>
-            <option value="10k-20k">$10,000 - $20,000</option>
-            <option value="20k-50k">$20,000 - $50,000</option>
-            <option value="over50k">Over $50,000</option>
+            <option value="">Selecione o orçamento</option>
+            <option value="under5k">Até R$ 15.000</option>
+            <option value="5k-10k">R$ 15.000 - R$ 30.000</option>
+            <option value="10k-20k">R$ 30.000 - R$ 60.000</option>
+            <option value="20k-50k">R$ 60.000 - R$ 150.000</option>
+            <option value="over50k">Acima de R$ 150.000</option>
           </select>
         </div>
       </div>
 
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-          Project Description
+          Descrição do Projeto
         </label>
         <textarea
           id="description"
@@ -221,14 +221,14 @@ export default function QuoteForm() {
           value={formData.description}
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Tell us more about your project, specific requirements, or any questions you have..."
+          placeholder="Conte-nos mais sobre seu projeto, requisitos específicos ou qualquer dúvida que tenha..."
         />
       </div>
 
       <div className="bg-blue-50 p-4 rounded-lg">
         <p className="text-sm text-blue-800">
-          <strong>What happens next?</strong> We'll review your request and contact you within 24 hours 
-          to schedule a free, no-obligation consultation and provide you with a detailed quote.
+          <strong>O que acontece agora?</strong> Analisaremos sua solicitação e entraremos em contato em até 24 horas 
+          para agendar uma consulta gratuita, sem compromisso, e fornecer um orçamento detalhado.
         </p>
       </div>
 
@@ -237,7 +237,7 @@ export default function QuoteForm() {
         disabled={isSubmitting}
         className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? 'Submitting...' : 'Get Free Quote'}
+        {isSubmitting ? 'Enviando...' : 'Obter Orçamento Gratuito'}
       </button>
     </form>
   )
