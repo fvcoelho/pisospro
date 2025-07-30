@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About PisosPro - 25+ Years of Professional Flooring Excellence',
-  description: 'Learn about PisosPro\'s 25+ years of flooring expertise. Our team of skilled professionals has completed 5000+ projects with 98% customer satisfaction.',
-  keywords: 'about pisospro, flooring company, flooring contractors, professional flooring team, flooring experience, flooring history',
+  title: 'Sobre a PisosPro - 25+ Anos de Excelência Profissional em Pisos',
+  description: 'Conheça os 25+ anos de expertise em pisos da PisosPro. Nossa equipe de profissionais qualificados completou mais de 5000 projetos com 98% de satisfação do cliente.',
+  keywords: 'sobre pisospro, empresa de pisos, empreiteiros de pisos, equipe profissional de pisos, experiência em pisos, história da empresa',
   openGraph: {
-    title: 'About PisosPro - Professional Flooring Experts',
-    description: 'Discover our story, team, and commitment to exceptional flooring craftsmanship.',
+    title: 'Sobre a PisosPro - Especialistas Profissionais em Pisos',
+    description: 'Descubra nossa história, equipe e compromisso com o artesanato excepcional em pisos.',
     type: 'website',
   },
 }

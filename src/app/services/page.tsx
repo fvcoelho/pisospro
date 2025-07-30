@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Professional Flooring Services - Installation & Renovation | PisosPro',
-  description: 'Expert flooring installation services including hardwood, tile, laminate, vinyl, and carpet. Licensed professionals with 25+ years experience. Free quotes available.',
-  keywords: 'flooring installation, hardwood installation, tile installation, laminate flooring, vinyl flooring, carpet installation, floor refinishing, professional flooring services',
+  title: 'Serviços Profissionais de Pisos - Instalação e Reforma | PisosPro',
+  description: 'Serviços especializados de instalação de pisos incluindo madeira, cerâmica, laminado, vinílico e carpete. Profissionais licenciados com mais de 25 anos de experiência. Orçamentos gratuitos disponíveis.',
+  keywords: 'instalação de pisos, instalação de madeira, instalação de cerâmica, piso laminado, piso vinílico, instalação de carpete, restauração de pisos, serviços profissionais de pisos',
   openGraph: {
-    title: 'Professional Flooring Services | PisosPro',
-    description: 'Transform your space with our expert flooring installation and renovation services.',
+    title: 'Serviços Profissionais de Pisos | PisosPro',
+    description: 'Transforme seu espaço com nossos serviços especializados de instalação e reforma de pisos.',
     type: 'website',
   },
 }
@@ -15,55 +15,55 @@ export const metadata: Metadata = {
 const services = [
   {
     id: 'hardwood',
-    title: 'Hardwood Installation',
-    description: 'Premium hardwood flooring installation with expert craftsmanship. We work with all types of hardwood including oak, maple, cherry, and exotic species.',
-    features: ['Site-finished & Pre-finished', 'Solid & Engineered Wood', 'Custom Staining', 'Professional Sanding'],
-    price: 'Starting at $8/sq ft',
+    title: 'Instalação de Madeira',
+    description: 'Instalação premium de piso de madeira com artesanato especializado. Trabalhamos com todos os tipos de madeira incluindo carvalho, maple, cerejeira e espécies exóticas.',
+    features: ['Acabamento no Local e Pré-acabado', 'Madeira Maciça e Engenheirada', 'Tingimento Personalizado', 'Lixamento Profissional'],
+    price: 'A partir de R$ 120/m²',
     image: '🪵',
     popular: true
   },
   {
     id: 'tile',
-    title: 'Tile & Stone Installation',
-    description: 'Beautiful ceramic, porcelain, and natural stone installation for kitchens, bathrooms, and living spaces.',
-    features: ['Ceramic & Porcelain Tile', 'Natural Stone', 'Mosaic Patterns', 'Waterproof Installation'],
-    price: 'Starting at $5/sq ft',
+    title: 'Instalação de Cerâmica e Pedra',
+    description: 'Bela instalação de cerâmica, porcelanato e pedra natural para cozinhas, banheiros e áreas de estar.',
+    features: ['Cerâmica e Porcelanato', 'Pedra Natural', 'Padrões de Mosaico', 'Instalação Impermeável'],
+    price: 'A partir de R$ 80/m²',
     image: '🏛️',
     popular: false
   },
   {
     id: 'laminate',
-    title: 'Laminate Flooring',
-    description: 'Affordable and durable laminate flooring that mimics the look of hardwood and tile at a fraction of the cost.',
-    features: ['Click-Lock Installation', 'Water-Resistant Options', 'Multiple Finishes', 'Quick Installation'],
-    price: 'Starting at $3/sq ft',
+    title: 'Piso Laminado',
+    description: 'Piso laminado acessível e durável que imita a aparência da madeira e cerâmica por uma fração do custo.',
+    features: ['Instalação Click', 'Opções Resistentes à Água', 'Múltiplos Acabamentos', 'Instalação Rápida'],
+    price: 'A partir de R$ 50/m²',
     image: '📋',
     popular: false
   },
   {
     id: 'vinyl',
-    title: 'Vinyl & LVP',
-    description: 'Luxury vinyl plank and sheet flooring perfect for high-moisture areas and heavy traffic zones.',
-    features: ['100% Waterproof', 'Luxury Vinyl Plank', 'Sheet Vinyl', 'Commercial Grade'],
-    price: 'Starting at $4/sq ft',
+    title: 'Vinílico e LVT',
+    description: 'Piso vinílico de luxo em régua e manta perfeito para áreas de alta umidade e tráfego intenso.',
+    features: ['100% À Prova d’Água', 'Vinílico de Luxo em Régua', 'Vinílico em Manta', 'Grau Comercial'],
+    price: 'A partir de R$ 65/m²',
     image: '💧',
     popular: true
   },
   {
     id: 'carpet',
-    title: 'Carpet Installation',
-    description: 'Comfortable carpet installation for bedrooms, living rooms, and offices with professional padding and finishing.',
-    features: ['Residential & Commercial', 'Premium Padding', 'Stain-Resistant Options', 'Custom Binding'],
-    price: 'Starting at $2/sq ft',
+    title: 'Instalação de Carpete',
+    description: 'Instalação confortável de carpete para quartos, salas e escritórios com base e acabamento profissionais.',
+    features: ['Residencial e Comercial', 'Base Premium', 'Opções Anti-Manchas', 'Acabamento Personalizado'],
+    price: 'A partir de R$ 35/m²',
     image: '🏠',
     popular: false
   },
   {
     id: 'refinishing',
-    title: 'Floor Refinishing',
-    description: 'Restore the beauty of your existing hardwood floors with professional sanding, staining, and finishing.',
-    features: ['Complete Sanding', 'Custom Staining', 'Polyurethane Finish', 'Dust-Free Process'],
-    price: 'Starting at $3/sq ft',
+    title: 'Restauração de Pisos',
+    description: 'Restaure a beleza dos seus pisos de madeira existentes com lixamento, tingimento e acabamento profissionais.',
+    features: ['Lixamento Completo', 'Tingimento Personalizado', 'Acabamento Poliuretano', 'Processo Sem Poeira'],
+    price: 'A partir de R$ 45/m²',
     image: '✨',
     popular: true
   }
@@ -76,10 +76,10 @@ export default function ServicesPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Services
+            Nossos Serviços
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Professional flooring installation and renovation services for residential and commercial properties.
+            Serviços profissionais de instalação e reforma de pisos para propriedades residenciais e comerciais.
           </p>
         </div>
 
@@ -105,7 +105,7 @@ export default function ServicesPage() {
                 <p className="text-gray-600 mb-6">{service.description}</p>
                 
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 mb-3">What's Included:</h4>
+                  <h4 className="font-semibold text-gray-900 mb-3">O que está incluído:</h4>
                   <ul className="space-y-2">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-gray-600">
@@ -121,13 +121,13 @@ export default function ServicesPage() {
                     href="/contact"
                     className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex-1 text-center"
                   >
-                    Get Quote
+                    Solicitar Orçamento
                   </Link>
                   <Link 
                     href={`/services/${service.id}`}
                     className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
                   >
-                    Learn More
+                    Saiba Mais
                   </Link>
                 </div>
               </div>
@@ -137,22 +137,22 @@ export default function ServicesPage() {
 
         {/* CTA Section */}
         <div className="bg-blue-900 text-white rounded-lg p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Space?</h2>
+          <h2 className="text-3xl font-bold mb-4">Pronto para Transformar seu Espaço?</h2>
           <p className="text-xl mb-6">
-            Get a free, no-obligation quote for your flooring project today.
+            Obtenha um orçamento gratuito e sem compromisso para seu projeto de piso hoje.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/contact"
               className="bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors"
             >
-              Get Free Quote
+              Orçamento Grátis
             </Link>
             <Link 
-              href="tel:555-123-4567"
+              href="tel:11-9999-9999"
               className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors"
             >
-              Call (555) 123-4567
+              Ligue (11) 9999-9999
             </Link>
           </div>
         </div>

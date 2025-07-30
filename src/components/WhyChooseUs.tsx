@@ -1,32 +1,32 @@
 const features = [
   {
-    title: '25+ Years Experience',
-    description: 'Decades of expertise in flooring installation and renovation.',
+    title: '25+ Anos de Experiência',
+    description: 'Décadas de expertise em instalação e reforma de pisos.',
     icon: '⭐'
   },
   {
-    title: 'Licensed & Insured',
-    description: 'Fully licensed professionals with comprehensive insurance coverage.',
+    title: 'Licenciado e Segurado',
+    description: 'Profissionais totalmente licenciados com cobertura de seguro abrangente.',
     icon: '🛡️'
   },
   {
-    title: 'Quality Materials',
-    description: 'We only use premium materials from trusted manufacturers.',
+    title: 'Materiais de Qualidade',
+    description: 'Usamos apenas materiais premium de fabricantes confiáveis.',
     icon: '💎'
   },
   {
-    title: 'Free Estimates',
-    description: 'No-obligation quotes with transparent pricing.',
+    title: 'Orçamentos Gratuitos',
+    description: 'Cotações sem compromisso com preços transparentes.',
     icon: '💰'
   },
   {
-    title: 'Warranty Guarantee',
-    description: 'All work comes with our comprehensive warranty protection.',
+    title: 'Garantia Assegurada',
+    description: 'Todo trabalho vem com nossa proteção de garantia abrangente.',
     icon: '✅'
   },
   {
-    title: '24/7 Support',
-    description: 'Round-the-clock customer support for your peace of mind.',
+    title: 'Suporte 24/7',
+    description: 'Atendimento ao cliente 24 horas para sua tranquilidade.',
     icon: '📞'
   }
 ]
@@ -37,10 +37,10 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Why Choose PisosPro?
+            Por Que Escolher a PisosPro?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We're committed to delivering exceptional flooring solutions with unmatched quality and service.
+            Estamos comprometidos em fornecer soluções excepcionais em pisos com qualidade e atendimento incomparáveis.
           </p>
         </div>
         

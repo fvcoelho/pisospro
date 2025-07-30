@@ -19,22 +19,22 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">
-              Home
+              Início
             </Link>
             <Link href="/services" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">
-              Services
+              Serviços
             </Link>
             <Link href="/products" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">
-              Products
+              Produtos
             </Link>
             <Link href="/portfolio" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">
-              Portfolio
+              Portfólio
             </Link>
             <Link href="/about" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">
-              About
+              Sobre
             </Link>
             <Link href="/contact" className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
-              Get Quote
+              Orçamento
             </Link>
           </div>
 
@@ -60,22 +60,22 @@ export default function Navbar() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
               <Link href="/" className="block text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-medium">
-                Home
+                Início
               </Link>
               <Link href="/services" className="block text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-medium">
-                Services
+                Serviços
               </Link>
               <Link href="/products" className="block text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-medium">
-                Products
+                Produtos
               </Link>
               <Link href="/portfolio" className="block text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-medium">
-                Portfolio
+                Portfólio
               </Link>
               <Link href="/about" className="block text-gray-900 hover:text-blue-600 px-3 py-2 text-base font-medium">
-                About
+                Sobre
               </Link>
               <Link href="/contact" className="block bg-blue-600 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700 mx-3">
-                Get Quote
+                Orçamento
               </Link>
             </div>
           </div>

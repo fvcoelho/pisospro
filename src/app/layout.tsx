@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "PisosPro - Professional Flooring Solutions",
-  description: "Expert flooring installation, renovation, and maintenance services. Quality craftsmanship with 25+ years of experience.",
-  keywords: "flooring, hardwood, tile, laminate, vinyl, carpet, installation, renovation, professional",
+  title: "PisosPro - Soluções Profissionais em Pisos",
+  description: "Instalação especializada, reforma e manutenção de pisos. Artesanato de qualidade com mais de 25 anos de experiência.",
+  keywords: "pisos, madeira, cerâmica, laminado, vinílico, carpete, instalação, reforma, profissional",
 };
 
 export default function RootLayout({

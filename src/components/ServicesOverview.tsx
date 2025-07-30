@@ -2,38 +2,38 @@ import Link from 'next/link'
 
 const services = [
   {
-    title: 'Hardwood Installation',
-    description: 'Expert installation of premium hardwood flooring with precision and care.',
+    title: 'Instalação de Madeira',
+    description: 'Instalação especializada de pisos de madeira premium com precisão e cuidado.',
     icon: '🪵',
     href: '/services/hardwood'
   },
   {
-    title: 'Tile & Stone',
-    description: 'Beautiful ceramic, porcelain, and natural stone tile installation.',
+    title: 'Cerâmica e Pedra',
+    description: 'Bela instalação de azulejos cerâmicos, porcelanato e pedra natural.',
     icon: '🏛️',
     href: '/services/tile'
   },
   {
-    title: 'Laminate Flooring',
-    description: 'Affordable and durable laminate options for every space.',
+    title: 'Piso Laminado',
+    description: 'Opções de laminado acessíveis e duráveis para todos os ambientes.',
     icon: '📋',
     href: '/services/laminate'
   },
   {
-    title: 'Vinyl & LVP',
-    description: 'Waterproof luxury vinyl plank and sheet flooring solutions.',
+    title: 'Vinílico e LVT',
+    description: 'Soluções impermeáveis em piso vinílico de luxo em régua e manta.',
     icon: '💧',
     href: '/services/vinyl'
   },
   {
-    title: 'Carpet Installation',
-    description: 'Comfortable and cozy carpet installation for residential and commercial spaces.',
+    title: 'Instalação de Carpete',
+    description: 'Instalação confortável de carpetes para espaços residenciais e comerciais.',
     icon: '🏠',
     href: '/services/carpet'
   },
   {
-    title: 'Floor Refinishing',
-    description: 'Restore the beauty of your existing hardwood floors.',
+    title: 'Restauração de Pisos',
+    description: 'Restaure a beleza dos seus pisos de madeira existentes.',
     icon: '✨',
     href: '/services/refinishing'
   }
@@ -45,10 +45,10 @@ export default function ServicesOverview() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our Services
+            Nossos Serviços
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            From installation to refinishing, we provide comprehensive flooring solutions for every need and budget.
+            Da instalação à restauração, oferecemos soluções completas em pisos para todas as necessidades e orçamentos.
           </p>
         </div>
         
@@ -62,7 +62,7 @@ export default function ServicesOverview() {
                 href={service.href}
                 className="text-blue-600 font-medium hover:text-blue-800 transition-colors"
               >
-                Learn More →
+                Saiba Mais →
               </Link>
             </div>
           ))}
@@ -73,7 +73,7 @@ export default function ServicesOverview() {
             href="/services"
             className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
           >
-            View All Services
+            Ver Todos os Serviços
           </Link>
         </div>
       </div>
