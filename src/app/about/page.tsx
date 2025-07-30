@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sobre a PisosPro - 25+ Anos de Excelência Profissional em Pisos',
-  description: 'Conheça os 25+ anos de expertise em pisos da PisosPro. Nossa equipe de profissionais qualificados completou mais de 5000 projetos com 98% de satisfação do cliente.',
-  keywords: 'sobre pisospro, empresa de pisos, empreiteiros de pisos, equipe profissional de pisos, experiência em pisos, história da empresa',
+  title: 'Sobre a Pisos-Pró - 25+ Anos de Excelência Profissional em Pisos',
+  description: 'Conheça os 25+ anos de expertise em pisos da Pisos-Pró. Nossa equipe de profissionais qualificados completou mais de 5000 projetos com 98% de satisfação do cliente.',
+  keywords: 'sobre pisos-pro, empresa de pisos, empreiteiros de pisos, equipe profissional de pisos, experiência em pisos, história da empresa',
   openGraph: {
-    title: 'Sobre a PisosPro - Especialistas Profissionais em Pisos',
+    title: 'Sobre a Pisos-Pró - Especialistas Profissionais em Pisos',
     description: 'Descubra nossa história, equipe e compromisso com o artesanato excepcional em pisos.',
     type: 'website',
   },
@@ -17,7 +17,7 @@ const team = [
     role: 'Founder & Master Installer',
     experience: '25+ years',
     specialties: ['Hardwood', 'Custom Installation'],
-    description: 'Started PisosPro with a vision to provide exceptional flooring craftsmanship.',
+    description: 'Fundou a Pisos-Pró com a visão de fornecer artesanato excepcional em pisos.',
     image: '👨‍🔧'
   },
   {
@@ -60,7 +60,7 @@ export default function AboutPage() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            About PisosPro
+            Sobre a Pisos-Pró
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             For over 25 years, we've been transforming homes and businesses with 
@@ -75,7 +75,7 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-600">
                 <p>
-                  Founded in 1998 by master craftsman Michael Rodriguez, PisosPro began as a small 
+                  Fundada em 1998 pelo mestre artesão Michael Rodriguez, a Pisos-Pró começou como uma pequena 
                   family business with a simple mission: to provide the highest quality flooring 
                   installation and customer service in the region.
                 </p>

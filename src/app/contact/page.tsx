@@ -2,11 +2,11 @@ import QuoteForm from '@/components/QuoteForm'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact PisosPro - Get Your Free Flooring Quote Today',
-  description: 'Contact PisosPro for a free flooring consultation and quote. Call (555) 123-4567 or fill out our online form. Fast response, transparent pricing, satisfaction guaranteed.',
-  keywords: 'contact pisospro, flooring quote, free estimate, flooring consultation, flooring contractor contact, get quote',
+  title: 'Contato Pisos-Pró - Obtenha seu Orçamento Gratuito Hoje',
+  description: 'Entre em contato com a Pisos-Pró para uma consulta e orçamento gratuitos. Ligue (11) 9999-9999 ou preencha nosso formulário online. Resposta rápida, preços transparentes, satisfação garantida.',
+  keywords: 'contato pisos-pro, orcamento pisos, estimativa gratuita, consultoria pisos, contato empreiteiro pisos, solicitar orcamento',
   openGraph: {
-    title: 'Contact PisosPro - Free Flooring Quote',
+    title: 'Contato Pisos-Pró - Orçamento Gratuito',
     description: 'Get your free flooring consultation and quote today. Expert advice and transparent pricing.',
     type: 'website',
   },
@@ -22,10 +22,10 @@ const contactInfo = [
   },
   {
     type: 'Email',
-    value: 'info@pisospro.com',
+    value: 'contato@pisospro.com.br',
     description: 'Send us your questions anytime',
     icon: '✉️',
-    href: 'mailto:info@pisospro.com'
+    href: 'mailto:contato@pisospro.com.br'
   },
   {
     type: 'Address',
@@ -150,7 +150,7 @@ export default function ContactPage() {
         {/* Why Choose Us for Contact */}
         <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-            Why Customers Choose PisosPro
+            Por Que Clientes Escolhem a Pisos-Pró
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">

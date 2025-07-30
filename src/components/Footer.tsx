@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold text-yellow-400 mb-4">PisosPro</h3>
+            <h3 className="text-2xl font-bold text-yellow-400 mb-4">Pisos-Pró</h3>
             <p className="text-gray-300 mb-4">
               Soluções profissionais em pisos com mais de 25 anos de experiência. 
               Transformamos espaços com artesanato de qualidade e atendimento excepcional.
@@ -46,7 +46,7 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Informações de Contato</h4>
             <div className="space-y-2 text-gray-300">
               <p>📞 (11) 9999-9999</p>
-              <p>✉️ contato@pisospro.com.br</p>
+              <p>✉️ contato@pisos-pro.com.br</p>
               <p>📍 Rua das Flores, 123<br />São Paulo, SP 01234-567</p>
               <p>🕒 Seg-Sex: 8h-18h<br />Sáb: 9h-16h</p>
             </div>
@@ -56,7 +56,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-300">
-              © 2024 PisosPro. Todos os direitos reservados.
+              © 2024 Pisos-Pró. Todos os direitos reservados.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">

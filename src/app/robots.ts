@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://pisospro.com/sitemap.xml',
+    sitemap: 'https://pisospro.com.br/sitemap.xml',
   }
 }

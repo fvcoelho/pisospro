@@ -37,7 +37,7 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Por Que Escolher a PisosPro?
+            Por Que Escolher a Pisos-Pró?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Estamos comprometidos em fornecer soluções excepcionais em pisos com qualidade e atendimento incomparáveis.

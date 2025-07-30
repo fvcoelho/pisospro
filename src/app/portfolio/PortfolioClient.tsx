@@ -144,7 +144,7 @@ export default function PortfolioClient() {
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Explore nossos projetos recentes e veja o artesanato de qualidade que fez da 
-            PisosPro a escolha confiável para soluções em pisos.
+            Pisos-Pró a escolha confiável para soluções em pisos.
           </p>
         </div>
 

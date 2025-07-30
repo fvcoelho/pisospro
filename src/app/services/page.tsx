@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Serviços Profissionais de Pisos - Instalação e Reforma | PisosPro',
+  title: 'Serviços Profissionais de Pisos - Instalação e Reforma | Pisos-Pró',
   description: 'Serviços especializados de instalação de pisos incluindo madeira, cerâmica, laminado, vinílico e carpete. Profissionais licenciados com mais de 25 anos de experiência. Orçamentos gratuitos disponíveis.',
   keywords: 'instalação de pisos, instalação de madeira, instalação de cerâmica, piso laminado, piso vinílico, instalação de carpete, restauração de pisos, serviços profissionais de pisos',
   openGraph: {
-    title: 'Serviços Profissionais de Pisos | PisosPro',
+    title: 'Serviços Profissionais de Pisos | Pisos-Pró',
     description: 'Transforme seu espaço com nossos serviços especializados de instalação e reforma de pisos.',
     type: 'website',
   },

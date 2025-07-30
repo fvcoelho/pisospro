@@ -40,10 +40,10 @@ export default function QuoteForm() {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
         <div className="text-6xl mb-4">✅</div>
-        <h3 className="text-2xl font-bold text-green-800 mb-4">Quote Request Submitted!</h3>
+        <h3 className="text-2xl font-bold text-green-800 mb-4">Solicitação de Orçamento Enviada!</h3>
         <p className="text-green-700 mb-6">
-          Thank you for your interest in PisosPro. We'll review your request and contact you within 24 hours 
-          to schedule a free consultation.
+          Obrigado pelo seu interesse na Pisos-Pró. Analisaremos sua solicitação e entraremos em contato em até 24 horas 
+          para agendar uma consulta gratuita.
         </p>
         <button 
           onClick={() => {

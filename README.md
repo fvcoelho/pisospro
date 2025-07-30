@@ -1,6 +1,6 @@
-# PisosPro - Professional Flooring Solutions
+# Pisos-Pró - Soluções Profissionais em Pisos
 
-A comprehensive flooring business website built with Next.js, TypeScript, Tailwind CSS, and Prisma PostgreSQL database.
+Um site completo para empresa de pisos desenvolvido com Next.js, TypeScript, Tailwind CSS e banco de dados PostgreSQL com Prisma.
 
 ## 🚀 Features
 
@@ -62,8 +62,8 @@ npm start
 
 ## 📞 Contact Information
 
-- **Phone**: (555) 123-4567
-- **Email**: info@pisospro.com
+- **Telefone**: (11) 9999-9999
+- **Email**: contato@pisos-pro.com.br
 - **Website**: http://localhost:3000
 
 ## 🏗️ Built With
@@ -76,4 +76,4 @@ npm start
 
 ---
 
-**Ready to transform your space with professional flooring solutions!** 🏠✨
+**Pronto para transformar seu espaço com soluções profissionais em pisos!** 🏠✨
