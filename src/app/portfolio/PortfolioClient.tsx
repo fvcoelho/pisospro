@@ -5,125 +5,125 @@ import { useState } from 'react'
 const portfolioProjects = [
   {
     id: 1,
-    title: 'Modern Kitchen Renovation',
+    title: 'Reforma de Cozinha Moderna',
     category: 'tile',
-    location: 'Downtown Condo',
-    description: 'Complete kitchen floor renovation with premium porcelain tiles featuring wood-look finish.',
+    location: 'Apart. Centro',
+    description: 'Reforma completa do piso da cozinha com porcelanato premium com acabamento madeirado.',
     image: '🏠',
     details: {
-      size: '250 sq ft',
-      duration: '3 days',
-      materials: 'Porcelain wood-look tiles',
-      challenge: 'Working around existing cabinetry'
+      size: '23 m²',
+      duration: '3 dias',
+      materials: 'Porcelanato efeito madeira',
+      challenge: 'Trabalho ao redor dos armários existentes'
     }
   },
   {
     id: 2,
-    title: 'Luxury Hardwood Installation',
+    title: 'Instalação de Madeira de Luxo',
     category: 'hardwood',
-    location: 'Suburban Home',
-    description: 'Beautiful oak hardwood flooring installation throughout main living areas.',
+    location: 'Casa Residencial',
+    description: 'Bela instalação de piso de carvalho maciço nas principais áreas sociais.',
     image: '🪵',
     details: {
-      size: '1,200 sq ft',
-      duration: '5 days',
-      materials: 'Solid oak hardwood',
-      challenge: 'Multiple room transitions'
+      size: '110 m²',
+      duration: '5 dias',
+      materials: 'Carvalho maciço',
+      challenge: 'Transições entre múltiplos ambientes'
     }
   },
   {
     id: 3,
-    title: 'Commercial Office Flooring',
+    title: 'Piso Comercial para Escritório',
     category: 'vinyl',
-    location: 'Business District',
-    description: 'Durable LVP installation for high-traffic commercial office space.',
+    location: 'Centro Empresarial',
+    description: 'Instalação durável de LVT para escritório comercial de alto tráfego.',
     image: '🏢',
     details: {
-      size: '3,500 sq ft',
-      duration: '1 week',
-      materials: 'Commercial-grade LVP',
-      challenge: 'Weekend installation schedule'
+      size: '325 m²',
+      duration: '1 semana',
+      materials: 'LVT grau comercial',
+      challenge: 'Instalação nos finais de semana'
     }
   },
   {
     id: 4,
-    title: 'Bathroom Floor Transformation',
+    title: 'Transformação de Banheiro',
     category: 'tile',
-    location: 'Master Suite',
-    description: 'Elegant marble tile installation with custom mosaic accent border.',
+    location: 'Suíte Master',
+    description: 'Elegante instalação de mármore com borda decorativa de mosaico personalizada.',
     image: '🛁',
     details: {
-      size: '120 sq ft',
-      duration: '4 days',
-      materials: 'Carrara marble with mosaic border',
-      challenge: 'Waterproofing and drainage'
+      size: '11 m²',
+      duration: '4 dias',
+      materials: 'Mármore Carrara com borda de mosaico',
+      challenge: 'Impermeabilização e drenagem'
     }
   },
   {
     id: 5,
-    title: 'Basement Family Room',
+    title: 'Sala Familiar no Subsolo',
     category: 'laminate',
-    location: 'Residential Basement',
-    description: 'Moisture-resistant laminate flooring perfect for below-grade installation.',
+    location: 'Porão Residencial',
+    description: 'Piso laminado resistente à umidade perfeito para instalação subterrânea.',
     image: '🏠',
     details: {
-      size: '600 sq ft',
-      duration: '2 days',
-      materials: 'Water-resistant laminate',
-      challenge: 'Moisture mitigation'
+      size: '55 m²',
+      duration: '2 dias',
+      materials: 'Laminado resistente à água',
+      challenge: 'Mitigação da umidade'
     }
   },
   {
     id: 6,
-    title: 'Restaurant Dining Area',
+    title: 'Área de Jantar do Restaurante',
     category: 'hardwood',
-    location: 'Historic Building',
-    description: 'Restoration and installation of reclaimed hardwood in historic restaurant.',
+    location: 'Edifício Histórico',
+    description: 'Restauração e instalação de madeira de demolição em restaurante histórico.',
     image: '🍽️',
     details: {
-      size: '800 sq ft',
-      duration: '1 week',
-      materials: 'Reclaimed heart pine',
-      challenge: 'Preserving historic character'
+      size: '74 m²',
+      duration: '1 semana',
+      materials: 'Pinho de demolição',
+      challenge: 'Preservar o caráter histórico'
     }
   },
   {
     id: 7,
-    title: 'Luxury Hotel Lobby',
+    title: 'Lobby de Hotel de Luxo',
     category: 'tile',
-    location: 'Downtown Hotel',
-    description: 'High-end natural stone installation with intricate pattern design.',
+    location: 'Hotel Centro',
+    description: 'Instalação de pedra natural de alto padrão com design de padrões intrincados.',
     image: '🏨',
     details: {
-      size: '1,500 sq ft',
-      duration: '2 weeks',
-      materials: 'Travertine and marble',
-      challenge: 'Complex geometric patterns'
+      size: '140 m²',
+      duration: '2 semanas',
+      materials: 'Travertino e mármore',
+      challenge: 'Padrões geométricos complexos'
     }
   },
   {
     id: 8,
-    title: 'Cozy Bedroom Carpet',
+    title: 'Carpete Aconchegante para Quarto',
     category: 'carpet',
-    location: 'Family Home',
-    description: 'Plush carpet installation for ultimate comfort and noise reduction.',
+    location: 'Casa Familiar',
+    description: 'Instalação de carpete felpudo para máximo conforto e redução de ruído.',
     image: '🛏️',
     details: {
-      size: '300 sq ft',
-      duration: '1 day',
-      materials: 'Premium plush carpet',
-      challenge: 'Stair carpeting included'
+      size: '28 m²',
+      duration: '1 dia',
+      materials: 'Carpete felpudo premium',
+      challenge: 'Carpete de escada incluído'
     }
   }
 ]
 
 const categories = [
-  { id: 'all', name: 'All Projects', icon: '🏗️' },
-  { id: 'hardwood', name: 'Hardwood', icon: '🪵' },
-  { id: 'tile', name: 'Tile & Stone', icon: '🏛️' },
-  { id: 'vinyl', name: 'Vinyl & LVP', icon: '💧' },
-  { id: 'laminate', name: 'Laminate', icon: '📋' },
-  { id: 'carpet', name: 'Carpet', icon: '🏠' }
+  { id: 'all', name: 'Todos os Projetos', icon: '🏗️' },
+  { id: 'hardwood', name: 'Madeira', icon: '🪵' },
+  { id: 'tile', name: 'Cerâmica e Pedra', icon: '🏛️' },
+  { id: 'vinyl', name: 'Vinílico e LVT', icon: '💧' },
+  { id: 'laminate', name: 'Laminado', icon: '📋' },
+  { id: 'carpet', name: 'Carpete', icon: '🏠' }
 ]
 
 export default function PortfolioClient() {
@@ -140,11 +140,11 @@ export default function PortfolioClient() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Portfolio
+            Nosso Portfólio
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our recent projects and see the quality craftsmanship that has made 
-            PisosPro the trusted choice for flooring solutions.
+            Explore nossos projetos recentes e veja o artesanato de qualidade que fez da 
+            PisosPro a escolha confiável para soluções em pisos.
           </p>
         </div>
 
@@ -185,7 +185,7 @@ export default function PortfolioClient() {
                   <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
                     {categories.find(cat => cat.id === project.category)?.name}
                   </span>
-                  <span className="text-blue-600 text-sm font-medium">View Details →</span>
+                  <span className="text-blue-600 text-sm font-medium">Ver Detalhes →</span>
                 </div>
               </div>
             </div>
@@ -195,46 +195,46 @@ export default function PortfolioClient() {
         {/* Stats Section */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-16">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-            Project Statistics
+            Estatísticas dos Projetos
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">5,000+</div>
-              <div className="text-gray-600">Projects Completed</div>
+              <div className="text-gray-600">Projetos Concluídos</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">2M+</div>
-              <div className="text-gray-600">Square Feet Installed</div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">200k+</div>
+              <div className="text-gray-600">Metros Quadrados Instalados</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">98%</div>
-              <div className="text-gray-600">Customer Satisfaction</div>
+              <div className="text-gray-600">Satisfação do Cliente</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">25+</div>
-              <div className="text-gray-600">Years Experience</div>
+              <div className="text-gray-600">Anos de Experiência</div>
             </div>
           </div>
         </div>
 
         {/* CTA Section */}
         <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-lg p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready for Your Dream Floor?</h2>
+          <h2 className="text-3xl font-bold mb-4">Pronto para o Piso dos seus Sonhos?</h2>
           <p className="text-xl mb-6">
-            Let us transform your space with the same quality and attention to detail shown in our portfolio.
+            Deixe-nos transformar seu espaço com a mesma qualidade e atenção aos detalhes mostrados em nosso portfólio.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href="/contact"
               className="bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors"
             >
-              Start Your Project
+              Iniciar seu Projeto
             </a>
             <a 
               href="/services"
               className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors"
             >
-              View Services
+              Ver Serviços
             </a>
           </div>
         </div>
@@ -260,18 +260,18 @@ export default function PortfolioClient() {
                 
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-2">Project Details</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">Detalhes do Projeto</h3>
                     <p className="text-gray-600 mb-4">{selectedProject.description}</p>
-                    <p className="text-blue-600 font-semibold">Location: {selectedProject.location}</p>
+                    <p className="text-blue-600 font-semibold">Localização: {selectedProject.location}</p>
                   </div>
                   
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-2">Specifications</h3>
+                    <h3 className="font-bold text-gray-900 mb-2">Especificações</h3>
                     <div className="space-y-2 text-sm">
-                      <div><strong>Size:</strong> {selectedProject.details.size}</div>
-                      <div><strong>Duration:</strong> {selectedProject.details.duration}</div>
-                      <div><strong>Materials:</strong> {selectedProject.details.materials}</div>
-                      <div><strong>Challenge:</strong> {selectedProject.details.challenge}</div>
+                      <div><strong>Tamanho:</strong> {selectedProject.details.size}</div>
+                      <div><strong>Duração:</strong> {selectedProject.details.duration}</div>
+                      <div><strong>Materiais:</strong> {selectedProject.details.materials}</div>
+                      <div><strong>Desafio:</strong> {selectedProject.details.challenge}</div>
                     </div>
                   </div>
                 </div>
@@ -281,13 +281,13 @@ export default function PortfolioClient() {
                     href="/contact"
                     className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex-1 text-center"
                   >
-                    Start Similar Project
+                    Iniciar Projeto Semelhante
                   </a>
                   <button 
                     onClick={() => setSelectedProject(null)}
                     className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                   >
-                    Close
+                    Fechar
                   </button>
                 </div>
               </div>
