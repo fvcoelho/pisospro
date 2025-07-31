@@ -51,6 +51,7 @@ export default function Footer() {
                   href="https://wa.me/5511940147157?text=Olá! Gostaria de solicitar um orçamento para pisos."
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-track-id="footer-whatsapp-link"
                   className="text-green-400 hover:text-green-300 font-medium"
                 >
                   (11) 94014-7157 - WhatsApp

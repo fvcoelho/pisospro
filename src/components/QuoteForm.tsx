@@ -53,6 +53,7 @@ export default function QuoteForm() {
               roomSize: '', timeline: '', budget: '', description: ''
             })
           }}
+          data-track-id="quote-form-reset"
           className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
         >
           Enviar Outra Solicitação
@@ -235,6 +236,7 @@ export default function QuoteForm() {
       <button
         type="submit"
         disabled={isSubmitting}
+        data-track-id="quote-form-submit"
         className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? 'Enviando...' : 'Obter Orçamento Gratuito'}

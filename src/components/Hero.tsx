@@ -16,12 +16,14 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/contact" 
+              data-track-id="hero-quote-button"
               className="bg-yellow-500 text-black px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-400 transition-colors"
             >
               Orçamento Grátis
             </Link>
             <Link 
               href="/portfolio" 
+              data-track-id="hero-portfolio-button"
               className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors"
             >
               Ver Nossos Trabalhos

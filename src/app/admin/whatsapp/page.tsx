@@ -19,8 +19,20 @@ export default async function WhatsAppAdminPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Conversas WhatsApp</h1>
-        <p className="text-gray-600">Gerencie as conversas do chatbot</p>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Conversas WhatsApp</h1>
+            <p className="text-gray-600">Gerencie as conversas do chatbot</p>
+          </div>
+          <div className="flex space-x-4">
+            <a
+              href="/admin/analytics"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              📊 Analytics
+            </a>
+          </div>
+        </div>
       </div>
 
       <div className="bg-white shadow overflow-hidden sm:rounded-md">

@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import AnalyticsProvider from "@/components/AnalyticsProvider";
 
 export const metadata: Metadata = {
   title: "Pisos-Pró - Soluções Profissionais em Pisos",
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <Navbar />
-        <main className="pt-20">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppButton />
+        <AnalyticsProvider>
+          <Navbar />
+          <main className="pt-20">
+            {children}
+          </main>
+          <Footer />
+          <WhatsAppButton />
+        </AnalyticsProvider>
       </body>
     </html>
   );

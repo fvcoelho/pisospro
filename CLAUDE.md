@@ -73,6 +73,26 @@ Key WhatsApp files:
 - `/src/lib/whatsapp/templates.ts` - Conversation templates and state definitions
 - `/src/app/api/whatsapp/webhook/route.ts` - Webhook endpoint for receiving messages
 
+### Analytics & User Tracking
+The application includes comprehensive user activity tracking:
+- **Global Click Tracking**: Automatically captures all button clicks and interactions
+- **Page View Tracking**: Records page visits with time spent on each page
+- **Session Management**: Tracks unique user sessions with device and location data
+- **Real-time Dashboard**: `/admin/analytics` for viewing live user activity
+- **Simple Data Model**: Records element text, IDs, and interaction metadata
+
+Key Analytics files:
+- `/src/lib/analytics/tracker.ts` - Core tracking library with global click listener
+- `/src/components/AnalyticsProvider.tsx` - React provider for automatic tracking
+- `/src/app/api/track/click/route.ts` - API endpoint for recording clicks
+- `/src/app/api/track/pageview/route.ts` - API endpoint for recording page views
+- `/src/app/api/analytics/recent/route.ts` - API endpoint for dashboard data
+
+Tracking Data Collected:
+- **Click Events**: Element text, ID, type, page, timestamp
+- **Page Views**: URL, title, time spent, referrer
+- **Session Info**: IP address, user agent, device type, traffic source
+
 ### Important Configuration
 - **Environment Variables**: Requires `DATABASE_URL` for PostgreSQL connection and WhatsApp API credentials (`WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`, etc.)
 - **WhatsApp Setup**: See `WHATSAPP_SETUP.md` for complete Meta Business API setup instructions
