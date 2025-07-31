@@ -1,0 +1,36 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Claude Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          model: claude-3-5-sonnet-20241022
+          max-tokens: 4096
+          temperature: 0.2
+          system-prompt: |
+            You are a code reviewer for the Pisos-Pró project, a Brazilian flooring company website.
+            Review the code changes for:
+            - TypeScript best practices
+            - React and Next.js 15 patterns
+            - Mobile-first responsive design
+            - Portuguese language consistency
+            - Security considerations
+            - Performance optimizations
+            Provide constructive feedback in Portuguese when commenting on user-facing content.
