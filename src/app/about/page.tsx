@@ -63,7 +63,7 @@ export default function AboutPage() {
             Sobre a Pisos-Pró
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            For over 25 years, we've been transforming homes and businesses with 
+            For over 25 years, we&apos;ve been transforming homes and businesses with 
             premium flooring solutions and exceptional craftsmanship.
           </p>
         </div>
@@ -85,7 +85,7 @@ export default function AboutPage() {
                   residential and commercial markets.
                 </p>
                 <p>
-                  Today, we're proud to be recognized as the premier flooring contractor in our area, 
+                  Today, we&apos;re proud to be recognized as the premier flooring contractor in our area, 
                   known for our attention to detail, use of premium materials, and commitment to 
                   exceeding customer expectations on every project.
                 </p>

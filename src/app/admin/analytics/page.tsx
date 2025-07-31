@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 interface Activity {
   id: string
@@ -123,12 +124,12 @@ export default function AnalyticsPage() {
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-sm text-gray-600">Ao vivo</span>
             </div>
-            <a
+            <Link
               href="/admin/whatsapp"
               className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
             >
               💬 WhatsApp
-            </a>
+            </Link>
             <button
               onClick={fetchData}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
