@@ -45,9 +45,9 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Informações de Contato</h4>
             <div className="space-y-2 text-gray-300">
-              <p>📞 (11) 9999-9999</p>
-              <p>✉️ contato@pisos-pro.com.br</p>
-              <p>📍 Rua das Flores, 123<br />São Paulo, SP 01234-567</p>
+              <p>📞 (11) 94014-7157</p>
+              <p>✉️ contato@pisospro.com.br</p>
+              <p>📍 Rua Leonardo Mota, 100<br />São Paulo, SP 05586-090</p>
               <p>🕒 Seg-Sex: 8h-18h<br />Sáb: 9h-16h</p>
             </div>
           </div>
