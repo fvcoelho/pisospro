@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -9,10 +10,17 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-lg fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0">
-              <span className="text-2xl font-bold text-blue-600">Pisos-Pró</span>
+            <Link href="/" className="flex-shrink-0 flex items-center">
+              <Image 
+                src="/logo.svg" 
+                alt="Pisos Pró - Venda & Instalação" 
+                width={400} 
+                height={200}
+                className="h-16 w-auto"
+                priority
+              />
             </Link>
           </div>
           
