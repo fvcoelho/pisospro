@@ -45,7 +45,17 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Informações de Contato</h4>
             <div className="space-y-2 text-gray-300">
-              <p>📞 (11) 94014-7157</p>
+              <div className="flex items-center space-x-2">
+                <span>📞</span>
+                <a 
+                  href="https://wa.me/5511940147157?text=Olá! Gostaria de solicitar um orçamento para pisos."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-400 hover:text-green-300 font-medium"
+                >
+                  (11) 94014-7157 - WhatsApp
+                </a>
+              </div>
               <p>✉️ contato@pisospro.com.br</p>
               <p>📍 Rua Leonardo Mota, 100<br />São Paulo, SP 05586-090</p>
               <p>🕒 Seg-Sex: 8h-18h<br />Sáb: 9h-16h</p>
