@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import ConditionalLayout from "@/components/ConditionalLayout";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
 
 export const metadata: Metadata = {
@@ -20,12 +18,9 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="antialiased">
         <AnalyticsProvider>
-          <Navbar />
-          <main>
+          <ConditionalLayout>
             {children}
-          </main>
-          <Footer />
-          <WhatsAppButton />
+          </ConditionalLayout>
         </AnalyticsProvider>
       </body>
     </html>
