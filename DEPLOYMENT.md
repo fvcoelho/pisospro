@@ -205,4 +205,6 @@ psql $DATABASE_URL < backup-20240101.sql
 
 ---
 
+**Last Updated:** January 2025
+
 For support or questions about deployment, contact the development team.
