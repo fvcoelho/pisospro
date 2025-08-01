@@ -50,6 +50,18 @@ const features = [
 export default function WhyChooseUs() {
   const [visibleItems, setVisibleItems] = useState<number[]>([])
   const [scrollY, setScrollY] = useState(0)
+  const [particles, setParticles] = useState<Array<{left: number, top: number, duration: number}>>([])
+
+  useEffect(() => {
+    // Generate particles positions on client side only
+    setParticles(
+      [...Array(20)].map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 3 + Math.random() * 2,
+      }))
+    )
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -89,15 +101,15 @@ export default function WhyChooseUs() {
 
       {/* Floating Particles */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((particle, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-gold-400/30 rounded-full animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
               animationDelay: `${i * 0.3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
+              animationDuration: `${particle.duration}s`,
             }}
           />
         ))}

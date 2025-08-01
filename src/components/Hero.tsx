@@ -5,11 +5,22 @@ import { useEffect, useState } from 'react'
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0)
+  const [particles, setParticles] = useState<Array<{left: number, top: number}>>([])
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    // Generate particles positions on client side only
+    setParticles(
+      [...Array(12)].map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+      }))
+    )
   }, [])
 
   return (
@@ -34,13 +45,13 @@ export default function Hero() {
         
         {/* Floating Wood Particles */}
         <div className="absolute inset-0 opacity-30">
-          {[...Array(12)].map((_, i) => (
+          {particles.map((particle, i) => (
             <div
               key={i}
               className="absolute w-2 h-2 bg-gold-400/60 rounded-full animate-float"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
                 animationDelay: `${i * 0.5}s`,
                 transform: `translateY(${scrollY * (0.1 + i * 0.02)}px)`,
               }}
