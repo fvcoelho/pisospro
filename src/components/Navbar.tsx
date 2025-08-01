@@ -137,7 +137,7 @@ function NavLink({ href, children, scrolled, ...props }: {
     <Link 
       href={href} 
       {...props}
-      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg group ${
+      className={`relative px-4 py-2 text-base font-medium transition-all duration-300 rounded-lg group ${
         scrolled 
           ? 'text-wood-900 hover:text-wood-700 hover:bg-wood-100' 
           : 'text-white hover:text-gold-300'
@@ -163,7 +163,7 @@ function MobileNavLink({ href, children, onClick, ...props }: {
       href={href} 
       onClick={onClick}
       {...props}
-      className="block text-wood-900 hover:text-wood-700 hover:bg-wood-100/50 px-3 py-2 text-base font-medium rounded-lg transition-all duration-300"
+      className="block text-wood-900 hover:text-wood-700 hover:bg-wood-100/50 px-3 py-2 text-lg font-medium rounded-lg transition-all duration-300"
     >
       {children}
     </Link>

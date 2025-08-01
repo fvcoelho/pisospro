@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className="antialiased">
         <AnalyticsProvider>
           <Navbar />
-          <main className="pt-20">
+          <main>
             {children}
           </main>
           <Footer />
