@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate": "prisma migrate deploy",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:reset": "prisma migrate reset --force",
+    "build:production": "npm run db:generate && next build",
+    "deploy:vercel": "vercel --prod",
+    "postbuild": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.13.0",
