@@ -37,7 +37,13 @@ function getSessionInfo() {
     sessionId: getSessionId(),
     userAgent: navigator.userAgent,
     referrer: document.referrer || undefined,
-    landingPage: window.location.pathname + window.location.search
+    landingPage: window.location.pathname + window.location.search,
+    // Additional client-side data
+    screenResolution: `${window.screen.width}x${window.screen.height}`,
+    viewport: `${window.innerWidth}x${window.innerHeight}`,
+    colorDepth: window.screen.colorDepth,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    language: navigator.language || navigator.languages?.[0]
   }
 }
 

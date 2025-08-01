@@ -11,6 +11,7 @@ interface Activity {
   elementType?: string
   createdAt: string
   session: {
+    sessionId: string
     ipAddress?: string
     userAgent?: string
     referrer?: string
@@ -24,6 +25,7 @@ interface PageView {
   timeSpent?: number
   createdAt: string
   session: {
+    sessionId: string
     ipAddress?: string
     userAgent?: string
     referrer?: string
@@ -47,10 +49,18 @@ export default function AnalyticsPage() {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<'overview' | 'clicks' | 'pages'>('overview')
   const [refreshInterval, setRefreshInterval] = useState<NodeJS.Timeout | null>(null)
+  const [limit, setLimit] = useState(100)
+  const [orderBy, setOrderBy] = useState('createdAt')
+  const [orderDirection, setOrderDirection] = useState<'asc' | 'desc'>('desc')
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/analytics/recent')
+      const params = new URLSearchParams({
+        limit: limit.toString(),
+        orderBy,
+        orderDirection
+      })
+      const response = await fetch(`/api/analytics/recent?${params}`)
       const result = await response.json()
       setData(result)
     } catch (error) {
@@ -70,7 +80,7 @@ export default function AnalyticsPage() {
     return () => {
       if (interval) clearInterval(interval)
     }
-  }, [])
+  }, [limit, orderBy, orderDirection])
 
   const formatTime = (dateString: string) => {
     return new Date(dateString).toLocaleString('pt-BR')
@@ -114,7 +124,7 @@ export default function AnalyticsPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="mb-8">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
             <p className="text-gray-600">Acompanhamento de atividade do site em tempo real</p>
@@ -124,6 +134,12 @@ export default function AnalyticsPage() {
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-sm text-gray-600">Ao vivo</span>
             </div>
+            <Link
+              href="/admin/analytics/sessions"
+              className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+            >
+              📊 Ver Todas Sessões
+            </Link>
             <Link
               href="/admin/whatsapp"
               className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
@@ -136,6 +152,48 @@ export default function AnalyticsPage() {
             >
               Atualizar
             </button>
+          </div>
+        </div>
+        
+        {/* Controls */}
+        <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow">
+          <div>
+            <label className="text-sm font-medium text-gray-700 mr-2">Limite:</label>
+            <select 
+              value={limit} 
+              onChange={(e) => setLimit(Number(e.target.value))}
+              className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+            >
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+              <option value={150}>150</option>
+              <option value={200}>200</option>
+            </select>
+          </div>
+          
+          <div>
+            <label className="text-sm font-medium text-gray-700 mr-2">Ordenar por:</label>
+            <select 
+              value={orderBy} 
+              onChange={(e) => setOrderBy(e.target.value)}
+              className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+            >
+              <option value="createdAt">Data de Criação</option>
+              <option value="page">Página</option>
+              <option value="elementText">Texto do Elemento</option>
+            </select>
+          </div>
+          
+          <div>
+            <label className="text-sm font-medium text-gray-700 mr-2">Direção:</label>
+            <select 
+              value={orderDirection} 
+              onChange={(e) => setOrderDirection(e.target.value as 'asc' | 'desc')}
+              className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+            >
+              <option value="desc">Mais recente primeiro</option>
+              <option value="asc">Mais antigo primeiro</option>
+            </select>
           </div>
         </div>
       </div>
@@ -327,6 +385,12 @@ export default function AnalyticsPage() {
                     <div className="text-sm text-gray-500">
                       {getDeviceType(activity.session.userAgent)}
                     </div>
+                    <Link
+                      href={`/admin/analytics/session/${activity.session.sessionId}`}
+                      className="text-xs text-blue-600 hover:text-blue-800"
+                    >
+                      Ver sessão →
+                    </Link>
                   </div>
                 </div>
               </li>
@@ -373,6 +437,12 @@ export default function AnalyticsPage() {
                     <div className="text-sm text-gray-500">
                       {getDeviceType(pageView.session.userAgent)}
                     </div>
+                    <Link
+                      href={`/admin/analytics/session/${pageView.session.sessionId}`}
+                      className="text-xs text-blue-600 hover:text-blue-800"
+                    >
+                      Ver sessão →
+                    </Link>
                   </div>
                 </div>
               </li>

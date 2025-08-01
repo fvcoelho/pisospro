@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -30,9 +24,9 @@ model Category {
   description String?
   slug        String    @unique
   imageUrl    String?
-  products    Product[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  products    Product[]
 }
 
 model Product {
@@ -42,70 +36,62 @@ model Product {
   price       Decimal?
   imageUrl    String?
   categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  category    Category @relation(fields: [categoryId], references: [id])
 }
 
 model Service {
-  id          Int     @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   name        String
   description String?
   basePrice   Decimal?
   imageUrl    String?
-  isActive    Boolean @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
   quotes      QuoteService[]
 }
 
 model Quote {
-  id          Int      @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   userId      Int?
-  user        User?    @relation(fields: [userId], references: [id])
   name        String
   email       String
   phone       String?
   address     String?
   description String?
-  status      QuoteStatus @default(PENDING)
+  status      QuoteStatus    @default(PENDING)
   totalAmount Decimal?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  user        User?          @relation(fields: [userId], references: [id])
   services    QuoteService[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 model QuoteService {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   quoteId   Int
-  quote     Quote   @relation(fields: [quoteId], references: [id], onDelete: Cascade)
   serviceId Int
-  service   Service @relation(fields: [serviceId], references: [id])
-  quantity  Int     @default(1)
+  quantity  Int      @default(1)
   price     Decimal?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  quote     Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  service   Service  @relation(fields: [serviceId], references: [id])
 }
 
 model Project {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
   description String?
   imageUrls   String[]
   location    String?
   completedAt DateTime?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-enum QuoteStatus {
-  PENDING
-  REVIEWED
-  APPROVED
-  REJECTED
-  COMPLETED
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model WhatsAppConversation {
@@ -115,17 +101,16 @@ model WhatsAppConversation {
   lastMessageAt DateTime
   status        ConversationStatus @default(ACTIVE)
   userId        Int?
-  user          User?              @relation(fields: [userId], references: [id])
-  messages      WhatsAppMessage[]
-  state         ChatbotState?
   createdAt     DateTime           @default(now())
   updatedAt     DateTime           @updatedAt
+  state         ChatbotState?
+  user          User?              @relation(fields: [userId], references: [id])
+  messages      WhatsAppMessage[]
 }
 
 model WhatsAppMessage {
   id             String               @id @default(cuid())
   conversationId String
-  conversation   WhatsAppConversation @relation(fields: [conversationId], references: [id])
   messageId      String               @unique
   direction      MessageDirection
   content        String
@@ -133,15 +118,70 @@ model WhatsAppMessage {
   mediaType      String?
   status         String?
   createdAt      DateTime             @default(now())
+  conversation   WhatsAppConversation @relation(fields: [conversationId], references: [id])
 }
 
 model ChatbotState {
   id             String               @id @default(cuid())
   conversationId String               @unique
-  conversation   WhatsAppConversation @relation(fields: [conversationId], references: [id])
   currentStep    String
   collectedData  Json
   updatedAt      DateTime             @updatedAt
+  conversation   WhatsAppConversation @relation(fields: [conversationId], references: [id])
+}
+
+model UserSession {
+  id               String         @id @default(cuid())
+  sessionId        String         @unique
+  ipAddress        String?
+  userAgent        String?
+  referrer         String?
+  landingPage      String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  browser          String?
+  city             String?
+  country          String?
+  device           String?
+  headers          Json?
+  language         String?
+  os               String?
+  region           String?
+  colorDepth       Int?
+  screenResolution String?
+  timezone         String?
+  viewport         String?
+  pageViews        PageView[]
+  activities       UserActivity[]
+}
+
+model PageView {
+  id        String      @id @default(cuid())
+  sessionId String
+  page      String
+  title     String?
+  timeSpent Int?
+  createdAt DateTime    @default(now())
+  session   UserSession @relation(fields: [sessionId], references: [sessionId])
+}
+
+model UserActivity {
+  id          String      @id @default(cuid())
+  sessionId   String
+  page        String
+  elementId   String?
+  elementText String?
+  elementType String?
+  createdAt   DateTime    @default(now())
+  session     UserSession @relation(fields: [sessionId], references: [sessionId])
+}
+
+enum QuoteStatus {
+  PENDING
+  REVIEWED
+  APPROVED
+  REJECTED
+  COMPLETED
 }
 
 enum ConversationStatus {
@@ -153,38 +193,4 @@ enum ConversationStatus {
 enum MessageDirection {
   INBOUND
   OUTBOUND
-}
-
-model UserSession {
-  id          String         @id @default(cuid())
-  sessionId   String         @unique
-  ipAddress   String?
-  userAgent   String?
-  referrer    String?
-  landingPage String?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  activities  UserActivity[]
-  pageViews   PageView[]
-}
-
-model PageView {
-  id        String      @id @default(cuid())
-  sessionId String
-  session   UserSession @relation(fields: [sessionId], references: [sessionId])
-  page      String
-  title     String?
-  timeSpent Int?
-  createdAt DateTime    @default(now())
-}
-
-model UserActivity {
-  id          String      @id @default(cuid())
-  sessionId   String
-  session     UserSession @relation(fields: [sessionId], references: [sessionId])
-  page        String
-  elementId   String?
-  elementText String?
-  elementType String?
-  createdAt   DateTime    @default(now())
 }

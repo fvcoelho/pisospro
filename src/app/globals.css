@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* WhatsApp button fade-in/fade-out animation */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-pulse {
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+.animate-fade-pulse:hover {
+  animation: none;
+  opacity: 1;
+  transform: scale(1);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
