@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contato Pisos-Pró - Obtenha seu Orçamento Gratuito Hoje',
-  description: 'Entre em contato com a Pisos-Pró para uma consulta e orçamento gratuitos. Ligue (11) 9999-9999 ou preencha nosso formulário online. Resposta rápida, preços transparentes, satisfação garantida.',
+  description: 'Entre em contato com a Pisos-Pró para uma consulta e orçamento gratuitos. Ligue (11) 94014-7157 ou preencha nosso formulário online. Resposta rápida, preços transparentes, satisfação garantida.',
   keywords: 'contato pisos-pro, orcamento pisos, estimativa gratuita, consultoria pisos, contato empreiteiro pisos, solicitar orcamento',
   openGraph: {
     title: 'Contato Pisos-Pró - Orçamento Gratuito',
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 const contactInfo = [
   {
     type: 'Telefone',
-    value: '(11) 9999-9999',
+    value: '(11) 94014-7157',
     description: 'Ligue para atendimento imediato',
     icon: '📞',
-    href: 'tel:11-9999-9999'
+    href: 'tel:11-94014-7157'
   },
   {
     type: 'E-mail',

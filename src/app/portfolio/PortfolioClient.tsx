@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const portfolioProjects = [
   {
@@ -126,13 +126,72 @@ const categories = [
   { id: 'carpet', name: 'Carpete', icon: '🏠' }
 ]
 
+interface GalleryImage {
+  id: number
+  title: string
+  description: string | null
+  location: string | null
+  imageUrl: string
+  category: string | null
+  createdAt: string
+}
+
 export default function PortfolioClient() {
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [selectedProject, setSelectedProject] = useState<typeof portfolioProjects[0] | null>(null)
+  const [selectedProject, setSelectedProject] = useState<any>(null)
+  const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([])
+  const [loading, setLoading] = useState(true)
+
+  const fetchGalleryImages = async () => {
+    try {
+      const response = await fetch(`/api/gallery?category=${selectedCategory}`)
+      const data = await response.json()
+      setGalleryImages(data.images || [])
+    } catch (error) {
+      console.error('Error fetching gallery images:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchGalleryImages()
+  }, [selectedCategory])
+
+  const allProjects = [
+    ...portfolioProjects.map(project => ({ ...project, isGalleryImage: false })),
+    ...galleryImages.map(img => ({
+      id: `gallery-${img.id}`,
+      title: img.title,
+      category: img.category || 'other',
+      location: img.location || 'Localização não informada',
+      description: img.description || 'Sem descrição',
+      image: img.imageUrl,
+      isGalleryImage: true,
+      details: {
+        size: 'N/A',
+        duration: 'N/A',
+        materials: 'N/A',
+        challenge: 'N/A'
+      }
+    }))
+  ]
 
   const filteredProjects = selectedCategory === 'all' 
-    ? portfolioProjects 
-    : portfolioProjects.filter(project => project.category === selectedCategory)
+    ? allProjects 
+    : allProjects.filter(project => project.category === selectedCategory)
+
+  if (loading) {
+    return (
+      <div className="py-12 bg-gray-50 min-h-screen">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="text-2xl mb-4">Carregando galeria...</div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="py-12 bg-gray-50 min-h-screen">
@@ -175,7 +234,15 @@ export default function PortfolioClient() {
               onClick={() => setSelectedProject(project)}
             >
               <div className="h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                <div className="text-6xl">{project.image}</div>
+                {project.isGalleryImage ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="text-6xl">{project.image}</div>
+                )}
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
@@ -255,7 +322,15 @@ export default function PortfolioClient() {
                 </div>
                 
                 <div className="h-64 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-6">
-                  <div className="text-8xl">{selectedProject.image}</div>
+                  {selectedProject.isGalleryImage ? (
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div className="text-8xl">{selectedProject.image}</div>
+                  )}
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
