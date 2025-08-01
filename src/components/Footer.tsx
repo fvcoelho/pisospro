@@ -2,26 +2,66 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="relative bg-gradient-to-br from-wood-900 via-wood-800 to-wood-900 text-white overflow-hidden">
+      {/* Background texture */}
+      <div className="absolute inset-0 bg-wood-texture opacity-5"></div>
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold text-yellow-400 mb-4">Pisos-Pró</h3>
-            <p className="text-gray-300 mb-4">
-              Soluções profissionais em pisos com mais de 25 anos de experiência. 
-              Transformamos espaços com artesanato de qualidade e atendimento excepcional.
+          <div className="lg:col-span-2">
+            <div className="mb-6">
+              <h3 className="text-3xl font-bold text-gradient-gold mb-2">Pisos-Pró</h3>
+              <div className="w-20 h-1 bg-gradient-gold rounded-full mb-4"></div>
+            </div>
+            <p className="text-white/80 mb-6 leading-relaxed text-lg">
+              Especialistas em pisos de madeira com mais de 25 anos de experiência. 
+              Transformamos espaços com artesanato de excelência e atendimento personalizado 
+              em toda região metropolitana de São Paulo.
             </p>
+            
+            {/* Trust indicators */}
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="text-center glass-enhanced p-3 rounded-lg">
+                <div className="text-2xl font-bold text-gold-400">25+</div>
+                <div className="text-xs text-white/70">Anos</div>
+              </div>
+              <div className="text-center glass-enhanced p-3 rounded-lg">
+                <div className="text-2xl font-bold text-gold-400">5K+</div>
+                <div className="text-xs text-white/70">Projetos</div>
+              </div>
+              <div className="text-center glass-enhanced p-3 rounded-lg">
+                <div className="text-2xl font-bold text-gold-400">98%</div>
+                <div className="text-xs text-white/70">Satisfação</div>
+              </div>
+            </div>
+
+            {/* Social Links */}
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              <a 
+                href="https://facebook.com/pisospro" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              >
                 <span className="sr-only">Facebook</span>
                 📘
               </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              <a 
+                href="https://instagram.com/pisospro" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              >
                 <span className="sr-only">Instagram</span>
                 📷
               </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              <a 
+                href="https://linkedin.com/company/pisospro" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              >
                 <span className="sr-only">LinkedIn</span>
                 💼
               </a>
@@ -30,56 +70,130 @@ export default function Footer() {
           
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Links Rápidos</h4>
-            <ul className="space-y-2">
-              <li><Link href="/" className="text-gray-300 hover:text-white transition-colors">Início</Link></li>
-              <li><Link href="/services" className="text-gray-300 hover:text-white transition-colors">Serviços</Link></li>
-              <li><Link href="/products" className="text-gray-300 hover:text-white transition-colors">Produtos</Link></li>
-              <li><Link href="/portfolio" className="text-gray-300 hover:text-white transition-colors">Portfólio</Link></li>
-              <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors">Sobre</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Contato</Link></li>
+            <h4 className="text-xl font-bold mb-6 text-white">Navegação</h4>
+            <ul className="space-y-3">
+              <li><FooterLink href="/">Início</FooterLink></li>
+              <li><FooterLink href="/services">Serviços</FooterLink></li>
+              <li><FooterLink href="/products">Produtos</FooterLink></li>
+              <li><FooterLink href="/portfolio">Portfólio</FooterLink></li>
+              <li><FooterLink href="/about">Sobre Nós</FooterLink></li>
+              <li><FooterLink href="/contact">Contato</FooterLink></li>
             </ul>
           </div>
           
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Informações de Contato</h4>
-            <div className="space-y-2 text-gray-300">
-              <div className="flex items-center space-x-2">
-                <span>📞</span>
-                <a 
-                  href="https://wa.me/5511940147157?text=Olá! Gostaria de solicitar um orçamento para pisos."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-track-id="footer-whatsapp-link"
-                  className="text-green-400 hover:text-green-300 font-medium"
-                >
-                  (11) 94014-7157 - WhatsApp
-                </a>
+            <h4 className="text-xl font-bold mb-6 text-white">Contato</h4>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
+                  <span className="text-wood-900">📞</span>
+                </div>
+                <div>
+                  <a 
+                    href="https://wa.me/5511940147157?text=Olá! Gostaria de solicitar um orçamento para pisos de madeira."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track-id="footer-whatsapp-link"
+                    className="text-gold-300 hover:text-gold-200 font-semibold transition-colors block"
+                  >
+                    (11) 94014-7157
+                  </a>
+                  <span className="text-white/70 text-sm">WhatsApp</span>
+                </div>
               </div>
-              <p>✉️ contato@pisospro.com.br</p>
-              <p>📍 Rua Leonardo Mota, 100<br />São Paulo, SP 05586-090</p>
-              <p>🕒 Seg-Sex: 8h-18h<br />Sáb: 9h-16h</p>
+
+              <div className="flex items-start space-x-3">
+                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
+                  <span className="text-wood-900">✉️</span>
+                </div>
+                <div>
+                  <a 
+                    href="mailto:contato@pisospro.com.br"
+                    className="text-white/80 hover:text-white transition-colors"
+                  >
+                    contato@pisospro.com.br
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
+                  <span className="text-wood-900">📍</span>
+                </div>
+                <div className="text-white/80">
+                  <p>São Paulo, SP</p>
+                  <p className="text-sm text-white/60">Atendemos toda RMSP</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <div className="bg-gradient-gold p-2 rounded-lg mt-1">
+                  <span className="text-wood-900">🕒</span>
+                </div>
+                <div className="text-white/80 text-sm">
+                  <p>Seg-Sex: 8h às 18h</p>
+                  <p>Sáb: 9h às 16h</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-gray-700 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-300">
-              © 2024 Pisos-Pró. Todos os direitos reservados.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
+        {/* Bottom section */}
+        <div className="border-t border-white/10 pt-8 mt-12">
+          <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+            <div className="text-center lg:text-left">
+              <p className="text-white/70">
+                © {new Date().getFullYear()} Pisos-Pró. Todos os direitos reservados.
+              </p>
+              <p className="text-white/50 text-sm mt-1">
+                Especialistas em pisos de madeira desde 1998
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center lg:justify-end space-x-6">
+              <Link href="/privacy" className="text-white/70 hover:text-white transition-colors text-sm">
                 Política de Privacidade
               </Link>
-              <Link href="/terms" className="text-gray-300 hover:text-white transition-colors">
+              <Link href="/terms" className="text-white/70 hover:text-white transition-colors text-sm">
                 Termos de Serviço
               </Link>
+              <Link href="/sitemap" className="text-white/70 hover:text-white transition-colors text-sm">
+                Mapa do Site
+              </Link>
+            </div>
+          </div>
+
+          {/* Certificate badges */}
+          <div className="flex justify-center space-x-6 mt-8 pt-6 border-t border-white/10">
+            <div className="flex items-center space-x-2 text-white/60">
+              <span className="text-gold-500">🏅</span>
+              <span className="text-xs">Licenciado CREA</span>
+            </div>
+            <div className="flex items-center space-x-2 text-white/60">
+              <span className="text-gold-500">🛡️</span>
+              <span className="text-xs">Totalmente Segurado</span>
+            </div>
+            <div className="flex items-center space-x-2 text-white/60">
+              <span className="text-gold-500">🌱</span>
+              <span className="text-xs">Madeira Sustentável</span>
             </div>
           </div>
         </div>
       </div>
     </footer>
+  )
+}
+
+// Helper component for footer links
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link 
+      href={href} 
+      className="text-white/70 hover:text-gold-300 transition-all duration-300 hover:translate-x-1 inline-block"
+    >
+      {children}
+    </Link>
   )
 }
