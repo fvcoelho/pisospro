@@ -153,7 +153,7 @@ export default function Footer() {
             </div>
             
             <div className="flex flex-wrap justify-center lg:justify-end space-x-6">
-              <Link href="/privacy" className="text-white/70 hover:text-white transition-colors text-sm">
+              <Link href="/politica-privacidade" className="text-white/70 hover:text-white transition-colors text-sm">
                 Política de Privacidade
               </Link>
               <Link href="/terms" className="text-white/70 hover:text-white transition-colors text-sm">
