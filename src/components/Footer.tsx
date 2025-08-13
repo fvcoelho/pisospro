@@ -166,7 +166,7 @@ export default function Footer() {
           </div>
 
           {/* Certificate badges */}
-          <div className="flex justify-center space-x-6 mt-8 pt-6 border-t border-white/10">
+          {/* <div className="flex justify-center space-x-6 mt-8 pt-6 border-t border-white/10">
             <div className="flex items-center space-x-2 text-white/60">
               <span className="text-gold-500">🏅</span>
               <span className="text-xs">Licenciado CREA</span>
@@ -179,6 +179,21 @@ export default function Footer() {
               <span className="text-gold-500">🌱</span>
               <span className="text-xs">Madeira Sustentável</span>
             </div>
+          </div> */}
+
+          {/* Developer credit */}
+          <div className="flex justify-center mt-6 pt-4 border-t border-white/10">
+            <p className="text-white/50 text-xl text-center">
+              Desenvolvido com ❤️ por{' '}
+              <a 
+                href="https://pegue.app" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gold-400 hover:text-gold-300 transition-colors font-medium"
+              >
+                pegue.app
+              </a>
+            </p>
           </div>
         </div>
       </div>
