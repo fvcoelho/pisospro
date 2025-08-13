@@ -71,7 +71,7 @@ export default function Hero() {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🏆</span>
-                  <span className="font-montserrat text-sm">5000+ Projetos Realizados</span>
+                  <span className="font-montserrat text-sm">1000+ Projetos Realizados</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">✅</span>
