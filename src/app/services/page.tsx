@@ -22,15 +22,15 @@ const services = [
     image: '🪵',
     popular: true
   },
-  {
-    id: 'tile',
-    title: 'Instalação de Cerâmica e Pedra',
-    description: 'Bela instalação de cerâmica, porcelanato e pedra natural para cozinhas, banheiros e áreas de estar.',
-    features: ['Cerâmica e Porcelanato', 'Pedra Natural', 'Padrões de Mosaico', 'Instalação Impermeável'],
-    price: 'A partir de R$ 80/m²',
-    image: '🏛️',
-    popular: false
-  },
+  // {
+  //   id: 'tile',
+  //   title: 'Instalação de Cerâmica e Pedra',
+  //   description: 'Bela instalação de cerâmica, porcelanato e pedra natural para cozinhas, banheiros e áreas de estar.',
+  //   features: ['Cerâmica e Porcelanato', 'Pedra Natural', 'Padrões de Mosaico', 'Instalação Impermeável'],
+  //   price: 'A partir de R$ 80/m²',
+  //   image: '🏛️',
+  //   popular: false
+  // },
   {
     id: 'laminate',
     title: 'Piso Laminado',

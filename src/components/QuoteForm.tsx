@@ -128,7 +128,7 @@ export default function QuoteForm() {
           >
             <option value="">Selecione o tipo de projeto</option>
             <option value="hardwood">Instalação de Madeira</option>
-            <option value="tile">Cerâmica e Pedra</option>
+            {/* <option value="tile">Cerâmica e Pedra</option> */}
             <option value="laminate">Piso Laminado</option>
             <option value="vinyl">Vinílico e LVT</option>
             <option value="carpet">Instalação de Carpete</option>

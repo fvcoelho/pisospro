@@ -323,7 +323,7 @@ Cartão, boleto, PIX. Parcelamos em até 12x sem juros.`
 export function getProjectTypeDescription(projectType: string): string {
   const descriptions: Record<string, string> = {
     hardwood: 'Instalação de Pisos de Madeira - Elegância e durabilidade para sua casa',
-    tile: 'Cerâmica e Pedra - Resistência e beleza para todos os ambientes',  
+    //tile: 'Cerâmica e Pedra - Resistência e beleza para todos os ambientes',  
     laminate: 'Piso Laminado - Praticidade e economia sem abrir mão do estilo',
     vinyl: 'Vinílico e LVT - Tecnologia e conforto para ambientes modernos',
     carpet: 'Instalação de Carpete - Conforto e aconchego para seu lar',

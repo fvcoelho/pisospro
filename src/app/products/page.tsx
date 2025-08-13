@@ -24,18 +24,18 @@ const productCategories = [
       { name: 'Madeiras Exóticas', price: 'R$ 180-300/m²', description: 'Opções em cerejeira brasileira, teca e bambu' }
     ]
   },
-  {
-    id: 'tile',
-    name: 'Cerâmica e Pedra',
-    description: 'Azulejos cerâmicos, porcelanato e pedra natural para todas as aplicações',
-    image: '🏛️',
-    products: [
-      { name: 'Porcelanato', price: 'R$ 45-120/m²', description: 'Porcelanato durável em múltiplos tamanhos e acabamentos' },
-      { name: 'Cerâmica', price: 'R$ 30-90/m²', description: 'Azulejos cerâmicos clássicos para paredes e pisos' },
-      { name: 'Pedra Natural', price: 'R$ 120-225/m²', description: 'Opções em mármore, granito e travertino' },
-      { name: 'Pastilhas', price: 'R$ 150-375/m²', description: 'Padrões de mosaico em vidro, pedra e metal' }
-    ]
-  },
+  // {
+  //   id: 'tile',
+  //   name: 'Cerâmica e Pedra',
+  //   description: 'Azulejos cerâmicos, porcelanato e pedra natural para todas as aplicações',
+  //   image: '🏛️',
+  //   products: [
+  //     { name: 'Porcelanato', price: 'R$ 45-120/m²', description: 'Porcelanato durável em múltiplos tamanhos e acabamentos' },
+  //     { name: 'Cerâmica', price: 'R$ 30-90/m²', description: 'Azulejos cerâmicos clássicos para paredes e pisos' },
+  //     { name: 'Pedra Natural', price: 'R$ 120-225/m²', description: 'Opções em mármore, granito e travertino' },
+  //     { name: 'Pastilhas', price: 'R$ 150-375/m²', description: 'Padrões de mosaico em vidro, pedra e metal' }
+  //   ]
+  // },
   {
     id: 'laminate',
     name: 'Piso Laminado',
