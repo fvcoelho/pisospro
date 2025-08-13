@@ -2,11 +2,11 @@ import QuoteForm from '@/components/QuoteForm'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contato Pisos-Pró - Obtenha seu Orçamento Gratuito Hoje',
-  description: 'Entre em contato com a Pisos-Pró para uma consulta e orçamento gratuitos. Ligue (11) 94014-7157 ou preencha nosso formulário online. Resposta rápida, preços transparentes, satisfação garantida.',
+  title: 'Contato PisosPró - Obtenha seu Orçamento Gratuito Hoje',
+  description: 'Entre em contato com a PisosPró para uma consulta e orçamento gratuitos. Ligue (11) 94014-7157 ou preencha nosso formulário online. Resposta rápida, preços transparentes, satisfação garantida.',
   keywords: 'contato pisos-pro, orcamento pisos, estimativa gratuita, consultoria pisos, contato empreiteiro pisos, solicitar orcamento',
   openGraph: {
-    title: 'Contato Pisos-Pró - Orçamento Gratuito',
+    title: 'Contato PisosPró - Orçamento Gratuito',
     description: 'Obtenha sua consulta e orçamento gratuitos hoje mesmo. Assessoria especializada e preços transparentes.',
     type: 'website',
   },
@@ -150,7 +150,7 @@ export default function ContactPage() {
         {/* Why Choose Us for Contact */}
         <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-            Por Que Clientes Escolhem a Pisos-Pró
+            Por Que Clientes Escolhem a PisosPró
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">

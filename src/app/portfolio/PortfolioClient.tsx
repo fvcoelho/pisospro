@@ -203,7 +203,7 @@ export default function PortfolioClient() {
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Explore nossos projetos recentes e veja o artesanato de qualidade que fez da 
-            Pisos-Pró a escolha confiável para soluções em pisos.
+            PisosPró a escolha confiável para soluções em pisos.
           </p>
         </div>
 
@@ -278,7 +278,7 @@ export default function PortfolioClient() {
               <div className="text-gray-600">Satisfação do Cliente</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">25+</div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">15+</div>
               <div className="text-gray-600">Anos de Experiência</div>
             </div>
           </div>

@@ -10,7 +10,7 @@ export default function PoliticaPrivacidade() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">1. Introdução</h2>
             <p className="text-gray-600 leading-relaxed">
-              A Pisos-Pró está comprometida em proteger a privacidade e segurança dos dados pessoais de nossos clientes. 
+              A PisosPró está comprometida em proteger a privacidade e segurança dos dados pessoais de nossos clientes. 
               Esta Política de Privacidade descreve como coletamos, usamos, compartilhamos e protegemos suas informações 
               quando você utiliza nossos serviços, incluindo nosso site e integração com WhatsApp Business.
             </p>
@@ -140,7 +140,7 @@ export default function PoliticaPrivacidade() {
               entre em contato conosco:
             </p>
             <div className="bg-gray-100 p-4 rounded text-gray-600">
-              <p><strong>Pisos-Pró</strong></p>
+              <p><strong>PisosPró</strong></p>
               <p>WhatsApp: (11) 99999-9999</p>
               <p>E-mail: privacidade@pisospro.com.br</p>
               <p>Horário de atendimento: Segunda a Sexta, 8h às 18h</p>
