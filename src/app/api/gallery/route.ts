@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { del } from '@vercel/blob'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
@@ -47,6 +48,20 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Image not found' }, { status: 404 })
     }
 
+    // Delete from Vercel Blob if it's a blob URL
+    if (image.imageUrl && image.imageUrl.includes('blob.vercel-storage.com')) {
+      try {
+        await del(image.imageUrl, {
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        })
+        console.log('Successfully deleted blob:', image.imageUrl)
+      } catch (blobError) {
+        console.error('Error deleting blob:', blobError)
+        // Continue with database deletion even if blob deletion fails
+      }
+    }
+
+    // Mark as inactive in database instead of hard delete to maintain referential integrity
     await prisma.galleryImage.update({
       where: { id: parseInt(id) },
       data: { isActive: false }

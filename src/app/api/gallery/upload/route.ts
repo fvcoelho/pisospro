@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import cloudinary from '@/lib/cloudinary'
+import { put } from '@vercel/blob'
 import { prisma } from '@/lib/prisma'
 
 export async function POST(request: NextRequest) {
@@ -19,46 +19,74 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Title is required' }, { status: 400 })
     }
 
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      return NextResponse.json({ error: 'Only image files are allowed' }, { status: 400 })
+    }
 
-    const uploadResponse = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream(
-        {
-          resource_type: 'auto',
-          folder: 'pisos-pro/gallery',
-          transformation: [
-            { width: 1200, height: 800, crop: 'limit' },
-            { quality: 'auto' }
-          ]
-        },
-        (error, result) => {
-          if (error) reject(error)
-          else resolve(result)
-        }
-      ).end(buffer)
+    // Validate file size (10MB max)
+    const maxSize = 10 * 1024 * 1024 // 10MB
+    if (file.size > maxSize) {
+      return NextResponse.json({ error: 'File size must be less than 10MB' }, { status: 400 })
+    }
+
+    // Check if Vercel Blob is configured
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return NextResponse.json({ 
+        error: 'Blob storage not configured. Please set BLOB_READ_WRITE_TOKEN environment variable.' 
+      }, { status: 500 })
+    }
+
+    // Upload to Vercel Blob
+    const filename = `gallery/${Date.now()}-${file.name}`
+    const blob = await put(filename, file, {
+      access: 'public',
+      token: process.env.BLOB_READ_WRITE_TOKEN,
     })
 
-    const uploadResult = uploadResponse as any
-
+    // Save to database
     const galleryImage = await prisma.galleryImage.create({
       data: {
         title,
         description: description || null,
         location: location || null,
-        imageUrl: uploadResult.secure_url,
-        publicId: uploadResult.public_id,
+        imageUrl: blob.url,
+        publicId: blob.pathname, // Store blob pathname as publicId
         category: category || null,
+        isActive: true,
       }
     })
 
     return NextResponse.json({
       success: true,
-      image: galleryImage
+      image: galleryImage,
+      blob: {
+        url: blob.url,
+        pathname: blob.pathname,
+        size: file.size, // Use the original file size
+        downloadUrl: blob.downloadUrl,
+      }
     })
 
   } catch (error) {
     console.error('Upload error:', error)
+    
+    // Provide more specific error messages
+    if (error instanceof Error) {
+      if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+        return NextResponse.json(
+          { error: 'Blob storage authentication failed. Check BLOB_READ_WRITE_TOKEN.' },
+          { status: 401 }
+        )
+      }
+      if (error.message.includes('413') || error.message.includes('too large')) {
+        return NextResponse.json(
+          { error: 'File too large. Maximum size is 10MB.' },
+          { status: 413 }
+        )
+      }
+    }
+    
     return NextResponse.json(
       { error: 'Failed to upload image' },
       { status: 500 }
