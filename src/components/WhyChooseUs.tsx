@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react'
 
 const features = [
   {
-    title: '25+ Anos de Experiência',
+    title: '15+ Anos de Experiência',
     description: 'Décadas de expertise em instalação e restauração de pisos de madeira com técnicas tradicionais e modernas.',
     icon: '⭐',
-    stats: '25+ Anos',
+    stats: '15+ Anos',
     color: 'gold'
   },
   {
@@ -204,7 +204,7 @@ export default function WhyChooseUs() {
                 <div className="text-white/70">Satisfação do Cliente</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-gold-400">25+</div>
+                <div className="text-3xl font-bold text-gold-400">15+</div>
                 <div className="text-white/70">Anos de Experiência</div>
               </div>
             </div>

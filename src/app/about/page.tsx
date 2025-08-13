@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sobre a Pisos-Pró - 25+ Anos de Excelência Profissional em Pisos',
-  description: 'Conheça os 25+ anos de expertise em pisos da Pisos-Pró. Nossa equipe de profissionais qualificados completou mais de 5000 projetos com 98% de satisfação do cliente.',
+  title: 'Sobre a Pisos-Pró - 15+ Anos de Excelência Profissional em Pisos',
+  description: 'Conheça os 15+ anos de expertise em pisos da Pisos-Pró. Nossa equipe de profissionais qualificados completou mais de 5000 projetos com 98% de satisfação do cliente.',
   keywords: 'sobre pisos-pro, empresa de pisos, empreiteiros de pisos, equipe profissional de pisos, experiência em pisos, história da empresa',
   openGraph: {
     title: 'Sobre a Pisos-Pró - Especialistas Profissionais em Pisos',
@@ -15,7 +15,7 @@ const team = [
   {
     name: 'Michael Rodriguez',
     role: 'Founder & Master Installer',
-    experience: '25+ years',
+    experience: '15+ years',
     specialties: ['Hardwood', 'Custom Installation'],
     description: 'Fundou a Pisos-Pró com a visão de fornecer artesanato excepcional em pisos.',
     image: '👨‍🔧'
@@ -47,7 +47,7 @@ const team = [
 ]
 
 const stats = [
-  { number: '25+', label: 'Years in Business' },
+  { number: '15+', label: 'Years in Business' },
   { number: '5000+', label: 'Projects Completed' },
   { number: '98%', label: 'Customer Satisfaction' },
   { number: '50+', label: 'Team Members' }

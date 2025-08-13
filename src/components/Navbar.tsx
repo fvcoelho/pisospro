@@ -28,7 +28,7 @@ export default function Navbar() {
             <Link href="/" className="flex-shrink-0 flex items-center group">
               <div className="relative">
                 <Image 
-                  src="/logo.svg" 
+                  src="/logo_full.svg" 
                   alt="Pisos Pró - Especialistas em Pisos de Madeira" 
                   width={400} 
                   height={200}

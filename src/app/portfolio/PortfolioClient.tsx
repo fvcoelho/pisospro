@@ -278,7 +278,7 @@ export default function PortfolioClient() {
               <div className="text-gray-600">Satisfação do Cliente</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">25+</div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">15+</div>
               <div className="text-gray-600">Anos de Experiência</div>
             </div>
           </div>

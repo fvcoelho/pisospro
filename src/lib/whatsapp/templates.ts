@@ -20,7 +20,7 @@ export const WELCOME_MESSAGE = `Olá! 👋 Bem-vindo à *Pisos-Pró*!
 
 Sou o assistente virtual e estou aqui para ajudar você com soluções profissionais em pisos. 
 
-Temos mais de 25 anos de experiência em instalação, reforma e manutenção de pisos de todos os tipos!
+Temos mais de 15 anos de experiência em instalação, reforma e manutenção de pisos de todos os tipos!
 
 Como posso ajudá-lo hoje?`
 
@@ -290,7 +290,7 @@ export const SERVICES_INFO = `🏠 *Nossos Serviços Especializados*
 • Limpeza profissional
 
 💎 *Diferenciais Pisos-Pró*
-• +25 anos de experiência
+• +15 anos de experiência
 • Garantia em todos os serviços
 • Orçamento gratuito e sem compromisso
 • Materiais de primeira qualidade
