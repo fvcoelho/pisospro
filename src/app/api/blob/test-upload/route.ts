@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       blob: {
         url: blob.url,
         pathname: blob.pathname,
-        size: blob.size
+        size: buffer.length
       }
     });
 
