@@ -9,6 +9,7 @@ const portfolioProjects = [
     category: 'tile',
     location: 'Apart. Centro',
     description: 'Reforma completa do piso da cozinha com porcelanato premium com acabamento madeirado.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-neutral-400 to-neutral-600',
     details: {
       size: '23 m²',
@@ -23,6 +24,7 @@ const portfolioProjects = [
     category: 'hardwood',
     location: 'Casa Residencial',
     description: 'Bela instalação de piso de carvalho maciço nas principais áreas sociais.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-wood-400 to-wood-600',
     details: {
       size: '110 m²',
@@ -37,6 +39,7 @@ const portfolioProjects = [
     category: 'vinyl',
     location: 'Centro Empresarial',
     description: 'Instalação durável de LVT para escritório comercial de alto tráfego.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-blue-400 to-blue-600',
     details: {
       size: '325 m²',
@@ -51,6 +54,7 @@ const portfolioProjects = [
     category: 'tile',
     location: 'Suíte Master',
     description: 'Elegante instalação de mármore com borda decorativa de mosaico personalizada.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-gold-400 to-gold-600',
     details: {
       size: '11 m²',
@@ -65,6 +69,7 @@ const portfolioProjects = [
     category: 'laminate',
     location: 'Porão Residencial',
     description: 'Piso laminado resistente à umidade perfeito para instalação subterrânea.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-wood-300 to-wood-500',
     details: {
       size: '55 m²',
@@ -79,6 +84,7 @@ const portfolioProjects = [
     category: 'hardwood',
     location: 'Edifício Histórico',
     description: 'Restauração e instalação de madeira de demolição em restaurante histórico.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-wood-500 to-wood-700',
     details: {
       size: '74 m²',
@@ -93,6 +99,7 @@ const portfolioProjects = [
     category: 'tile',
     location: 'Hotel Centro',
     description: 'Instalação de pedra natural de alto padrão com design de padrões intrincados.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-gold-300 to-gold-500',
     details: {
       size: '140 m²',
@@ -107,6 +114,7 @@ const portfolioProjects = [
     category: 'carpet',
     location: 'Casa Familiar',
     description: 'Instalação de carpete felpudo para máximo conforto e redução de ruído.',
+    image: null, // Placeholder for gradient background
     gradient: 'from-neutral-300 to-neutral-500',
     details: {
       size: '28 m²',
@@ -242,7 +250,7 @@ export default function PortfolioClient() {
               onClick={() => setSelectedProject(project)}
             >
               <div className={`h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
-                {project.isGalleryImage ? (
+                {project.isGalleryImage && project.image ? (
                   <img
                     src={project.image}
                     alt={project.title}
@@ -348,7 +356,7 @@ export default function PortfolioClient() {
                 </div>
                 
                 <div className={`h-72 bg-gradient-to-br ${selectedProject.gradient} rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden`}>
-                  {selectedProject.isGalleryImage ? (
+                  {selectedProject.isGalleryImage && selectedProject.image ? (
                     <img
                       src={selectedProject.image}
                       alt={selectedProject.title}
