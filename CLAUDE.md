@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-PisosPró is a Next.js 15 business website for a flooring company specializing in professional flooring solutions. The application features a complete business website with home, services, products, portfolio, about, and contact pages.
+Pisos Pró is a Next.js 15 business website for a flooring company specializing in professional flooring solutions. The application features a complete business website with home, services, products, portfolio, about, and contact pages.
 
 ## Development Commands
 

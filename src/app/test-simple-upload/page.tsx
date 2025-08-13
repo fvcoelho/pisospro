@@ -303,7 +303,7 @@ export default function TestSimpleUploadPage() {
             <div>
               <Label>Vercel Blob Configuration</Label>
               <div className="text-sm bg-green-50 p-2 rounded border border-green-200">
-                <p><strong>Project:</strong> PisosPró</p>
+                <p><strong>Project:</strong> Pisos Pró</p>
                 <p><strong>Store ID:</strong> {blobConfig.storeId}</p>
                 <p><strong>Base URL:</strong> {blobConfig.baseUrl.startsWith('https://') ? blobConfig.baseUrl.replace('https://', '') : blobConfig.baseUrl}</p>
                 <p><strong>Token:</strong> <span className="text-green-600 font-medium">{blobConfig.isConfigured ? 'Configured ✓' : '❌ Not configured'}</span></p>

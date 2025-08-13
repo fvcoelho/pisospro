@@ -42,7 +42,7 @@ export default function QuoteForm() {
         <div className="text-6xl mb-4">✅</div>
         <h3 className="text-2xl font-bold text-green-800 mb-4">Solicitação de Orçamento Enviada!</h3>
         <p className="text-green-700 mb-6">
-          Obrigado pelo seu interesse na PisosPró. Analisaremos sua solicitação e entraremos em contato em até 24 horas 
+          Obrigado pelo seu interesse na Pisos Pró. Analisaremos sua solicitação e entraremos em contato em até 24 horas 
           para agendar uma consulta gratuita.
         </p>
         <button 

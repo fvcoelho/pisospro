@@ -1,4 +1,4 @@
-# PisosPró - Soluções Profissionais em Pisos
+# Pisos Pró - Soluções Profissionais em Pisos
 
 
 Um site completo para empresa de pisos desenvolvido com Next.js, TypeScript, Tailwind CSS e banco de dados PostgreSQL com Prisma.

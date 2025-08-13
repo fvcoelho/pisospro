@@ -206,7 +206,7 @@ export default function PortfolioClient() {
           </h1>
           <p className="font-montserrat text-xl md:text-2xl mb-8 font-light tracking-wide text-white/90 max-w-4xl mx-auto">
             Explore nossos projetos recentes e veja o artesanato de qualidade que fez da 
-            PisosPró a escolha confiável para soluções em pisos premium
+            Pisos Pró a escolha confiável para soluções em pisos premium
           </p>
         </div>
       </section>

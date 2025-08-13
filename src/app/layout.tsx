@@ -3,7 +3,7 @@ import "./globals.css";
 import RootProvider from "@/components/RootProvider";
 
 export const metadata: Metadata = {
-  title: "PisosPró",
+  title: "Pisos Pró",
   description: "Especialistas em instalação, reforma e manutenção de pisos de madeira. Artesanato de qualidade com mais de 15 anos de experiência em São Paulo.",
   keywords: "pisos, madeira, cerâmica, laminado, vinílico, carpete, instalação, reforma, profissional",
 };
