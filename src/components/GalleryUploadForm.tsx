@@ -13,7 +13,7 @@ interface GalleryUploadFormProps {
 const categories = [
   { value: '', label: 'Selecione uma categoria' },
   { value: 'hardwood', label: 'Madeira' },
-  { value: 'tile', label: 'Cerâmica e Pedra' },
+  //{ value: 'tile', label: 'Cerâmica e Pedra' },
   { value: 'vinyl', label: 'Vinílico e LVT' },
   { value: 'laminate', label: 'Laminado' },
   { value: 'carpet', label: 'Carpete' }

@@ -16,7 +16,7 @@ export enum ChatState {
   FAQ = 'faq'
 }
 
-export const WELCOME_MESSAGE = `Olá! 👋 Bem-vindo à *PisosPró*!
+export const WELCOME_MESSAGE = `Olá! 👋 Bem-vindo à *Pisos Pró*!
 
 Sou o assistente virtual e estou aqui para ajudar você com soluções profissionais em pisos. 
 
@@ -289,7 +289,7 @@ export const SERVICES_INFO = `🏠 *Nossos Serviços Especializados*
 • Reparos e substituições
 • Limpeza profissional
 
-💎 *Diferenciais PisosPró*
+💎 *Diferenciais Pisos Pró*
 • +15 anos de experiência
 • Garantia em todos os serviços
 • Orçamento gratuito e sem compromisso
@@ -323,7 +323,7 @@ Cartão, boleto, PIX. Parcelamos em até 12x sem juros.`
 export function getProjectTypeDescription(projectType: string): string {
   const descriptions: Record<string, string> = {
     hardwood: 'Instalação de Pisos de Madeira - Elegância e durabilidade para sua casa',
-    tile: 'Cerâmica e Pedra - Resistência e beleza para todos os ambientes',  
+    //tile: 'Cerâmica e Pedra - Resistência e beleza para todos os ambientes',  
     laminate: 'Piso Laminado - Praticidade e economia sem abrir mão do estilo',
     vinyl: 'Vinílico e LVT - Tecnologia e conforto para ambientes modernos',
     carpet: 'Instalação de Carpete - Conforto e aconchego para seu lar',

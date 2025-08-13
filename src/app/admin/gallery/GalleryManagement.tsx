@@ -21,7 +21,7 @@ interface GalleryImage {
 const categories = [
   { value: 'all', label: 'Todas as Categorias' },
   { value: 'hardwood', label: 'Madeira' },
-  { value: 'tile', label: 'Cerâmica e Pedra' },
+  //{ value: 'tile', label: 'Cerâmica e Pedra' },
   { value: 'vinyl', label: 'Vinílico e LVT' },
   { value: 'laminate', label: 'Laminado' },
   { value: 'carpet', label: 'Carpete' }

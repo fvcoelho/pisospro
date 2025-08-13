@@ -341,7 +341,7 @@ async function generateQuote(phoneNumber: string, conversationId: string, data: 
 
 💬 Em breve você receberá uma ligação ou mensagem da nossa equipe!
 
-*PisosPró - Transformando espaços há mais de 15 anos!* 🏠✨`
+*Pisos Pró - Transformando espaços há mais de 15 anos!* 🏠✨`
 
     await sendTextMessage(phoneNumber, summary, conversationId)
     

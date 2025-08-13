@@ -41,7 +41,7 @@ export default function PreloadScreen({ isLoading, onComplete }: PreloadScreenPr
           <div className="absolute inset-0 animate-spin">
             <Image
               src="/logo.svg"
-              alt="PisosPró"
+              alt="Pisos Pró"
               width={128}
               height={128}
               className="w-full h-full object-contain filter brightness-0 invert"
@@ -53,7 +53,7 @@ export default function PreloadScreen({ isLoading, onComplete }: PreloadScreenPr
         {/* Loading Text */}
         <div className="text-white">
           <h2 className="font-cinzel text-2xl md:text-3xl mb-4 tracking-wider font-light">
-            PisosPró
+            Pisos Pró
           </h2>
           <div className="flex items-center justify-center space-x-2">
             <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>

@@ -9,7 +9,8 @@ const portfolioProjects = [
     category: 'tile',
     location: 'Apart. Centro',
     description: 'Reforma completa do piso da cozinha com porcelanato premium com acabamento madeirado.',
-    image: '🏠',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-neutral-400 to-neutral-600',
     details: {
       size: '23 m²',
       duration: '3 dias',
@@ -23,7 +24,8 @@ const portfolioProjects = [
     category: 'hardwood',
     location: 'Casa Residencial',
     description: 'Bela instalação de piso de carvalho maciço nas principais áreas sociais.',
-    image: '🪵',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-wood-400 to-wood-600',
     details: {
       size: '110 m²',
       duration: '5 dias',
@@ -37,7 +39,8 @@ const portfolioProjects = [
     category: 'vinyl',
     location: 'Centro Empresarial',
     description: 'Instalação durável de LVT para escritório comercial de alto tráfego.',
-    image: '🏢',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-blue-400 to-blue-600',
     details: {
       size: '325 m²',
       duration: '1 semana',
@@ -51,7 +54,8 @@ const portfolioProjects = [
     category: 'tile',
     location: 'Suíte Master',
     description: 'Elegante instalação de mármore com borda decorativa de mosaico personalizada.',
-    image: '🛁',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-gold-400 to-gold-600',
     details: {
       size: '11 m²',
       duration: '4 dias',
@@ -65,7 +69,8 @@ const portfolioProjects = [
     category: 'laminate',
     location: 'Porão Residencial',
     description: 'Piso laminado resistente à umidade perfeito para instalação subterrânea.',
-    image: '🏠',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-wood-300 to-wood-500',
     details: {
       size: '55 m²',
       duration: '2 dias',
@@ -79,7 +84,8 @@ const portfolioProjects = [
     category: 'hardwood',
     location: 'Edifício Histórico',
     description: 'Restauração e instalação de madeira de demolição em restaurante histórico.',
-    image: '🍽️',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-wood-500 to-wood-700',
     details: {
       size: '74 m²',
       duration: '1 semana',
@@ -93,7 +99,8 @@ const portfolioProjects = [
     category: 'tile',
     location: 'Hotel Centro',
     description: 'Instalação de pedra natural de alto padrão com design de padrões intrincados.',
-    image: '🏨',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-gold-300 to-gold-500',
     details: {
       size: '140 m²',
       duration: '2 semanas',
@@ -107,7 +114,8 @@ const portfolioProjects = [
     category: 'carpet',
     location: 'Casa Familiar',
     description: 'Instalação de carpete felpudo para máximo conforto e redução de ruído.',
-    image: '🛏️',
+    image: null, // Placeholder for gradient background
+    gradient: 'from-neutral-300 to-neutral-500',
     details: {
       size: '28 m²',
       duration: '1 dia',
@@ -118,12 +126,12 @@ const portfolioProjects = [
 ]
 
 const categories = [
-  { id: 'all', name: 'Todos os Projetos', icon: '🏗️' },
-  { id: 'hardwood', name: 'Madeira', icon: '🪵' },
-  { id: 'tile', name: 'Cerâmica e Pedra', icon: '🏛️' },
-  { id: 'vinyl', name: 'Vinílico e LVT', icon: '💧' },
-  { id: 'laminate', name: 'Laminado', icon: '📋' },
-  { id: 'carpet', name: 'Carpete', icon: '🏠' }
+  { id: 'all', name: 'Todos os Projetos', gradient: 'from-green-400 to-green-600' },
+  { id: 'hardwood', name: 'Madeira', gradient: 'from-wood-400 to-wood-600' },
+  //{ id: 'tile', name: 'Cerâmica e Pedra', gradient: 'from-neutral-400 to-neutral-600' },
+  { id: 'vinyl', name: 'Vinílico e LVT', gradient: 'from-blue-400 to-blue-600' },
+  { id: 'laminate', name: 'Laminado', gradient: 'from-wood-300 to-wood-500' },
+  { id: 'carpet', name: 'Carpete', gradient: 'from-neutral-300 to-neutral-500' }
 ]
 
 interface GalleryImage {
@@ -167,6 +175,7 @@ export default function PortfolioClient() {
       location: img.location || 'Localização não informada',
       description: img.description || 'Sem descrição',
       image: img.imageUrl,
+      gradient: 'from-green-400 to-green-600', // Default gradient for gallery images
       isGalleryImage: true,
       details: {
         size: 'N/A',
@@ -183,76 +192,88 @@ export default function PortfolioClient() {
 
   if (loading) {
     return (
-      <div className="py-12 bg-gray-50 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="text-2xl mb-4">Carregando galeria...</div>
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-green-200 border-t-green-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="font-montserrat text-2xl text-gray-700 mb-2">Carregando Portfólio</div>
+          <div className="font-montserrat text-gray-500">Preparando nossos melhores projetos...</div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="py-12 bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Nosso Portfólio
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-cinzel text-5xl md:text-6xl lg:text-7xl mb-6 tracking-wider font-light">
+            <span className="text-gradient-gold">
+              Nosso Portfólio
+            </span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="font-montserrat text-xl md:text-2xl mb-8 font-light tracking-wide text-white/90 max-w-4xl mx-auto">
             Explore nossos projetos recentes e veja o artesanato de qualidade que fez da 
-            PisosPró a escolha confiável para soluções em pisos.
+            Pisos Pró a escolha confiável para soluções em pisos premium
           </p>
         </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`flex items-center px-6 py-3 rounded-lg font-semibold transition-colors ${
+              className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
                 selectedCategory === category.id
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                  ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg`
+                  : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
               }`}
             >
-              <span className="mr-2">{category.icon}</span>
-              {category.name}
+              <span className="relative z-10">{category.name}</span>
+              {selectedCategory === category.id && (
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
+              )}
             </button>
           ))}
         </div>
 
         {/* Project Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {filteredProjects.map((project) => (
             <div 
               key={project.id} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
               onClick={() => setSelectedProject(project)}
             >
-              <div className="h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                {project.isGalleryImage ? (
+              <div className={`h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
+                {project.isGalleryImage && project.image ? (
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="text-6xl">{project.image}</div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
                 )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                <p className="text-blue-600 font-semibold text-sm mb-2">{project.location}</p>
-                <p className="text-gray-600 text-sm mb-4">{project.description}</p>
+                <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-green-600 font-semibold text-sm mb-3">{project.location}</p>
+                <p className="text-gray-600 text-sm mb-6 line-clamp-3">{project.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                  <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">
                     {categories.find(cat => cat.id === project.category)?.name}
                   </span>
-                  <span className="text-blue-600 text-sm font-medium">Ver Detalhes →</span>
+                  <span className="text-green-600 text-sm font-medium group-hover:text-green-700">
+                    Ver Detalhes →
+                  </span>
                 </div>
               </div>
             </div>
@@ -260,93 +281,118 @@ export default function PortfolioClient() {
         </div>
 
         {/* Stats Section */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-16">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-            Estatísticas dos Projetos
+        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl shadow-xl p-12 mb-16">
+          <h2 className="font-cinzel text-4xl font-bold text-center text-gray-900 mb-12">
+            Nossa Experiência em Números
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">5,000+</div>
-              <div className="text-gray-600">Projetos Concluídos</div>
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                1,000+
+              </div>
+              <div className="font-montserrat text-gray-700 font-medium">Projetos Concluídos</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">200k+</div>
-              <div className="text-gray-600">Metros Quadrados Instalados</div>
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-wood-500 to-wood-700 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                200k+
+              </div>
+              <div className="font-montserrat text-gray-700 font-medium">Metros Quadrados</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">98%</div>
-              <div className="text-gray-600">Satisfação do Cliente</div>
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-gold-500 to-gold-700 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                98%
+              </div>
+              <div className="font-montserrat text-gray-700 font-medium">Satisfação do Cliente</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">15+</div>
-              <div className="text-gray-600">Anos de Experiência</div>
+            <div className="text-center group">
+              <div className="text-5xl font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                15+
+              </div>
+              <div className="font-montserrat text-gray-700 font-medium">Anos de Experiência</div>
             </div>
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-lg p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Pronto para o Piso dos seus Sonhos?</h2>
-          <p className="text-xl mb-6">
-            Deixe-nos transformar seu espaço com a mesma qualidade e atenção aos detalhes mostrados em nosso portfólio.
+        <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">
+          <h2 className="font-cinzel text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-gradient-gold">
+              Pronto para Transformar seu Espaço?
+            </span>
+          </h2>
+          <p className="font-montserrat text-xl md:text-2xl mb-8 font-light text-white/90 max-w-3xl mx-auto">
+            Deixe-nos criar o projeto dos seus sonhos com a mesma excelência e dedicação 
+            demonstradas em nosso portfólio
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a 
               href="/contact"
-              className="bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors"
+              className="group relative px-12 py-4 overflow-hidden bg-green-600 hover:bg-green-700 transition-colors duration-300 rounded font-montserrat font-semibold text-lg"
             >
-              Iniciar seu Projeto
+              <span className="relative z-10">Iniciar seu Projeto</span>
             </a>
             <a 
               href="/services"
-              className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors"
+              className="group relative px-12 py-4 border-2 border-white text-white hover:bg-white hover:text-green-900 transition-all duration-300 rounded font-montserrat font-semibold text-lg"
             >
-              Ver Serviços
+              <span className="relative z-10">Explorar Serviços</span>
             </a>
           </div>
         </div>
 
         {/* Project Detail Modal */}
         {selectedProject && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl max-w-3xl w-full max-h-screen overflow-y-auto shadow-2xl">
               <div className="p-8">
                 <div className="flex justify-between items-start mb-6">
-                  <h2 className="text-3xl font-bold text-gray-900">{selectedProject.title}</h2>
+                  <h2 className="font-cinzel text-4xl font-bold text-gray-900">{selectedProject.title}</h2>
                   <button 
                     onClick={() => setSelectedProject(null)}
-                    className="text-gray-500 hover:text-gray-700 text-2xl"
+                    className="text-gray-400 hover:text-gray-600 text-3xl transition-colors p-2"
                   >
                     ✕
                   </button>
                 </div>
                 
-                <div className="h-64 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-6">
-                  {selectedProject.isGalleryImage ? (
+                <div className={`h-72 bg-gradient-to-br ${selectedProject.gradient} rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden`}>
+                  {selectedProject.isGalleryImage && selectedProject.image ? (
                     <img
                       src={selectedProject.image}
                       alt={selectedProject.title}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-2xl"
                     />
                   ) : (
-                    <div className="text-8xl">{selectedProject.image}</div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
                   )}
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-2">Detalhes do Projeto</h3>
-                    <p className="text-gray-600 mb-4">{selectedProject.description}</p>
-                    <p className="text-blue-600 font-semibold">Localização: {selectedProject.location}</p>
+                    <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-4">Detalhes do Projeto</h3>
+                    <p className="font-montserrat text-gray-600 mb-4 leading-relaxed">{selectedProject.description}</p>
+                    <p className="text-green-600 font-semibold">📍 {selectedProject.location}</p>
                   </div>
                   
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-2">Especificações</h3>
-                    <div className="space-y-2 text-sm">
-                      <div><strong>Tamanho:</strong> {selectedProject.details.size}</div>
-                      <div><strong>Duração:</strong> {selectedProject.details.duration}</div>
-                      <div><strong>Materiais:</strong> {selectedProject.details.materials}</div>
-                      <div><strong>Desafio:</strong> {selectedProject.details.challenge}</div>
+                    <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-4">Especificações</h3>
+                    <div className="space-y-3 font-montserrat">
+                      <div className="flex justify-between">
+                        <strong className="text-gray-700">Tamanho:</strong>
+                        <span className="text-gray-600">{selectedProject.details.size}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <strong className="text-gray-700">Duração:</strong>
+                        <span className="text-gray-600">{selectedProject.details.duration}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <strong className="text-gray-700">Materiais:</strong>
+                        <span className="text-gray-600">{selectedProject.details.materials}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <strong className="text-gray-700">Desafio:</strong>
+                        <span className="text-gray-600">{selectedProject.details.challenge}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -354,13 +400,13 @@ export default function PortfolioClient() {
                 <div className="flex gap-4">
                   <a 
                     href="/contact"
-                    className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex-1 text-center"
+                    className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg"
                   >
                     Iniciar Projeto Semelhante
                   </a>
                   <button 
                     onClick={() => setSelectedProject(null)}
-                    className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                    className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors font-montserrat"
                   >
                     Fechar
                   </button>
