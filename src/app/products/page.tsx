@@ -16,7 +16,7 @@ const productCategories = [
     id: 'hardwood',
     name: 'Piso de Madeira',
     description: 'Madeira maciça e engenheirada premium dos principais fabricantes',
-    image: '🪵',
+    gradient: 'from-wood-400 to-wood-600',
     products: [
       { name: 'Carvalho Maciço', price: 'R$ 120-180/m²', description: 'Carvalho americano clássico em vários tons' },
       { name: 'Maple Engenheirado', price: 'R$ 90-150/m²', description: 'Réguas de maple engenheirado duráveis' },
@@ -40,7 +40,7 @@ const productCategories = [
     id: 'laminate',
     name: 'Piso Laminado',
     description: 'Laminado de alta qualidade com aparência de madeira e pedra verdadeiras',
-    image: '📋',
+    gradient: 'from-wood-300 to-wood-500',
     products: [
       { name: 'Laminado Efeito Madeira', price: 'R$ 30-75/m²', description: 'Padrões e texturas realistas de veios de madeira' },
       { name: 'Laminado Efeito Pedra', price: 'R$ 45-90/m²', description: 'Laminado com aparência de azulejo e pedra' },
@@ -52,7 +52,7 @@ const productCategories = [
     id: 'vinyl',
     name: 'Vinílico e LVT',
     description: 'Piso vinílico de luxo em régua e manta com durabilidade superior',
-    image: '💧',
+    gradient: 'from-blue-400 to-blue-600',
     products: [
       { name: 'Vinílico de Luxo em Régua', price: 'R$ 45-105/m²', description: 'LVP impermeável com aparência realista de madeira' },
       { name: 'Vinílico em Manta', price: 'R$ 30-60/m²', description: 'Piso vinílico contínuo para grandes áreas' },
@@ -64,7 +64,7 @@ const productCategories = [
     id: 'carpet',
     name: 'Carpete',
     description: 'Carpetes confortáveis para espaços residenciais e comerciais',
-    image: '🏠',
+    gradient: 'from-neutral-400 to-neutral-600',
     products: [
       { name: 'Carpete Felpudo', price: 'R$ 30-90/m²', description: 'Carpete macio e luxuoso para quartos e salas' },
       { name: 'Carpete Berber', price: 'R$ 45-105/m²', description: 'Carpete de laço durável em tons neutros' },
@@ -76,38 +76,46 @@ const productCategories = [
 
 export default function ProductsPage() {
   return (
-    <div className="py-12 bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Nossos Produtos
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-cinzel text-5xl md:text-6xl lg:text-7xl mb-6 tracking-wider font-light">
+            <span className="text-gradient-gold">
+              Nossos Produtos
+            </span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="font-montserrat text-xl md:text-2xl mb-8 font-light tracking-wide text-white/90 max-w-4xl mx-auto">
             Trabalhamos com produtos premium de pisos dos fabricantes mais confiáveis do setor, 
-            garantindo qualidade e durabilidade para cada projeto.
+            garantindo qualidade e durabilidade em cada projeto
           </p>
         </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         {/* Product Categories */}
-        <div className="space-y-12">
+        <div className="space-y-16">
           {productCategories.map((category) => (
-            <div key={category.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="text-5xl mr-6">{category.image}</div>
-                  <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
-                    <p className="text-gray-600">{category.description}</p>
-                  </div>
+            <div key={category.id} className="bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300">
+              {/* Gradient Header */}
+              <div className={`h-32 bg-gradient-to-r ${category.gradient} relative overflow-hidden`}>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+              
+              <div className="p-8 -mt-8 relative">
+                <div className="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                  <h2 className="font-cinzel text-4xl font-bold text-gray-900 mb-4">{category.name}</h2>
+                  <p className="font-montserrat text-gray-600 text-lg leading-relaxed">{category.description}</p>
                 </div>
                 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {category.products.map((product, index) => (
-                    <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                      <h3 className="font-semibold text-gray-900 mb-2">{product.name}</h3>
-                      <p className="text-blue-600 font-bold mb-2">{product.price}</p>
-                      <p className="text-gray-600 text-sm">{product.description}</p>
+                    <div key={index} className="bg-gradient-to-br from-green-50 to-white rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-300 border border-green-100 group">
+                      <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-3 group-hover:text-green-700 transition-colors">{product.name}</h3>
+                      <p className="text-green-600 font-bold text-lg mb-3">{product.price}</p>
+                      <p className="font-montserrat text-gray-600 text-sm leading-relaxed">{product.description}</p>
                     </div>
                   ))}
                 </div>
@@ -117,19 +125,19 @@ export default function ProductsPage() {
         </div>
 
         {/* Brands Section */}
-        <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+        <div className="mt-20 bg-gradient-to-r from-green-50 to-green-100 rounded-2xl shadow-xl p-12">
+          <h2 className="font-cinzel text-4xl font-bold text-center text-gray-900 mb-12">
             Marcas Confiáveis que Trabalhamos
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {[
               'Mohawk', 'Shaw', 'Armstrong', 'Pergo', 
               'Bruce', 'Mannington', 'Tarkett', 'Daltile',
               'American Olean', 'Congoleum', 'Karndean', 'Quick-Step'
             ].map((brand, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-gray-100 rounded-lg p-4 h-20 flex items-center justify-center">
-                  <span className="text-gray-600 font-semibold">{brand}</span>
+              <div key={index} className="text-center group">
+                <div className="bg-white rounded-xl p-6 h-24 flex items-center justify-center shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 border border-green-200">
+                  <span className="font-montserrat text-gray-700 font-semibold group-hover:text-green-700 transition-colors">{brand}</span>
                 </div>
               </div>
             ))}
@@ -137,24 +145,30 @@ export default function ProductsPage() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-lg p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Precisa de Ajuda para Escolher?</h2>
-          <p className="text-xl mb-6">
-            Nossos especialistas em pisos ajudarão você a selecionar os produtos perfeitos para seu espaço e orçamento.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/contact"
-              className="bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors"
-            >
-              Agendar Consultoria
-            </a>
-            <a 
-              href="/services"
-              className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors"
-            >
-              Ver Serviços de Instalação
-            </a>
+        <div className="mt-20 bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+          <div className="relative p-12 text-center">
+            <h2 className="font-cinzel text-4xl font-bold mb-6 text-white">
+              Precisa de Ajuda para Escolher?
+            </h2>
+            <p className="font-montserrat text-xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Nossos especialistas em pisos ajudarão você a selecionar os produtos perfeitos para seu espaço e orçamento.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a 
+                href="/contact"
+                className="bg-gradient-to-r from-gold-400 to-gold-500 text-black px-8 py-4 rounded-xl font-montserrat font-semibold hover:from-gold-300 hover:to-gold-400 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                Agendar Consultoria
+              </a>
+              <a 
+                href="/services"
+                className="border-2 border-white text-white px-8 py-4 rounded-xl font-montserrat font-semibold hover:bg-white hover:text-green-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                Ver Serviços de Instalação
+              </a>
+            </div>
           </div>
         </div>
       </div>
