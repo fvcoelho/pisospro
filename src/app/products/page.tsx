@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Produtos Premium de Pisos - Madeira, Cerâmica, Laminado e Mais | Pisos-Pró',
+  title: 'Produtos Premium de Pisos - Madeira, Cerâmica, Laminado e Mais | PisosPró',
   description: 'Produtos de qualidade em pisos de marcas confiáveis. Opções em madeira, cerâmica, laminado, vinílico e carpete. Seleção especializada de produtos e serviços de instalação disponíveis.',
   keywords: 'produtos de pisos, piso de madeira, piso cerâmico, piso laminado, piso vinílico, carpete, materiais de pisos, marcas de pisos',
   openGraph: {
-    title: 'Produtos Premium de Pisos | Pisos-Pró',
+    title: 'Produtos Premium de Pisos | PisosPró',
     description: 'Descubra nossa ampla seleção de produtos de qualidade em pisos das principais marcas do setor.',
     type: 'website',
   },

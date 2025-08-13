@@ -53,7 +53,7 @@ export default function WhyChooseUs() {
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Por Que Escolher a
-            <span className="block text-gradient-gold mt-2">Pisos-Pró?</span>
+            <span className="block text-gradient-gold mt-2">PisosPró?</span>
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             Combinamos tradição artesanal com técnicas modernas para entregar 
@@ -104,7 +104,7 @@ export default function WhyChooseUs() {
               Pronto Para Transformar Seu Espaço?
             </h3>
             <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Junte-se a milhares de clientes satisfeitos que confiaram na Pisos-Pró 
+              Junte-se a milhares de clientes satisfeitos que confiaram na PisosPró 
               para criar ambientes únicos e duradouros.
             </p>
             

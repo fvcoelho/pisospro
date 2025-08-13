@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="mb-6">
-              <h3 className="text-3xl font-bold text-gradient-gold mb-2">Pisos-Pró</h3>
+              <h3 className="text-3xl font-bold text-gradient-gold mb-2">PisosPró</h3>
               <div className="w-20 h-1 bg-gradient-gold rounded-full mb-4"></div>
             </div>
             <p className="text-white/80 mb-6 leading-relaxed text-lg">
@@ -145,7 +145,7 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             <div className="text-center lg:text-left">
               <p className="text-white/70">
-                © {new Date().getFullYear()} Pisos-Pró. Todos os direitos reservados.
+                © {new Date().getFullYear()} PisosPró. Todos os direitos reservados.
               </p>
               <p className="text-white/50 text-sm mt-1">
                 Especialistas em pisos de madeira desde 1998

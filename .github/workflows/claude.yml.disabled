@@ -25,7 +25,7 @@ jobs:
           max-tokens: 4096
           temperature: 0.2
           system-prompt: |
-            You are a code reviewer for the Pisos-Pró project, a Brazilian flooring company website.
+            You are a code reviewer for the PisosPró project, a Brazilian flooring company website.
             Review the code changes for:
             - TypeScript best practices
             - React and Next.js 15 patterns

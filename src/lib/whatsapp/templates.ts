@@ -16,7 +16,7 @@ export enum ChatState {
   FAQ = 'faq'
 }
 
-export const WELCOME_MESSAGE = `Olá! 👋 Bem-vindo à *Pisos-Pró*!
+export const WELCOME_MESSAGE = `Olá! 👋 Bem-vindo à *PisosPró*!
 
 Sou o assistente virtual e estou aqui para ajudar você com soluções profissionais em pisos. 
 
@@ -289,7 +289,7 @@ export const SERVICES_INFO = `🏠 *Nossos Serviços Especializados*
 • Reparos e substituições
 • Limpeza profissional
 
-💎 *Diferenciais Pisos-Pró*
+💎 *Diferenciais PisosPró*
 • +15 anos de experiência
 • Garantia em todos os serviços
 • Orçamento gratuito e sem compromisso

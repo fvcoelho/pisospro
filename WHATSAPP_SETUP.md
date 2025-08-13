@@ -13,7 +13,7 @@ This guide explains how to set up the WhatsApp Business API integration using Me
 
 ### 1.1 Create Facebook App
 1. Go to [developers.facebook.com](https://developers.facebook.com)
-2. Create a new app → Business → App Name: "Pisos-Pró WhatsApp"
+2. Create a new app → Business → App Name: "PisosPró WhatsApp"
 3. Add WhatsApp product to your app
 
 ### 1.2 WhatsApp Business API Setup
