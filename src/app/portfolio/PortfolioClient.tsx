@@ -72,16 +72,119 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
   const hasMultipleImages = images.length > 1
   const carousel = useCarousel(images.length)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  // Intersection observer for better video performance
+  useEffect(() => {
+    if (!cardRef.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        console.log('👁️ Intersection Observer triggered:', {
+          isIntersecting: entry.isIntersecting,
+          intersectionRatio: entry.intersectionRatio,
+          projectTitle: project.title
+        })
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.5 }
+    )
+
+    console.log('👁️ Setting up Intersection Observer for project:', project.title)
+    observer.observe(cardRef.current)
+
+    return () => {
+      console.log('👁️ Disconnecting Intersection Observer for project:', project.title)
+      observer.disconnect()
+    }
+  }, [])
 
   // Handle video autoplay when carousel changes
   useEffect(() => {
-    if (videoRef.current && images[carousel.currentIndex]?.fileType === 'video') {
-      videoRef.current.currentTime = 0
-      videoRef.current.play().catch(() => {
-        // Autoplay failed, which is expected in some browsers
+    if (videoRef.current) {
+      const video = videoRef.current
+      const currentImage = images[carousel.currentIndex]
+      
+      console.log('🎬 Portfolio ProjectCard video effect triggered:', {
+        hasVideo: !!video,
+        currentImageType: currentImage?.fileType,
+        isInView,
+        videoSrc: currentImage?.imageUrl,
+        carouselIndex: carousel.currentIndex,
+        totalImages: images.length
       })
+      
+      if (currentImage?.fileType === 'video' && isInView) {
+        console.log('🎬 Setting up video autoplay for ProjectCard')
+        
+        // Force muted state like HeroVideo
+        video.muted = true
+        video.defaultMuted = true
+        video.currentTime = 0
+        
+        console.log('🎬 Video state after setup:', {
+          muted: video.muted,
+          readyState: video.readyState,
+          currentTime: video.currentTime
+        })
+        
+        const handleCanPlay = () => {
+          console.log('🎬 ProjectCard video canPlay event triggered')
+          const playPromise = video.play()
+          
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                console.log('✅ Portfolio video autoplay successful')
+              })
+              .catch((error) => {
+                console.log('❌ Portfolio autoplay failed:', error)
+                // Try again on first user interaction like HeroVideo
+                const handleFirstInteraction = () => {
+                  console.log('🎬 User interaction detected, retrying video play')
+                  video.muted = true
+                  video.play().then(() => {
+                    console.log('✅ Video play successful after user interaction')
+                    document.removeEventListener('click', handleFirstInteraction)
+                    document.removeEventListener('touchstart', handleFirstInteraction)
+                  }).catch(console.error)
+                }
+                
+                document.addEventListener('click', handleFirstInteraction, { once: true })
+                document.addEventListener('touchstart', handleFirstInteraction, { once: true })
+              })
+          } else {
+            console.log('⚠️ Video play() returned undefined')
+          }
+        }
+
+        // Try to play immediately if video is ready
+        if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+          console.log('🎬 Video ready immediately, attempting play')
+          handleCanPlay()
+        } else {
+          console.log('🎬 Video not ready, waiting for canplay event')
+          // Wait for video to be ready
+          video.addEventListener('canplay', handleCanPlay, { once: true })
+        }
+      } else {
+        if (currentImage?.fileType === 'video') {
+          console.log('🎬 Pausing video - not in view or not current slide')
+        }
+        // Pause video if not current slide or not in view
+        video.pause()
+      }
     }
-  }, [carousel.currentIndex, images])
+
+    return () => {
+      // Cleanup: pause video when component unmounts or changes
+      if (videoRef.current) {
+        console.log('🎬 Cleanup: pausing ProjectCard video')
+        videoRef.current.pause()
+      }
+    }
+  }, [carousel.currentIndex, images, isInView])
 
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
@@ -111,6 +214,7 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
 
   return (
     <div 
+      ref={cardRef}
       className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
       onClick={handleCardClick}
     >
@@ -123,17 +227,11 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
                 ref={videoRef}
                 src={images[carousel.currentIndex]?.imageUrl}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                autoPlay
                 muted
                 loop
                 playsInline
                 controls={false}
-                onLoadStart={() => {
-                  // Ensure video starts playing when loaded
-                  if (videoRef.current) {
-                    videoRef.current.play().catch(() => {})
-                  }
-                }}
+                preload="metadata"
               >
                 Seu navegador não suporta o elemento de vídeo.
               </video>
@@ -241,13 +339,94 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
   
   // Handle video autoplay when carousel changes in modal
   useEffect(() => {
-    if (modalVideoRef.current && images[carousel.currentIndex]?.fileType === 'video') {
-      modalVideoRef.current.currentTime = 0
-      modalVideoRef.current.play().catch(() => {
-        // Autoplay failed, which is expected in some browsers
+    if (modalVideoRef.current) {
+      const video = modalVideoRef.current
+      const currentImage = images[carousel.currentIndex]
+      
+      console.log('🎭 Modal video effect triggered:', {
+        hasVideo: !!video,
+        currentImageType: currentImage?.fileType,
+        videoSrc: currentImage?.imageUrl,
+        carouselIndex: carousel.currentIndex,
+        totalImages: images.length,
+        projectTitle: project.title
       })
+      
+      if (currentImage?.fileType === 'video') {
+        console.log('🎭 Setting up modal video autoplay')
+        
+        // Apply HeroVideo patterns: force muted state
+        video.muted = true
+        video.defaultMuted = true
+        video.currentTime = 0
+        
+        console.log('🎭 Modal video state after setup:', {
+          muted: video.muted,
+          readyState: video.readyState,
+          currentTime: video.currentTime,
+          videoElement: video.tagName
+        })
+        
+        const handleCanPlay = () => {
+          console.log('🎭 Modal video canPlay event triggered')
+          const playPromise = video.play()
+          
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                console.log('✅ Modal video autoplay successful')
+              })
+              .catch((error) => {
+                console.log('❌ Modal autoplay failed:', error)
+                // Try again on first user interaction like HeroVideo
+                const handleFirstInteraction = () => {
+                  console.log('🎭 User interaction detected in modal, retrying video play')
+                  video.muted = true
+                  video.play().then(() => {
+                    console.log('✅ Modal video play successful after user interaction')
+                    document.removeEventListener('click', handleFirstInteraction)
+                    document.removeEventListener('touchstart', handleFirstInteraction)
+                    document.removeEventListener('keydown', handleFirstInteraction)
+                  }).catch(console.error)
+                }
+                
+                document.addEventListener('click', handleFirstInteraction, { once: true })
+                document.addEventListener('touchstart', handleFirstInteraction, { once: true })
+                document.addEventListener('keydown', handleFirstInteraction, { once: true })
+              })
+          } else {
+            console.log('⚠️ Modal video play() returned undefined')
+          }
+        }
+
+        // Try to play immediately if video is ready
+        if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+          console.log('🎭 Modal video ready immediately, attempting play')
+          handleCanPlay()
+        } else {
+          console.log('🎭 Modal video not ready, waiting for canplay event')
+          // Wait for video to be ready
+          video.addEventListener('canplay', handleCanPlay, { once: true })
+        }
+      } else {
+        if (currentImage?.fileType !== 'video') {
+          console.log('🎭 Current slide is not a video, pausing modal video')
+        }
+        // Pause video if not current slide
+        video.pause()
+      }
+    } else {
+      console.log('🎭 No modal video ref available')
     }
-  }, [carousel.currentIndex, images])
+
+    return () => {
+      // Cleanup: pause video when modal closes or changes
+      if (modalVideoRef.current) {
+        console.log('🎭 Cleanup: pausing modal video')
+        modalVideoRef.current.pause()
+      }
+    }
+  }, [carousel.currentIndex, images, project.title])
   
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
@@ -307,12 +486,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                     loop
                     className="w-full h-full object-cover rounded-2xl"
                     playsInline
-                    onLoadStart={() => {
-                      // Ensure video starts playing when loaded
-                      if (modalVideoRef.current) {
-                        modalVideoRef.current.play().catch(() => {})
-                      }
-                    }}
+                    preload="metadata"
                   >
                     Seu navegador não suporta o elemento de vídeo.
                   </video>
@@ -487,11 +661,40 @@ export default function PortfolioClient() {
 
   const fetchProjects = async () => {
     try {
+      console.log('📡 Fetching projects from API...')
       const response = await fetch('/api/projects?status=active')
       const data = await response.json()
+      const projectsWithVideos = data.projects?.filter(p => 
+        p.galleryImages?.some(img => img.fileType === 'video')
+      ) || []
+      
+      console.log('📡 Projects fetched:')
+      console.log('Total projects:', data.projects?.length || 0)
+      console.log('Projects with videos:', projectsWithVideos.length)
+      console.log('All projects:', data.projects?.map(p => ({
+        id: p.id,
+        title: p.title,
+        galleryImagesCount: p.galleryImages?.length || 0,
+        hasVideos: p.galleryImages?.some(img => img.fileType === 'video') || false,
+        videoCount: p.galleryImages?.filter(img => img.fileType === 'video').length || 0,
+        imageTypes: p.galleryImages?.map(img => img.fileType) || []
+      })))
+      
+      if (projectsWithVideos.length > 0) {
+        console.log('🎬 Projects with videos detailed:')
+        projectsWithVideos.forEach(p => {
+          const videos = p.galleryImages?.filter(img => img.fileType === 'video') || []
+          console.log(`  ${p.title}:`, {
+            videoCount: videos.length,
+            videoUrls: videos.map(v => v.imageUrl)
+          })
+        })
+      } else {
+        console.log('⚠️ No projects with videos found. Check gallery images fileType field.')
+      }
       setProjects(data.projects || [])
     } catch (error) {
-      console.error('Error fetching projects:', error)
+      console.error('❌ Error fetching projects:', error)
     } finally {
       setLoading(false)
     }

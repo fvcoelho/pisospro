@@ -78,8 +78,12 @@ export async function GET(request: NextRequest) {
           select: {
             id: true,
             title: true,
+            description: true,
             imageUrl: true,
-            isActive: true
+            fileType: true,
+            mimeType: true,
+            isActive: true,
+            createdAt: true
           },
           take: 5 // Limit to first 5 images for performance
         }
