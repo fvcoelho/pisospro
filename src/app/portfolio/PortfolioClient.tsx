@@ -664,14 +664,14 @@ export default function PortfolioClient() {
       console.log('📡 Fetching projects from API...')
       const response = await fetch('/api/projects?status=active')
       const data = await response.json()
-      const projectsWithVideos = data.projects?.filter(p => 
+      const projectsWithVideos = data.projects?.filter((p: Project) => 
         p.galleryImages?.some(img => img.fileType === 'video')
       ) || []
       
       console.log('📡 Projects fetched:')
       console.log('Total projects:', data.projects?.length || 0)
       console.log('Projects with videos:', projectsWithVideos.length)
-      console.log('All projects:', data.projects?.map(p => ({
+      console.log('All projects:', data.projects?.map((p: Project) => ({
         id: p.id,
         title: p.title,
         galleryImagesCount: p.galleryImages?.length || 0,
@@ -682,7 +682,7 @@ export default function PortfolioClient() {
       
       if (projectsWithVideos.length > 0) {
         console.log('🎬 Projects with videos detailed:')
-        projectsWithVideos.forEach(p => {
+        projectsWithVideos.forEach((p: Project) => {
           const videos = p.galleryImages?.filter(img => img.fileType === 'video') || []
           console.log(`  ${p.title}:`, {
             videoCount: videos.length,
