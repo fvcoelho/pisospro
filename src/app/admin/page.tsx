@@ -59,6 +59,15 @@ export default function AdminDashboard() {
 
   const adminRoutes = [
     {
+      title: 'Projetos',
+      description: 'Gerenciar projetos do portfólio',
+      href: '/admin/projects',
+      icon: '🏗️',
+      color: 'bg-gradient-to-r from-orange-500 to-orange-600',
+      stat: null,
+      statLabel: 'ver todos'
+    },
+    {
       title: 'Galeria',
       description: 'Gerenciar imagens da galeria',
       href: '/admin/gallery',
@@ -302,10 +311,15 @@ export default function AdminDashboard() {
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Ações Rápidas
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             <Link href="/admin/gallery">
               <Button className="w-full" variant="outline">
                 📷 Adicionar Nova Imagem
+              </Button>
+            </Link>
+            <Link href="/admin/projects">
+              <Button className="w-full" variant="outline">
+                🏗️ Gerenciar Projetos
               </Button>
             </Link>
             <Link href="/admin/analytics">

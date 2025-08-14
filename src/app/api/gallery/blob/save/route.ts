@@ -9,15 +9,31 @@ export async function POST(request: NextRequest) {
       location, 
       category, 
       imageUrl, 
-      blobId 
+      blobId,
+      projectId
     } = await request.json();
 
     // Validate required fields
-    if (!title || !imageUrl || !blobId) {
+    if (!title || !imageUrl || !blobId || !projectId) {
       return NextResponse.json(
         { 
           success: false, 
-          error: 'Missing required fields: title, imageUrl, and blobId are required' 
+          error: 'Missing required fields: title, imageUrl, blobId, and projectId are required' 
+        },
+        { status: 400 }
+      );
+    }
+
+    // Validate that the project exists
+    const project = await prisma.project.findUnique({
+      where: { id: projectId, isActive: true }
+    })
+
+    if (!project) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Project not found or inactive' 
         },
         { status: 400 }
       );
@@ -32,7 +48,19 @@ export async function POST(request: NextRequest) {
         category: category || null,
         imageUrl,
         publicId: blobId, // Store blob pathname as publicId for consistency
+        projectId: projectId,
         isActive: true,
+      },
+      include: {
+        project: {
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            location: true,
+            isActive: true
+          }
+        }
       }
     });
 
