@@ -7,21 +7,75 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const category = searchParams.get('category')
     const limit = searchParams.get('limit')
+    const page = searchParams.get('page')
+    const pageSize = searchParams.get('pageSize')
+    const status = searchParams.get('status') // 'active', 'inactive', 'all'
+    const sortBy = searchParams.get('sortBy') || 'createdAt'
+    const sortOrder = (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc'
 
-    const where = {
-      isActive: true,
-      ...(category && category !== 'all' ? { category } : {})
+    // Build where clause
+    const where: Record<string, any> = {}
+    
+    // Status filter
+    if (status === 'active') {
+      where.isActive = true
+    } else if (status === 'inactive') {
+      where.isActive = false
+    } else if (!status || status === 'default') {
+      // Default behavior - only show active
+      where.isActive = true
+    }
+    // status === 'all' shows everything (no filter)
+
+    // Category filter
+    if (category && category !== 'all') {
+      where.category = category
     }
 
+    // Pagination setup
+    const currentPage = page ? parseInt(page) : 1
+    const itemsPerPage = pageSize ? parseInt(pageSize) : (limit ? parseInt(limit) : 20)
+    const skip = (currentPage - 1) * itemsPerPage
+
+    // Get total count for pagination
+    const totalCount = await prisma.galleryImage.count({ where })
+
+    // Build orderBy
+    const orderBy: Record<string, 'asc' | 'desc'> = {}
+    if (sortBy === 'title') {
+      orderBy.title = sortOrder
+    } else if (sortBy === 'category') {
+      orderBy.category = sortOrder
+    } else if (sortBy === 'updatedAt') {
+      orderBy.updatedAt = sortOrder
+    } else {
+      orderBy.createdAt = sortOrder
+    }
+
+    // Fetch images with pagination
     const images = await prisma.galleryImage.findMany({
       where,
-      orderBy: {
-        createdAt: 'desc'
-      },
-      ...(limit ? { take: parseInt(limit) } : {})
+      orderBy,
+      skip: page ? skip : undefined,
+      take: itemsPerPage
     })
 
-    return NextResponse.json({ images })
+    // Calculate pagination metadata
+    const totalPages = Math.ceil(totalCount / itemsPerPage)
+    const hasNextPage = currentPage < totalPages
+    const hasPreviousPage = currentPage > 1
+
+    return NextResponse.json({
+      images,
+      pagination: {
+        currentPage,
+        pageSize: itemsPerPage,
+        totalCount,
+        totalPages,
+        hasNextPage,
+        hasPreviousPage
+      }
+    })
   } catch (error) {
     console.error('Error fetching gallery images:', error)
     return NextResponse.json(

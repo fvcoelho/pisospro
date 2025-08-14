@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import GalleryUploadForm from '@/components/GalleryUploadForm'
 import { Button } from '@/components/ui/button'
 import { Select } from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
 interface GalleryImage {
   id: number
@@ -27,11 +29,139 @@ const categories = [
   { value: 'carpet', label: 'Carpete' }
 ]
 
+interface EditImageFormProps {
+  image: GalleryImage
+  categories: { value: string; label: string }[]
+  onSave: (data: any) => void
+  onCancel: () => void
+}
+
+function EditImageForm({ image, categories, onSave, onCancel }: EditImageFormProps) {
+  const [title, setTitle] = useState(image.title)
+  const [description, setDescription] = useState(image.description || '')
+  const [location, setLocation] = useState(image.location || '')
+  const [category, setCategory] = useState(image.category || '')
+  const [isActive, setIsActive] = useState(image.isActive)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    onSave({
+      title,
+      description: description || null,
+      location: location || null,
+      category: category || null,
+      isActive
+    })
+  }
+
+  return (
+    <div className="bg-white rounded-lg shadow-lg p-6">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">Editar Imagem</h3>
+      
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Título *
+            </label>
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Digite o título da imagem"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Descrição
+            </label>
+            <Textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Digite uma descrição para a imagem"
+              rows={3}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Localização
+            </label>
+            <Input
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Ex: São Paulo, SP"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Categoria
+            </label>
+            <Select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Selecione uma categoria</option>
+              {categories
+                .filter(cat => cat.value !== 'all')
+                .map((cat) => (
+                  <option key={cat.value} value={cat.value}>
+                    {cat.label}
+                  </option>
+                ))}
+            </Select>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="isActive"
+              checked={isActive}
+              onChange={(e) => setIsActive(e.target.checked)}
+              className="rounded"
+            />
+            <label htmlFor="isActive" className="text-sm font-medium text-gray-700">
+              Imagem ativa (visível na galeria)
+            </label>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Pré-visualização
+            </label>
+            <div className="aspect-video relative border rounded-lg overflow-hidden">
+              <img
+                src={image.imageUrl}
+                alt={image.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex gap-4 mt-6">
+        <Button onClick={handleSubmit} className="flex-1">
+          Salvar Alterações
+        </Button>
+        <Button variant="outline" onClick={onCancel} className="flex-1">
+          Cancelar
+        </Button>
+      </div>
+    </div>
+  )
+}
+
 export default function GalleryManagement() {
   const [images, setImages] = useState<GalleryImage[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [showUploadForm, setShowUploadForm] = useState(false)
+  const [editingImage, setEditingImage] = useState<GalleryImage | null>(null)
 
   const fetchImages = async () => {
     try {
@@ -72,6 +202,36 @@ export default function GalleryManagement() {
   const handleUploadSuccess = () => {
     fetchImages()
     setShowUploadForm(false)
+  }
+
+  const handleEditImage = (image: GalleryImage) => {
+    setEditingImage(image)
+    setShowUploadForm(false)
+  }
+
+  const handleUpdateImage = async (updatedData: any) => {
+    if (!editingImage) return
+
+    try {
+      const response = await fetch(`/api/gallery/${editingImage.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      })
+
+      if (response.ok) {
+        alert('Imagem atualizada com sucesso!')
+        fetchImages()
+        setEditingImage(null)
+      } else {
+        alert('Erro ao atualizar imagem')
+      }
+    } catch (error) {
+      console.error('Error updating image:', error)
+      alert('Erro ao atualizar imagem')
+    }
   }
 
   if (loading) {
@@ -118,6 +278,17 @@ export default function GalleryManagement() {
           </div>
         )}
 
+        {editingImage && (
+          <div className="mb-8">
+            <EditImageForm
+              image={editingImage}
+              categories={categories}
+              onSave={handleUpdateImage}
+              onCancel={() => setEditingImage(null)}
+            />
+          </div>
+        )}
+
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-bold text-gray-900">
@@ -158,6 +329,14 @@ export default function GalleryManagement() {
                       </span>
                     )}
                     <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleEditImage(image)}
+                        className="flex-1"
+                      >
+                        Editar
+                      </Button>
                       <Button
                         variant="destructive"
                         size="sm"
