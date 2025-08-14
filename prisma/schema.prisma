@@ -83,15 +83,16 @@ model QuoteService {
 }
 
 model Project {
-  id          Int       @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   title       String
   description String?
   imageUrls   String[]
   location    String?
   completedAt DateTime?
-  isActive    Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  media       ProjectMedia[]
 }
 
 model GalleryImage {
@@ -105,6 +106,26 @@ model GalleryImage {
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model ProjectMedia {
+  id           Int       @id @default(autoincrement())
+  projectId    Int
+  title        String
+  description  String?
+  mediaUrl     String
+  publicId     String
+  mediaType    MediaType
+  displayOrder Int       @default(0)
+  fileSize     Int?
+  duration     Int?
+  isCover      Boolean   @default(false)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  project      Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, displayOrder])
 }
 
 model WhatsAppConversation {
@@ -206,4 +227,9 @@ enum ConversationStatus {
 enum MessageDirection {
   INBOUND
   OUTBOUND
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
 }

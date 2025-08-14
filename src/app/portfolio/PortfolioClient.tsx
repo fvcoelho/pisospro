@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import ProjectMediaGallery from '@/components/ProjectMediaGallery'
 
 const portfolioProjects = [
   {
@@ -144,10 +145,23 @@ interface GalleryImage {
   createdAt: string
 }
 
+interface ProjectMedia {
+  id: number
+  title: string
+  description: string | null
+  mediaUrl: string
+  mediaType: 'IMAGE' | 'VIDEO'
+  displayOrder: number
+  fileSize: number | null
+  duration: number | null
+  isCover: boolean
+}
+
 export default function PortfolioClient() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedProject, setSelectedProject] = useState<any>(null)
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([])
+  const [projectMediaMap, setProjectMediaMap] = useState<Record<number, ProjectMedia[]>>({})
   const [loading, setLoading] = useState(true)
 
   const fetchGalleryImages = async () => {
@@ -157,17 +171,68 @@ export default function PortfolioClient() {
       setGalleryImages(data.images || [])
     } catch (error) {
       console.error('Error fetching gallery images:', error)
+    }
+  }
+
+  const fetchProjectMedia = async () => {
+    const mediaMap: Record<number, ProjectMedia[]> = {}
+    
+    try {
+      // Fetch media for each portfolio project
+      const mediaPromises = portfolioProjects.map(async (project) => {
+        try {
+          const response = await fetch(`/api/projects/${project.id}/media`)
+          const data = await response.json()
+          if (data.success && data.media) {
+            mediaMap[project.id] = data.media
+          }
+        } catch (error) {
+          console.error(`Error fetching media for project ${project.id}:`, error)
+          mediaMap[project.id] = []
+        }
+      })
+
+      await Promise.all(mediaPromises)
+      setProjectMediaMap(mediaMap)
+    } catch (error) {
+      console.error('Error fetching project media:', error)
+    }
+  }
+
+  const fetchAllData = async () => {
+    setLoading(true)
+    try {
+      await Promise.all([
+        fetchGalleryImages(),
+        fetchProjectMedia()
+      ])
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchGalleryImages()
+    if (selectedCategory === 'all') {
+      fetchAllData()
+    } else {
+      fetchGalleryImages().then(() => setLoading(false))
+    }
   }, [selectedCategory])
 
   const allProjects = [
-    ...portfolioProjects.map(project => ({ ...project, isGalleryImage: false })),
+    ...portfolioProjects.map(project => {
+      const projectMedia = projectMediaMap[project.id] || []
+      // Prioritize cover image, then any image
+      const coverImage = projectMedia.find(m => m.isCover)?.mediaUrl
+      const primaryImage = coverImage || projectMedia.find(m => m.mediaType === 'IMAGE')?.mediaUrl
+      return {
+        ...project,
+        isGalleryImage: false,
+        projectMedia,
+        image: primaryImage || project.image,
+        hasMedia: projectMedia.length > 0
+      }
+    }),
     ...galleryImages.map(img => ({
       id: `gallery-${img.id}`,
       title: img.title,
@@ -177,6 +242,8 @@ export default function PortfolioClient() {
       image: img.imageUrl,
       gradient: 'from-green-400 to-green-600', // Default gradient for gallery images
       isGalleryImage: true,
+      projectMedia: [],
+      hasMedia: false,
       details: {
         size: 'N/A',
         duration: 'N/A',
@@ -250,7 +317,7 @@ export default function PortfolioClient() {
               onClick={() => setSelectedProject(project)}
             >
               <div className={`h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
-                {project.isGalleryImage && project.image ? (
+                {(project.hasMedia && project.image) || (project.isGalleryImage && project.image) ? (
                   <img
                     src={project.image}
                     alt={project.title}
@@ -260,6 +327,29 @@ export default function PortfolioClient() {
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                
+                {/* Media count indicator */}
+                {project.hasMedia && (
+                  <div className="absolute top-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded-full text-sm font-medium">
+                    {project.projectMedia.length} mídias
+                  </div>
+                )}
+                
+                {/* Media type indicators */}
+                {project.hasMedia && (
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    {project.projectMedia.some(m => m.mediaType === 'IMAGE') && (
+                      <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
+                        📷 Fotos
+                      </span>
+                    )}
+                    {project.projectMedia.some(m => m.mediaType === 'VIDEO') && (
+                      <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">
+                        🎥 Vídeos
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
@@ -343,7 +433,7 @@ export default function PortfolioClient() {
         {/* Project Detail Modal */}
         {selectedProject && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl max-w-3xl w-full max-h-screen overflow-y-auto shadow-2xl">
+            <div className="bg-white rounded-2xl max-w-6xl w-full max-h-screen overflow-y-auto shadow-2xl">
               <div className="p-8">
                 <div className="flex justify-between items-start mb-6">
                   <h2 className="font-cinzel text-4xl font-bold text-gray-900">{selectedProject.title}</h2>
@@ -355,17 +445,31 @@ export default function PortfolioClient() {
                   </button>
                 </div>
                 
-                <div className={`h-72 bg-gradient-to-br ${selectedProject.gradient} rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden`}>
-                  {selectedProject.isGalleryImage && selectedProject.image ? (
-                    <img
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="w-full h-full object-cover rounded-2xl"
-                    />
-                  ) : (
+                {/* Project Media Gallery */}
+                {selectedProject.hasMedia && selectedProject.projectMedia.length > 0 ? (
+                  <div className="mb-8">
+                    <ProjectMediaGallery media={selectedProject.projectMedia} />
+                  </div>
+                ) : selectedProject.isGalleryImage && selectedProject.image ? (
+                  <div className="mb-8">
+                    <div className="aspect-video relative overflow-hidden rounded-2xl">
+                      <img
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className={`h-72 bg-gradient-to-br ${selectedProject.gradient} rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-                  )}
-                </div>
+                    <div className="text-center text-white">
+                      <div className="text-6xl mb-4">🏗️</div>
+                      <p className="font-montserrat text-xl">Projeto em Desenvolvimento</p>
+                      <p className="font-montserrat text-sm opacity-75">Mídias serão adicionadas em breve</p>
+                    </div>
+                  </div>
+                )}
                 
                 <div className="grid md:grid-cols-2 gap-8 mb-8">
                   <div>
