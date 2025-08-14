@@ -34,7 +34,7 @@ export default function Hero() {
             {/* Main Title */}
             <h1 className="font-cinzel text-5xl md:text-7xl lg:text-8xl mb-6 tracking-wider font-light text-white drop-shadow-lg">
               <span className="block text-gradient-gold">
-                Porque seu espaço merece o melhor
+                Conforto e segurança para cada passo
               </span>
             </h1>
             
@@ -63,7 +63,7 @@ export default function Hero() {
             </div>
 
             {/* Trust Indicators */}
-            <div className="mt-16 pt-8 border-t border-white/20">
+            {/* <div className="mt-16 pt-8 border-t border-white/20">
               <div className="flex flex-wrap justify-center items-center gap-8 text-white/90">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">⭐</span>
@@ -78,7 +78,7 @@ export default function Hero() {
                   <span className="font-montserrat text-sm">Garantia Total</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
