@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import SpinningLogo from '@/components/SpinningLogo'
 
 interface HeroVideoProps {
   src: string
@@ -105,8 +106,7 @@ export default function HeroVideo({ src, className = '', onVideoReady }: HeroVid
       {!canPlay && (
         <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-green-800 to-green-700 flex items-center justify-center">
           <div className="text-white text-center">
-            <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-sm">Carregando vídeo...</p>
+            <SpinningLogo size="sm" color="white" showText text="Carregando vídeo..." />
           </div>
         </div>
       )}

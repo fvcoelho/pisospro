@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import SpinningLogo from '@/components/SpinningLogo'
 
 // Carousel hook for managing image navigation
 function useCarousel(totalImages: number) {
@@ -715,7 +716,7 @@ export default function PortfolioClient() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-green-200 border-t-green-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <SpinningLogo size="lg" color="green" className="mb-4" />
           <div className="font-montserrat text-2xl text-gray-700 mb-2">Carregando Portfólio</div>
           <div className="font-montserrat text-gray-500">Preparando nossos melhores projetos...</div>
         </div>

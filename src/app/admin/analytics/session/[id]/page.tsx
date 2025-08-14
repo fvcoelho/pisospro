@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
+import SpinningLogo from '@/components/SpinningLogo'
 
 interface SessionDetail {
   id: string
@@ -80,8 +81,7 @@ export default function SessionDetailPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Carregando sessão...</p>
+          <SpinningLogo size="lg" color="blue" showText text="Carregando sessão..." className="text-gray-600" />
         </div>
       </div>
     )
