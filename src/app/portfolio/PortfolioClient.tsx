@@ -1,129 +1,32 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import SpinningLogo from '@/components/SpinningLogo'
 
-const portfolioProjects = [
-  {
-    id: 1,
-    title: 'Reforma de Cozinha Moderna',
-    category: 'tile',
-    location: 'Apart. Centro',
-    description: 'Reforma completa do piso da cozinha com porcelanato premium com acabamento madeirado.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-neutral-400 to-neutral-600',
-    details: {
-      size: '23 m²',
-      duration: '3 dias',
-      materials: 'Porcelanato efeito madeira',
-      challenge: 'Trabalho ao redor dos armários existentes'
-    }
-  },
-  {
-    id: 2,
-    title: 'Instalação de Madeira de Luxo',
-    category: 'hardwood',
-    location: 'Casa Residencial',
-    description: 'Bela instalação de piso de carvalho maciço nas principais áreas sociais.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-wood-400 to-wood-600',
-    details: {
-      size: '110 m²',
-      duration: '5 dias',
-      materials: 'Carvalho maciço',
-      challenge: 'Transições entre múltiplos ambientes'
-    }
-  },
-  {
-    id: 3,
-    title: 'Piso Comercial para Escritório',
-    category: 'vinyl',
-    location: 'Centro Empresarial',
-    description: 'Instalação durável de LVT para escritório comercial de alto tráfego.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-blue-400 to-blue-600',
-    details: {
-      size: '325 m²',
-      duration: '1 semana',
-      materials: 'LVT grau comercial',
-      challenge: 'Instalação nos finais de semana'
-    }
-  },
-  {
-    id: 4,
-    title: 'Transformação de Banheiro',
-    category: 'tile',
-    location: 'Suíte Master',
-    description: 'Elegante instalação de mármore com borda decorativa de mosaico personalizada.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-gold-400 to-gold-600',
-    details: {
-      size: '11 m²',
-      duration: '4 dias',
-      materials: 'Mármore Carrara com borda de mosaico',
-      challenge: 'Impermeabilização e drenagem'
-    }
-  },
-  {
-    id: 5,
-    title: 'Sala Familiar no Subsolo',
-    category: 'laminate',
-    location: 'Porão Residencial',
-    description: 'Piso laminado resistente à umidade perfeito para instalação subterrânea.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-wood-300 to-wood-500',
-    details: {
-      size: '55 m²',
-      duration: '2 dias',
-      materials: 'Laminado resistente à água',
-      challenge: 'Mitigação da umidade'
-    }
-  },
-  {
-    id: 6,
-    title: 'Área de Jantar do Restaurante',
-    category: 'hardwood',
-    location: 'Edifício Histórico',
-    description: 'Restauração e instalação de madeira de demolição em restaurante histórico.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-wood-500 to-wood-700',
-    details: {
-      size: '74 m²',
-      duration: '1 semana',
-      materials: 'Pinho de demolição',
-      challenge: 'Preservar o caráter histórico'
-    }
-  },
-  {
-    id: 7,
-    title: 'Lobby de Hotel de Luxo',
-    category: 'tile',
-    location: 'Hotel Centro',
-    description: 'Instalação de pedra natural de alto padrão com design de padrões intrincados.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-gold-300 to-gold-500',
-    details: {
-      size: '140 m²',
-      duration: '2 semanas',
-      materials: 'Travertino e mármore',
-      challenge: 'Padrões geométricos complexos'
-    }
-  },
-  {
-    id: 8,
-    title: 'Carpete Aconchegante para Quarto',
-    category: 'carpet',
-    location: 'Casa Familiar',
-    description: 'Instalação de carpete felpudo para máximo conforto e redução de ruído.',
-    image: null, // Placeholder for gradient background
-    gradient: 'from-neutral-300 to-neutral-500',
-    details: {
-      size: '28 m²',
-      duration: '1 dia',
-      materials: 'Carpete felpudo premium',
-      challenge: 'Carpete de escada incluído'
-    }
+// Carousel hook for managing image navigation
+function useCarousel(totalImages: number) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const nextImage = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % totalImages)
+  }, [totalImages])
+
+  const prevImage = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + totalImages) % totalImages)
+  }, [totalImages])
+
+  const goToImage = useCallback((index: number) => {
+    setCurrentIndex(index)
+  }, [])
+
+  return {
+    currentIndex,
+    nextImage,
+    prevImage,
+    goToImage,
+    reset: () => setCurrentIndex(0)
   }
-]
+}
 
 const categories = [
   { id: 'all', name: 'Todos os Projetos', gradient: 'from-green-400 to-green-600' },
@@ -138,63 +41,682 @@ interface GalleryImage {
   id: number
   title: string
   description: string | null
-  location: string | null
   imageUrl: string
   category: string | null
+  fileType: string
+  mimeType: string | null
+  isActive: boolean
   createdAt: string
+}
+
+interface Project {
+  id: number
+  title: string
+  description: string | null
+  location: string | null
+  category: string | null
+  completedAt: string | null
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+  galleryImages?: GalleryImage[]
+}
+
+// ProjectCard component with carousel capability
+interface ProjectCardProps {
+  project: Project
+  onClick: (project: Project) => void
+}
+
+function ProjectCard({ project, onClick }: ProjectCardProps) {
+  const images = project.galleryImages?.filter(img => img.isActive) || []
+  const hasMultipleImages = images.length > 1
+  const carousel = useCarousel(images.length)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  // Intersection observer for better video performance
+  useEffect(() => {
+    if (!cardRef.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        console.log('👁️ Intersection Observer triggered:', {
+          isIntersecting: entry.isIntersecting,
+          intersectionRatio: entry.intersectionRatio,
+          projectTitle: project.title
+        })
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.5 }
+    )
+
+    console.log('👁️ Setting up Intersection Observer for project:', project.title)
+    observer.observe(cardRef.current)
+
+    return () => {
+      console.log('👁️ Disconnecting Intersection Observer for project:', project.title)
+      observer.disconnect()
+    }
+  }, [])
+
+  // Handle video autoplay when carousel changes
+  useEffect(() => {
+    if (videoRef.current) {
+      const video = videoRef.current
+      const currentImage = images[carousel.currentIndex]
+      
+      console.log('🎬 Portfolio ProjectCard video effect triggered:', {
+        hasVideo: !!video,
+        currentImageType: currentImage?.fileType,
+        isInView,
+        videoSrc: currentImage?.imageUrl,
+        carouselIndex: carousel.currentIndex,
+        totalImages: images.length
+      })
+      
+      if (currentImage?.fileType === 'video' && isInView) {
+        console.log('🎬 Setting up video autoplay for ProjectCard')
+        
+        // Force muted state like HeroVideo
+        video.muted = true
+        video.defaultMuted = true
+        video.currentTime = 0
+        
+        console.log('🎬 Video state after setup:', {
+          muted: video.muted,
+          readyState: video.readyState,
+          currentTime: video.currentTime
+        })
+        
+        const handleCanPlay = () => {
+          console.log('🎬 ProjectCard video canPlay event triggered')
+          const playPromise = video.play()
+          
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                console.log('✅ Portfolio video autoplay successful')
+              })
+              .catch((error) => {
+                console.log('❌ Portfolio autoplay failed:', error)
+                // Try again on first user interaction like HeroVideo
+                const handleFirstInteraction = () => {
+                  console.log('🎬 User interaction detected, retrying video play')
+                  video.muted = true
+                  video.play().then(() => {
+                    console.log('✅ Video play successful after user interaction')
+                    document.removeEventListener('click', handleFirstInteraction)
+                    document.removeEventListener('touchstart', handleFirstInteraction)
+                  }).catch(console.error)
+                }
+                
+                document.addEventListener('click', handleFirstInteraction, { once: true })
+                document.addEventListener('touchstart', handleFirstInteraction, { once: true })
+              })
+          } else {
+            console.log('⚠️ Video play() returned undefined')
+          }
+        }
+
+        // Try to play immediately if video is ready
+        if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+          console.log('🎬 Video ready immediately, attempting play')
+          handleCanPlay()
+        } else {
+          console.log('🎬 Video not ready, waiting for canplay event')
+          // Wait for video to be ready
+          video.addEventListener('canplay', handleCanPlay, { once: true })
+        }
+      } else {
+        if (currentImage?.fileType === 'video') {
+          console.log('🎬 Pausing video - not in view or not current slide')
+        }
+        // Pause video if not current slide or not in view
+        video.pause()
+      }
+    }
+
+    return () => {
+      // Cleanup: pause video when component unmounts or changes
+      if (videoRef.current) {
+        console.log('🎬 Cleanup: pausing ProjectCard video')
+        videoRef.current.pause()
+      }
+    }
+  }, [carousel.currentIndex, images, isInView])
+
+  const getCategoryGradient = (category: string | null) => {
+    switch (category) {
+      case 'hardwood': return 'from-wood-400 to-wood-600'
+      case 'vinyl': return 'from-blue-400 to-blue-600'
+      case 'laminate': return 'from-wood-300 to-wood-500'
+      case 'carpet': return 'from-neutral-300 to-neutral-500'
+      default: return 'from-green-400 to-green-600'
+    }
+  }
+
+  const primaryCategory = project.category || null
+  const gradient = getCategoryGradient(primaryCategory)
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't trigger card click when clicking carousel controls
+    if ((e.target as HTMLElement).closest('.carousel-control')) {
+      return
+    }
+    onClick(project)
+  }
+
+  const handleCarouselNavigation = (e: React.MouseEvent, action: () => void) => {
+    e.stopPropagation()
+    action()
+  }
+
+  return (
+    <div 
+      ref={cardRef}
+      className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
+      onClick={handleCardClick}
+    >
+      <div className={`h-56 bg-gradient-to-br ${gradient} flex items-center justify-center relative overflow-hidden`}>
+        {images.length > 0 ? (
+          <div className="relative w-full h-full">
+            {/* Current Image/Video */}
+            {images[carousel.currentIndex]?.fileType === 'video' ? (
+              <video
+                ref={videoRef}
+                src={images[carousel.currentIndex]?.imageUrl}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                muted
+                loop
+                playsInline
+                controls={false}
+                preload="metadata"
+              >
+                Seu navegador não suporta o elemento de vídeo.
+              </video>
+            ) : (
+              <img
+                src={images[carousel.currentIndex]?.imageUrl}
+                alt={images[carousel.currentIndex]?.title || project.title}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            )}
+            
+            {/* Carousel Controls - only show if multiple images */}
+            {hasMultipleImages && (
+              <>
+                {/* Navigation Arrows */}
+                <button
+                  className="carousel-control absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  onClick={(e) => handleCarouselNavigation(e, carousel.prevImage)}
+                  aria-label="Previous image"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                
+                <button
+                  className="carousel-control absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  onClick={(e) => handleCarouselNavigation(e, carousel.nextImage)}
+                  aria-label="Next image"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Dot Indicators */}
+                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`carousel-control w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === carousel.currentIndex ? 'bg-white' : 'bg-white/50 hover:bg-white/70'
+                      }`}
+                      onClick={(e) => handleCarouselNavigation(e, () => carousel.goToImage(index))}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Image Counter */}
+                <div className="absolute top-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                  {carousel.currentIndex + 1} / {images.length}
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          // Fallback gradient when no images
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center">
+            <div className="text-white/70 text-6xl">🏗️</div>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+      </div>
+      
+      <div className="p-6">
+        <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-green-600 font-semibold text-sm mb-3">{project.location || 'Localização não informada'}</p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description || 'Projeto de pisos profissional.'}</p>
+        
+        <div className="flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            {images.length > 0 && (
+              <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">
+                {images.length} mídia{images.length !== 1 ? 's' : ''}
+              </span>
+            )}
+            {project.completedAt && (
+              <span className="inline-block bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-medium">
+                {new Date(project.completedAt).getFullYear()}
+              </span>
+            )}
+          </div>
+          <span className="text-green-600 text-sm font-medium group-hover:text-green-700">
+            Ver Detalhes →
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ProjectModal component with image carousel
+interface ProjectModalProps {
+  project: Project
+  onClose: () => void
+}
+
+function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const images = project.galleryImages?.filter(img => img.isActive) || []
+  const carousel = useCarousel(images.length)
+  const modalVideoRef = useRef<HTMLVideoElement>(null)
+  
+  // Handle video autoplay when carousel changes in modal
+  useEffect(() => {
+    if (modalVideoRef.current) {
+      const video = modalVideoRef.current
+      const currentImage = images[carousel.currentIndex]
+      
+      console.log('🎭 Modal video effect triggered:', {
+        hasVideo: !!video,
+        currentImageType: currentImage?.fileType,
+        videoSrc: currentImage?.imageUrl,
+        carouselIndex: carousel.currentIndex,
+        totalImages: images.length,
+        projectTitle: project.title
+      })
+      
+      if (currentImage?.fileType === 'video') {
+        console.log('🎭 Setting up modal video autoplay')
+        
+        // Apply HeroVideo patterns: force muted state
+        video.muted = true
+        video.defaultMuted = true
+        video.currentTime = 0
+        
+        console.log('🎭 Modal video state after setup:', {
+          muted: video.muted,
+          readyState: video.readyState,
+          currentTime: video.currentTime,
+          videoElement: video.tagName
+        })
+        
+        const handleCanPlay = () => {
+          console.log('🎭 Modal video canPlay event triggered')
+          const playPromise = video.play()
+          
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                console.log('✅ Modal video autoplay successful')
+              })
+              .catch((error) => {
+                console.log('❌ Modal autoplay failed:', error)
+                // Try again on first user interaction like HeroVideo
+                const handleFirstInteraction = () => {
+                  console.log('🎭 User interaction detected in modal, retrying video play')
+                  video.muted = true
+                  video.play().then(() => {
+                    console.log('✅ Modal video play successful after user interaction')
+                    document.removeEventListener('click', handleFirstInteraction)
+                    document.removeEventListener('touchstart', handleFirstInteraction)
+                    document.removeEventListener('keydown', handleFirstInteraction)
+                  }).catch(console.error)
+                }
+                
+                document.addEventListener('click', handleFirstInteraction, { once: true })
+                document.addEventListener('touchstart', handleFirstInteraction, { once: true })
+                document.addEventListener('keydown', handleFirstInteraction, { once: true })
+              })
+          } else {
+            console.log('⚠️ Modal video play() returned undefined')
+          }
+        }
+
+        // Try to play immediately if video is ready
+        if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+          console.log('🎭 Modal video ready immediately, attempting play')
+          handleCanPlay()
+        } else {
+          console.log('🎭 Modal video not ready, waiting for canplay event')
+          // Wait for video to be ready
+          video.addEventListener('canplay', handleCanPlay, { once: true })
+        }
+      } else {
+        if (currentImage?.fileType !== 'video') {
+          console.log('🎭 Current slide is not a video, pausing modal video')
+        }
+        // Pause video if not current slide
+        video.pause()
+      }
+    } else {
+      console.log('🎭 No modal video ref available')
+    }
+
+    return () => {
+      // Cleanup: pause video when modal closes or changes
+      if (modalVideoRef.current) {
+        console.log('🎭 Cleanup: pausing modal video')
+        modalVideoRef.current.pause()
+      }
+    }
+  }, [carousel.currentIndex, images, project.title])
+  
+  const getCategoryGradient = (category: string | null) => {
+    switch (category) {
+      case 'hardwood': return 'from-wood-400 to-wood-600'
+      case 'vinyl': return 'from-blue-400 to-blue-600'
+      case 'laminate': return 'from-wood-300 to-wood-500'
+      case 'carpet': return 'from-neutral-300 to-neutral-500'
+      default: return 'from-green-400 to-green-600'
+    }
+  }
+
+  const primaryCategory = project.category || null
+  const gradient = getCategoryGradient(primaryCategory)
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      } else if (e.key === 'ArrowLeft' && images.length > 1) {
+        carousel.prevImage()
+      } else if (e.key === 'ArrowRight' && images.length > 1) {
+        carousel.nextImage()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+    return () => document.removeEventListener('keydown', handleKeyPress)
+  }, [onClose, carousel, images.length])
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-screen overflow-y-auto shadow-2xl">
+        <div className="p-8">
+          <div className="flex justify-between items-start mb-6">
+            <h2 className="font-cinzel text-4xl font-bold text-gray-900">{project.title}</h2>
+            <button 
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 text-3xl transition-colors p-2"
+            >
+              ✕
+            </button>
+          </div>
+          
+          {/* Image Carousel Section */}
+          <div className={`h-80 bg-gradient-to-br ${gradient} rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden`}>
+            {images.length > 0 ? (
+              <div className="relative w-full h-full">
+                {/* Current Image/Video */}
+                {images[carousel.currentIndex]?.fileType === 'video' ? (
+                  <video
+                    ref={modalVideoRef}
+                    src={images[carousel.currentIndex]?.imageUrl}
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    className="w-full h-full object-cover rounded-2xl"
+                    playsInline
+                    preload="metadata"
+                  >
+                    Seu navegador não suporta o elemento de vídeo.
+                  </video>
+                ) : (
+                  <img
+                    src={images[carousel.currentIndex]?.imageUrl}
+                    alt={images[carousel.currentIndex]?.title || project.title}
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
+                )}
+                
+                {/* Navigation Controls for multiple images */}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all duration-300"
+                      onClick={carousel.prevImage}
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    
+                    <button
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all duration-300"
+                      onClick={carousel.nextImage}
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+
+                    {/* Dot Indicators */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+                      {images.map((_, index) => (
+                        <button
+                          key={index}
+                          className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                            index === carousel.currentIndex ? 'bg-white' : 'bg-white/50 hover:bg-white/70'
+                          }`}
+                          onClick={() => carousel.goToImage(index)}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Image Counter */}
+                    <div className="absolute top-4 right-4 bg-black/60 text-white text-sm px-3 py-1 rounded">
+                      {carousel.currentIndex + 1} / {images.length}
+                    </div>
+                  </>
+                )}
+              </div>
+            ) : (
+              // Fallback when no images
+              <div className="flex items-center justify-center text-white/70">
+                <div className="text-center">
+                  <div className="text-8xl mb-4">🏗️</div>
+                  <p className="text-xl">Imagens em breve</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Media thumbnails for multiple images/videos */}
+          {images.length > 1 && (
+            <div className="flex space-x-2 mb-8 overflow-x-auto">
+              {images.map((image, index) => (
+                <button
+                  key={image.id}
+                  className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 relative ${
+                    index === carousel.currentIndex ? 'border-green-500' : 'border-transparent hover:border-gray-300'
+                  }`}
+                  onClick={() => carousel.goToImage(index)}
+                >
+                  {image.fileType === 'video' ? (
+                    <>
+                      <video
+                        src={image.imageUrl}
+                        className="w-full h-full object-cover"
+                        muted
+                        preload="metadata"
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <div className="text-white text-xs">▶</div>
+                      </div>
+                    </>
+                  ) : (
+                    <img
+                      src={image.imageUrl}
+                      alt={image.title}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+          
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div>
+              <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-4">Detalhes do Projeto</h3>
+              <p className="font-montserrat text-gray-600 mb-4 leading-relaxed">
+                {project.description || 'Projeto profissional de pisos executado com excelência e atenção aos detalhes.'}
+              </p>
+              <div className="space-y-2">
+                <p className="text-green-600 font-semibold">📍 {project.location || 'Localização não informada'}</p>
+                {project.completedAt && (
+                  <p className="text-blue-600 font-semibold">
+                    📅 Concluído em {new Date(project.completedAt).toLocaleDateString('pt-BR')}
+                  </p>
+                )}
+                <p className="text-purple-600 font-semibold">
+                  🎬 {images.length} mídia{images.length !== 1 ? 's' : ''} disponível{images.length !== 1 ? 'is' : ''}
+                </p>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-4">Categorias da Mídia</h3>
+              {images.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {[...new Set(images.map(img => img.category))].filter(Boolean).map(category => (
+                    <span key={category} className="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-medium">
+                      {categories.find(cat => cat.id === category)?.name || category}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 italic">Nenhuma categoria de mídia disponível</p>
+              )}
+
+              {/* Current media details if available */}
+              {images[carousel.currentIndex] && (
+                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {images[carousel.currentIndex].fileType === 'video' ? 'Vídeo Atual:' : 'Imagem Atual:'}
+                  </h4>
+                  <p className="text-sm text-gray-700">{images[carousel.currentIndex].title}</p>
+                  {images[carousel.currentIndex].description && (
+                    <p className="text-sm text-gray-600 mt-1">{images[carousel.currentIndex].description}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div className="flex gap-4">
+            <a 
+              href="/contact"
+              className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg"
+            >
+              Iniciar Projeto Semelhante
+            </a>
+            <button 
+              onClick={onClose}
+              className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors font-montserrat"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default function PortfolioClient() {
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [selectedProject, setSelectedProject] = useState<any>(null)
-  const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([])
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
 
-  const fetchGalleryImages = async () => {
+  const fetchProjects = async () => {
     try {
-      const response = await fetch(`/api/gallery?category=${selectedCategory}`)
+      console.log('📡 Fetching projects from API...')
+      const response = await fetch('/api/projects?status=active')
       const data = await response.json()
-      setGalleryImages(data.images || [])
+      const projectsWithVideos = data.projects?.filter((p: Project) => 
+        p.galleryImages?.some(img => img.fileType === 'video')
+      ) || []
+      
+      console.log('📡 Projects fetched:')
+      console.log('Total projects:', data.projects?.length || 0)
+      console.log('Projects with videos:', projectsWithVideos.length)
+      console.log('All projects:', data.projects?.map((p: Project) => ({
+        id: p.id,
+        title: p.title,
+        galleryImagesCount: p.galleryImages?.length || 0,
+        hasVideos: p.galleryImages?.some(img => img.fileType === 'video') || false,
+        videoCount: p.galleryImages?.filter(img => img.fileType === 'video').length || 0,
+        imageTypes: p.galleryImages?.map(img => img.fileType) || []
+      })))
+      
+      if (projectsWithVideos.length > 0) {
+        console.log('🎬 Projects with videos detailed:')
+        projectsWithVideos.forEach((p: Project) => {
+          const videos = p.galleryImages?.filter(img => img.fileType === 'video') || []
+          console.log(`  ${p.title}:`, {
+            videoCount: videos.length,
+            videoUrls: videos.map(v => v.imageUrl)
+          })
+        })
+      } else {
+        console.log('⚠️ No projects with videos found. Check gallery images fileType field.')
+      }
+      setProjects(data.projects || [])
     } catch (error) {
-      console.error('Error fetching gallery images:', error)
+      console.error('❌ Error fetching projects:', error)
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchGalleryImages()
-  }, [selectedCategory])
+    fetchProjects()
+  }, [])
 
-  const allProjects = [
-    ...portfolioProjects.map(project => ({ ...project, isGalleryImage: false })),
-    ...galleryImages.map(img => ({
-      id: `gallery-${img.id}`,
-      title: img.title,
-      category: img.category || 'other',
-      location: img.location || 'Localização não informada',
-      description: img.description || 'Sem descrição',
-      image: img.imageUrl,
-      gradient: 'from-green-400 to-green-600', // Default gradient for gallery images
-      isGalleryImage: true,
-      details: {
-        size: 'N/A',
-        duration: 'N/A',
-        materials: 'N/A',
-        challenge: 'N/A'
-      }
-    }))
-  ]
-
+  // Filter projects based on project categories
   const filteredProjects = selectedCategory === 'all' 
-    ? allProjects 
-    : allProjects.filter(project => project.category === selectedCategory)
+    ? projects 
+    : projects.filter(project => 
+        project.category === selectedCategory
+      )
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-green-200 border-t-green-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <SpinningLogo size="lg" color="green" className="mb-4" />
           <div className="font-montserrat text-2xl text-gray-700 mb-2">Carregando Portfólio</div>
           <div className="font-montserrat text-gray-500">Preparando nossos melhores projetos...</div>
         </div>
@@ -244,39 +766,11 @@ export default function PortfolioClient() {
         {/* Project Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {filteredProjects.map((project) => (
-            <div 
+            <ProjectCard 
               key={project.id} 
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer group"
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className={`h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
-                {project.isGalleryImage && project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              </div>
-              <div className="p-6">
-                <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-green-600 font-semibold text-sm mb-3">{project.location}</p>
-                <p className="text-gray-600 text-sm mb-6 line-clamp-3">{project.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">
-                    {categories.find(cat => cat.id === project.category)?.name}
-                  </span>
-                  <span className="text-green-600 text-sm font-medium group-hover:text-green-700">
-                    Ver Detalhes →
-                  </span>
-                </div>
-              </div>
-            </div>
+              project={project} 
+              onClick={setSelectedProject}
+            />
           ))}
         </div>
 
@@ -342,78 +836,10 @@ export default function PortfolioClient() {
 
         {/* Project Detail Modal */}
         {selectedProject && (
-          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl max-w-3xl w-full max-h-screen overflow-y-auto shadow-2xl">
-              <div className="p-8">
-                <div className="flex justify-between items-start mb-6">
-                  <h2 className="font-cinzel text-4xl font-bold text-gray-900">{selectedProject.title}</h2>
-                  <button 
-                    onClick={() => setSelectedProject(null)}
-                    className="text-gray-400 hover:text-gray-600 text-3xl transition-colors p-2"
-                  >
-                    ✕
-                  </button>
-                </div>
-                
-                <div className={`h-72 bg-gradient-to-br ${selectedProject.gradient} rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden`}>
-                  {selectedProject.isGalleryImage && selectedProject.image ? (
-                    <img
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="w-full h-full object-cover rounded-2xl"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-                  )}
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  <div>
-                    <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-4">Detalhes do Projeto</h3>
-                    <p className="font-montserrat text-gray-600 mb-4 leading-relaxed">{selectedProject.description}</p>
-                    <p className="text-green-600 font-semibold">📍 {selectedProject.location}</p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-cinzel text-xl font-bold text-gray-900 mb-4">Especificações</h3>
-                    <div className="space-y-3 font-montserrat">
-                      <div className="flex justify-between">
-                        <strong className="text-gray-700">Tamanho:</strong>
-                        <span className="text-gray-600">{selectedProject.details.size}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <strong className="text-gray-700">Duração:</strong>
-                        <span className="text-gray-600">{selectedProject.details.duration}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <strong className="text-gray-700">Materiais:</strong>
-                        <span className="text-gray-600">{selectedProject.details.materials}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <strong className="text-gray-700">Desafio:</strong>
-                        <span className="text-gray-600">{selectedProject.details.challenge}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4">
-                  <a 
-                    href="/contact"
-                    className="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 flex-1 text-center font-montserrat shadow-lg"
-                  >
-                    Iniciar Projeto Semelhante
-                  </a>
-                  <button 
-                    onClick={() => setSelectedProject(null)}
-                    className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors font-montserrat"
-                  >
-                    Fechar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProjectModal 
+            project={selectedProject} 
+            onClose={() => setSelectedProject(null)} 
+          />
         )}
       </div>
     </div>

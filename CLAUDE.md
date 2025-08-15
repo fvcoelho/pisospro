@@ -91,6 +91,7 @@ The application includes comprehensive user activity tracking:
 - **Session Management**: Tracks unique user sessions with device and location data
 - **Real-time Dashboard**: `/admin/analytics` for viewing live user activity
 - **Simple Data Model**: Records element text, IDs, and interaction metadata
+- **Admin Route Exclusion**: Analytics tracking is disabled for all `/admin` routes
 
 Key Analytics files:
 - `/src/lib/analytics/tracker.ts` - Core tracking library with global click listener

@@ -1,6 +1,19 @@
 // Simple analytics tracking library
 let sessionId: string | null = null
 
+// Check if current route should be tracked
+function shouldTrack(): boolean {
+  if (typeof window === 'undefined') return false
+  
+  // Skip tracking for admin routes
+  const pathname = window.location.pathname
+  if (pathname.startsWith('/admin')) {
+    return false
+  }
+  
+  return true
+}
+
 // Generate or retrieve session ID
 function getSessionId(): string {
   if (sessionId) return sessionId
@@ -49,7 +62,7 @@ function getSessionInfo() {
 
 // Track page view
 export async function trackPageView(page?: string, title?: string) {
-  if (typeof window === 'undefined') return
+  if (!shouldTrack()) return
   
   const pageUrl = page || window.location.pathname
   const pageTitle = title || document.title
@@ -73,7 +86,7 @@ export async function trackPageView(page?: string, title?: string) {
 
 // Track click event
 export async function trackClick(element: HTMLElement, customData?: any) {
-  if (typeof window === 'undefined') return
+  if (!shouldTrack()) return
   
   // Extract element information
   const elementId = element.id || 
@@ -114,7 +127,7 @@ export async function trackClick(element: HTMLElement, customData?: any) {
 
 // Setup global click listener
 export function setupGlobalTracking() {
-  if (typeof window === 'undefined') return
+  if (!shouldTrack()) return
   
   // Track initial page view
   trackPageView()
@@ -149,7 +162,7 @@ export function setupGlobalTracking() {
 
 // Update page view with time spent
 async function updatePageViewTime(timeSpent: number) {
-  if (timeSpent < 1) return // Ignore very short visits
+  if (!shouldTrack() || timeSpent < 1) return // Ignore very short visits or admin routes
   
   try {
     await fetch('/api/track/pageview', {
@@ -171,7 +184,7 @@ async function updatePageViewTime(timeSpent: number) {
 // Manual tracking functions for special cases
 export const analytics = {
   trackEvent: (eventName: string, data?: any) => {
-    if (typeof window === 'undefined') return
+    if (!shouldTrack()) return
     
     const element = document.createElement('span')
     element.setAttribute('data-track-id', eventName)
@@ -181,7 +194,7 @@ export const analytics = {
   },
   
   identify: (userId: string, traits?: any) => {
-    if (typeof window === 'undefined') return
+    if (!shouldTrack()) return
     
     localStorage.setItem('analytics_user_id', userId)
     if (traits) {

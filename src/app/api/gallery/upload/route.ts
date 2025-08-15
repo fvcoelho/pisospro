@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
     const description = formData.get('description') as string
     const location = formData.get('location') as string
     const category = formData.get('category') as string
+    const projectIdStr = formData.get('projectId') as string
 
     console.log('📁 File details:', {
       name: file?.name,
@@ -43,24 +44,63 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    // Validate file type
-    if (!file.type.startsWith('image/')) {
-      console.log('❌ Invalid file type:', file.type)
+    if (!projectIdStr) {
+      console.log('❌ No projectId provided')
       return NextResponse.json({ 
         success: false,
-        error: 'Only image files are allowed',
-        details: `Received file type: ${file.type}. Allowed types: image/*`
+        error: 'Project is required',
+        details: 'Project selection is required'
       }, { status: 400 })
     }
 
-    // Validate file size (10MB max)
-    const maxSize = 10 * 1024 * 1024 // 10MB
+    const projectId = parseInt(projectIdStr)
+    if (isNaN(projectId)) {
+      console.log('❌ Invalid projectId provided')
+      return NextResponse.json({ 
+        success: false,
+        error: 'Invalid project ID',
+        details: 'Project ID must be a valid number'
+      }, { status: 400 })
+    }
+
+    // Validate that the project exists
+    const project = await prisma.project.findUnique({
+      where: { id: projectId, isActive: true }
+    })
+
+    if (!project) {
+      console.log('❌ Project not found or inactive:', projectId)
+      return NextResponse.json({ 
+        success: false,
+        error: 'Project not found',
+        details: 'The selected project does not exist or is inactive'
+      }, { status: 400 })
+    }
+
+    // Validate file type (images and videos)
+    const isImage = file.type.startsWith('image/')
+    const isVideo = file.type.startsWith('video/')
+    
+    if (!isImage && !isVideo) {
+      console.log('❌ Invalid file type:', file.type)
+      return NextResponse.json({ 
+        success: false,
+        error: 'Only image and video files are allowed',
+        details: `Received file type: ${file.type}. Allowed types: image/*, video/*`
+      }, { status: 400 })
+    }
+
+    const fileType = isVideo ? 'video' : 'image'
+
+    // Validate file size (20MB max for videos, 10MB for images)
+    const maxSize = isVideo ? 20 * 1024 * 1024 : 10 * 1024 * 1024 // 20MB for videos, 10MB for images
     if (file.size > maxSize) {
+      const maxSizeMB = isVideo ? 20 : 10
       console.log('❌ File too large:', `${(file.size / 1024 / 1024).toFixed(2)}MB`)
       return NextResponse.json({ 
         success: false,
-        error: 'File size must be less than 10MB',
-        details: `File size: ${(file.size / 1024 / 1024).toFixed(2)}MB. Max allowed: 10MB`
+        error: `File size must be less than ${maxSizeMB}MB for ${fileType}s`,
+        details: `File size: ${(file.size / 1024 / 1024).toFixed(2)}MB. Max allowed: ${maxSizeMB}MB for ${fileType}s`
       }, { status: 400 })
     }
 
@@ -100,7 +140,21 @@ export async function POST(request: NextRequest) {
         imageUrl: blob.url,
         publicId: blob.pathname, // Store blob pathname as publicId
         category: category || null,
+        projectId: projectId,
+        fileType: fileType,
+        mimeType: file.type,
         isActive: true,
+      },
+      include: {
+        project: {
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            location: true,
+            isActive: true
+          }
+        }
       }
     })
 

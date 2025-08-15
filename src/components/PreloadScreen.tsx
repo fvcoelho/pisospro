@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
+import SpinningLogo from '@/components/SpinningLogo'
 
 interface PreloadScreenProps {
   isLoading: boolean
@@ -37,17 +37,8 @@ export default function PreloadScreen({ isLoading, onComplete }: PreloadScreenPr
     >
       <div className="text-center">
         {/* Spinning Logo */}
-        <div className="relative w-32 h-32 mx-auto mb-8">
-          <div className="absolute inset-0 animate-spin">
-            <Image
-              src="/logo.svg"
-              alt="Pisos Pró"
-              width={128}
-              height={128}
-              className="w-full h-full object-contain filter brightness-0 invert"
-              priority
-            />
-          </div>
+        <div className="mb-8">
+          <SpinningLogo size="xl" color="white" />
         </div>
 
         {/* Loading Text */}

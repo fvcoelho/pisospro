@@ -83,15 +83,17 @@ model QuoteService {
 }
 
 model Project {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String?
-  imageUrls   String[]
-  location    String?
-  completedAt DateTime?
-  isActive    Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id            Int            @id @default(autoincrement())
+  title         String
+  description   String?
+  imageUrls     String[] // Deprecated: will be replaced by galleryImages relation
+  location      String?
+  category      String?
+  completedAt   DateTime?
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  galleryImages GalleryImage[]
 }
 
 model GalleryImage {
@@ -99,12 +101,16 @@ model GalleryImage {
   title       String
   description String?
   location    String?
-  imageUrl    String
+  imageUrl    String // This will now store both image and video URLs
   publicId    String
   category    String?
+  projectId   Int
+  fileType    String   @default("image") // "image" or "video"
+  mimeType    String?  // Store original MIME type
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model WhatsAppConversation {

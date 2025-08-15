@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { del } from '@vercel/blob'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
+    const status = searchParams.get('status') // 'active', 'inactive', 'all'
     const category = searchParams.get('category')
-    const projectId = searchParams.get('projectId')
+    const search = searchParams.get('search')
     const limit = searchParams.get('limit')
     const page = searchParams.get('page')
     const pageSize = searchParams.get('pageSize')
-    const status = searchParams.get('status') // 'active', 'inactive', 'all'
     const sortBy = searchParams.get('sortBy') || 'createdAt'
     const sortOrder = (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc'
 
@@ -33,9 +32,14 @@ export async function GET(request: NextRequest) {
       where.category = category
     }
 
-    // Project filter
-    if (projectId && projectId !== 'all') {
-      where.projectId = parseInt(projectId)
+    // Search filter
+    if (search) {
+      where.OR = [
+        { title: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } },
+        { location: { contains: search, mode: 'insensitive' } },
+        { category: { contains: search, mode: 'insensitive' } }
+      ]
     }
 
     // Pagination setup
@@ -44,37 +48,44 @@ export async function GET(request: NextRequest) {
     const skip = (currentPage - 1) * itemsPerPage
 
     // Get total count for pagination
-    const totalCount = await prisma.galleryImage.count({ where })
+    const totalCount = await prisma.project.count({ where })
 
     // Build orderBy
-    const orderBy: Record<string, any> = {}
+    const orderBy: Record<string, 'asc' | 'desc'> = {}
     if (sortBy === 'title') {
       orderBy.title = sortOrder
+    } else if (sortBy === 'location') {
+      orderBy.location = sortOrder
     } else if (sortBy === 'category') {
       orderBy.category = sortOrder
-    } else if (sortBy === 'project') {
-      orderBy.project = { title: sortOrder }
+    } else if (sortBy === 'completedAt') {
+      orderBy.completedAt = sortOrder
     } else if (sortBy === 'updatedAt') {
       orderBy.updatedAt = sortOrder
     } else {
       orderBy.createdAt = sortOrder
     }
 
-    // Fetch images with pagination, including project information
-    const images = await prisma.galleryImage.findMany({
+    // Fetch projects with pagination, including gallery images
+    const projects = await prisma.project.findMany({
       where,
       orderBy,
       skip: page ? skip : undefined,
       take: itemsPerPage,
       include: {
-        project: {
+        galleryImages: {
+          where: { isActive: true },
           select: {
             id: true,
             title: true,
             description: true,
-            location: true,
-            isActive: true
-          }
+            imageUrl: true,
+            fileType: true,
+            mimeType: true,
+            isActive: true,
+            createdAt: true
+          },
+          take: 5 // Limit to first 5 images for performance
         }
       }
     })
@@ -85,7 +96,7 @@ export async function GET(request: NextRequest) {
     const hasPreviousPage = currentPage > 1
 
     return NextResponse.json({
-      images,
+      projects,
       pagination: {
         currentPage,
         pageSize: itemsPerPage,
@@ -96,9 +107,48 @@ export async function GET(request: NextRequest) {
       }
     })
   } catch (error) {
-    console.error('Error fetching gallery images:', error)
+    console.error('Error fetching projects:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch images' },
+      { error: 'Failed to fetch projects' },
+      { status: 500 }
+    )
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { title, description, location, category, imageUrls, completedAt, isActive } = body
+
+    // Validate required fields
+    if (!title || !title.trim()) {
+      return NextResponse.json(
+        { error: 'Title is required' },
+        { status: 400 }
+      )
+    }
+
+    // Create the project
+    const project = await prisma.project.create({
+      data: {
+        title: title.trim(),
+        description: description?.trim() || null,
+        location: location?.trim() || null,
+        category: category?.trim() || null,
+        imageUrls: imageUrls || [],
+        completedAt: completedAt ? new Date(completedAt) : null,
+        isActive: isActive !== undefined ? isActive : true
+      }
+    })
+
+    return NextResponse.json({
+      success: true,
+      project
+    })
+  } catch (error) {
+    console.error('Error creating project:', error)
+    return NextResponse.json(
+      { error: 'Failed to create project' },
       { status: 500 }
     )
   }
@@ -110,41 +160,28 @@ export async function DELETE(request: NextRequest) {
     const id = searchParams.get('id')
 
     if (!id) {
-      return NextResponse.json({ error: 'Image ID is required' }, { status: 400 })
+      return NextResponse.json({ error: 'Project ID is required' }, { status: 400 })
     }
 
-    const image = await prisma.galleryImage.findUnique({
+    const project = await prisma.project.findUnique({
       where: { id: parseInt(id) }
     })
 
-    if (!image) {
-      return NextResponse.json({ error: 'Image not found' }, { status: 404 })
+    if (!project) {
+      return NextResponse.json({ error: 'Project not found' }, { status: 404 })
     }
 
-    // Delete from Vercel Blob if it's a blob URL
-    if (image.imageUrl && image.imageUrl.includes('blob.vercel-storage.com')) {
-      try {
-        await del(image.imageUrl, {
-          token: process.env.BLOB_READ_WRITE_TOKEN,
-        })
-        console.log('Successfully deleted blob:', image.imageUrl)
-      } catch (blobError) {
-        console.error('Error deleting blob:', blobError)
-        // Continue with database deletion even if blob deletion fails
-      }
-    }
-
-    // Mark as inactive in database instead of hard delete to maintain referential integrity
-    await prisma.galleryImage.update({
+    // Mark as inactive in database instead of hard delete
+    await prisma.project.update({
       where: { id: parseInt(id) },
       data: { isActive: false }
     })
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Error deleting image:', error)
+    console.error('Error deleting project:', error)
     return NextResponse.json(
-      { error: 'Failed to delete image' },
+      { error: 'Failed to delete project' },
       { status: 500 }
     )
   }
