@@ -9,13 +9,12 @@ import { Card } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 
 const categories = [
-  { value: '', label: 'Selecione uma categoria' },
-  { value: 'hardwood', label: 'Madeira' },
+  { value: 'all', label: 'Todas as Categorias' },
+  { value: 'hardwood', label: 'Piso de Madeira' },
   { value: 'finish', label: 'Acabamento' },
-  { value: 'vinyl', label: 'Vinílico e LVT' },
-  { value: 'laminate', label: 'Laminado' },
-  { value: 'other', label: 'Outros' },
-  { value: 'multiple', label: 'Serviços' }
+  { value: 'vinyl', label: 'Piso Vinílico' },
+  { value: 'laminate', label: 'Piso Laminado' },
+  { value: 'other', label: 'Outros' }
 ]
 
 interface GalleryImage {

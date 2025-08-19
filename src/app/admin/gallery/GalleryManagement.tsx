@@ -36,10 +36,8 @@ const categories = [
   { value: 'all', label: 'Todas as Categorias' },
   { value: 'hardwood', label: 'Piso de Madeira' },
   { value: 'finish', label: 'Acabamento' },
-  //{ value: 'tile', label: 'Cerâmica e Pedra' },
   { value: 'vinyl', label: 'Piso Vinílico' },
   { value: 'laminate', label: 'Piso Laminado' },
- // { value: 'carpet', label: 'Carpete de Madera' }
   { value: 'other', label: 'Outros' }
 ]
 
