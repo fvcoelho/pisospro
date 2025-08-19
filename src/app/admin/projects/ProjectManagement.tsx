@@ -13,7 +13,8 @@ const categories = [
   { value: 'hardwood', label: 'Madeira' },
   { value: 'vinyl', label: 'Vinílico e LVT' },
   { value: 'laminate', label: 'Laminado' },
-  { value: 'carpet', label: 'Carpete' }
+  { value: 'carpet', label: 'Carpete' },
+  { value: 'multiple', label: 'Serviços' }
 ]
 
 interface GalleryImage {
