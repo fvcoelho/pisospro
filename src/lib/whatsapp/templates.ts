@@ -113,9 +113,9 @@ export const PROJECT_TYPE_MENU: WhatsAppInteractiveMessage = {
               description: 'Instalação de pisos de madeira'
             },
             {
-              id: 'tile',
-              title: 'Cerâmica/Pedra',
-              description: 'Cerâmica, porcelanato, pedras'
+              id: 'finish',
+              title: 'Acabamento',
+              description: 'Serviços de acabamento em pisos'
             },
             {
               id: 'laminate',
@@ -132,11 +132,11 @@ export const PROJECT_TYPE_MENU: WhatsAppInteractiveMessage = {
         {
           title: 'Serviços',
           rows: [
-            {
-              id: 'carpet',
-              title: 'Carpete',
-              description: 'Instalação de carpetes'
-            },
+            // {
+            //   id: 'carpet',
+            //   title: 'Carpete',
+            //   description: 'Instalação de carpetes'
+            // },
             {
               id: 'refinishing',
               title: 'Restauração',
@@ -326,7 +326,7 @@ export function getProjectTypeDescription(projectType: string): string {
     //tile: 'Cerâmica e Pedra - Resistência e beleza para todos os ambientes',  
     laminate: 'Piso Laminado - Praticidade e economia sem abrir mão do estilo',
     vinyl: 'Vinílico e LVT - Tecnologia e conforto para ambientes modernos',
-    carpet: 'Instalação de Carpete - Conforto e aconchego para seu lar',
+    other: 'Outros Serviços - Soluções especializadas para suas necessidades',
     refinishing: 'Restauração de Pisos - Renovamos seus pisos como novos',
     repair: 'Reparo de Pisos - Soluções rápidas para pequenos problemas',
     multiple: 'Vários Serviços - Soluções completas para seu projeto'

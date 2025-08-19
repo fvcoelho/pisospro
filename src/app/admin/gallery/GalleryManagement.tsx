@@ -34,11 +34,13 @@ interface GalleryImage {
 
 const categories = [
   { value: 'all', label: 'Todas as Categorias' },
-  { value: 'hardwood', label: 'Madeira' },
+  { value: 'hardwood', label: 'Piso de Madeira' },
+  { value: 'finish', label: 'Acabamento' },
   //{ value: 'tile', label: 'Cerâmica e Pedra' },
-  { value: 'vinyl', label: 'Vinílico e LVT' },
-  { value: 'laminate', label: 'Laminado' },
-  { value: 'carpet', label: 'Carpete' }
+  { value: 'vinyl', label: 'Piso Vinílico' },
+  { value: 'laminate', label: 'Piso Laminado' },
+ // { value: 'carpet', label: 'Carpete de Madera' }
+  { value: 'other', label: 'Outros' }
 ]
 
 interface EditImageFormProps {

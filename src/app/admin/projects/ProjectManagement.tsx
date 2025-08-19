@@ -11,9 +11,10 @@ import { Label } from '@/components/ui/label'
 const categories = [
   { value: '', label: 'Selecione uma categoria' },
   { value: 'hardwood', label: 'Madeira' },
+  { value: 'finish', label: 'Acabamento' },
   { value: 'vinyl', label: 'Vinílico e LVT' },
   { value: 'laminate', label: 'Laminado' },
-  { value: 'carpet', label: 'Carpete' },
+  { value: 'other', label: 'Outros' },
   { value: 'multiple', label: 'Serviços' }
 ]
 

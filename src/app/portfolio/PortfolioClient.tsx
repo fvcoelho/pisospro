@@ -31,10 +31,10 @@ function useCarousel(totalImages: number) {
 const categories = [
   { id: 'all', name: 'Todos os Projetos', gradient: 'from-green-400 to-green-600' },
   { id: 'hardwood', name: 'Madeira', gradient: 'from-wood-400 to-wood-600' },
-  //{ id: 'tile', name: 'Cerâmica e Pedra', gradient: 'from-neutral-400 to-neutral-600' },
+  { id: 'finish', name: 'Acabamento', gradient: 'from-gold-400 to-gold-600' },
   { id: 'vinyl', name: 'Vinílico e LVT', gradient: 'from-blue-400 to-blue-600' },
   { id: 'laminate', name: 'Laminado', gradient: 'from-wood-300 to-wood-500' },
-  { id: 'carpet', name: 'Carpete', gradient: 'from-neutral-300 to-neutral-500' }
+  { id: 'other', name: 'Outros', gradient: 'from-neutral-300 to-neutral-500' }
 ]
 
 interface GalleryImage {
@@ -192,7 +192,8 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
       case 'hardwood': return 'from-wood-400 to-wood-600'
       case 'vinyl': return 'from-blue-400 to-blue-600'
       case 'laminate': return 'from-wood-300 to-wood-500'
-      case 'carpet': return 'from-neutral-300 to-neutral-500'
+      case 'finish': return 'from-gold-400 to-gold-600'
+      case 'other': return 'from-neutral-300 to-neutral-500'
       default: return 'from-green-400 to-green-600'
     }
   }
@@ -434,7 +435,8 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
       case 'hardwood': return 'from-wood-400 to-wood-600'
       case 'vinyl': return 'from-blue-400 to-blue-600'
       case 'laminate': return 'from-wood-300 to-wood-500'
-      case 'carpet': return 'from-neutral-300 to-neutral-500'
+      case 'finish': return 'from-gold-400 to-gold-600'
+      case 'other': return 'from-neutral-300 to-neutral-500'
       default: return 'from-green-400 to-green-600'
     }
   }

@@ -50,11 +50,11 @@ const services = [
     popular: true
   },
   {
-    id: 'carpet',
-    title: 'Instalação de Carpete',
-    description: 'Instalação confortável de carpete para quartos, salas e escritórios com base e acabamento profissionais.',
-    features: ['Residencial e Comercial', 'Base Premium', 'Opções Anti-Manchas', 'Acabamento Personalizado'],
-    price: 'A partir de R$ 35/m²',
+    id: 'other',
+    title: 'Outros Serviços',
+    description: 'Soluções especializadas em pisos para atender suas necessidades específicas.',
+    features: ['Consulta Personalizada', 'Projetos Especiais', 'Soluções Sob Medida', 'Acabamento Premium'],
+    price: 'Sob consulta',
     gradient: 'from-neutral-400 to-neutral-600',
     popular: false
   },

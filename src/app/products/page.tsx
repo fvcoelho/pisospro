@@ -61,15 +61,15 @@ const productCategories = [
     ]
   },
   {
-    id: 'carpet',
-    name: 'Carpete',
-    description: 'Carpetes confortáveis para espaços residenciais e comerciais',
+    id: 'other',
+    name: 'Outros',
+    description: 'Soluções especializadas e produtos sob medida',
     gradient: 'from-neutral-400 to-neutral-600',
     products: [
-      { name: 'Carpete Felpudo', price: 'R$ 30-90/m²', description: 'Carpete macio e luxuoso para quartos e salas' },
-      { name: 'Carpete Berber', price: 'R$ 45-105/m²', description: 'Carpete de laço durável em tons neutros' },
-      { name: 'Carpete Frieze', price: 'R$ 45-120/m²', description: 'Carpete de fibra torcida que esconde pegadas' },
-      { name: 'Carpete Comercial', price: 'R$ 30-75/m²', description: 'Carpete resistente a manchas para escritórios' }
+      { name: 'Piso Elevado', price: 'Sob consulta', description: 'Sistema modular para escritórios e data centers' },
+      { name: 'Piso Esportivo', price: 'Sob consulta', description: 'Pisos especiais para quadras e academias' },
+      { name: 'Revestimento Acústico', price: 'Sob consulta', description: 'Soluções para isolamento acústico' },
+      { name: 'Projetos Especiais', price: 'Sob consulta', description: 'Soluções personalizadas para projetos únicos' }
     ]
   }
 ]

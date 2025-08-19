@@ -198,7 +198,7 @@ async function handleMainMenuResponse(message: IncomingMessage, conversationId: 
 }
 
 async function handleProjectTypeResponse(message: IncomingMessage, conversationId: string, state: any) {
-  const projectTypes = ['hardwood', 'tile', 'laminate', 'vinyl', 'carpet', 'refinishing', 'repair', 'multiple']
+  const projectTypes = ['hardwood', 'finish', 'laminate', 'vinyl', 'refinishing', 'repair', 'multiple']
   
   if (projectTypes.includes(message.text || '')) {
     const collectedData = { ...state.collectedData, projectType: message.text }
