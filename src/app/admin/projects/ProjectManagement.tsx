@@ -8,14 +8,13 @@ import { Select } from '@/components/ui/select'
 import { Card } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 
-const categories = [
-  { value: 'all', label: 'Todas as Categorias' },
-  { value: 'hardwood', label: 'Piso de Madeira' },
-  { value: 'finish', label: 'Acabamento' },
-  { value: 'vinyl', label: 'Piso Vinílico' },
-  { value: 'laminate', label: 'Piso Laminado' },
-  { value: 'other', label: 'Outros' }
-]
+interface Category {
+  id: number
+  name: string
+  description: string | null
+  slug: string
+  imageUrl: string | null
+}
 
 interface GalleryImage {
   id: number
@@ -42,11 +41,12 @@ interface Project {
 }
 
 interface AddProjectFormProps {
+  categories: Category[]
   onSave: (data: any) => void
   onCancel: () => void
 }
 
-function AddProjectForm({ onSave, onCancel }: AddProjectFormProps) {
+function AddProjectForm({ categories, onSave, onCancel }: AddProjectFormProps) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState('')
@@ -120,9 +120,10 @@ function AddProjectForm({ onSave, onCancel }: AddProjectFormProps) {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
+            <option value="">Selecione uma categoria</option>
             {categories.map((cat) => (
-              <option key={cat.value} value={cat.value}>
-                {cat.label}
+              <option key={cat.id} value={cat.slug}>
+                {cat.name}
               </option>
             ))}
           </Select>
@@ -196,11 +197,12 @@ function AddProjectForm({ onSave, onCancel }: AddProjectFormProps) {
 
 interface EditProjectFormProps {
   project: Project
+  categories: Category[]
   onSave: (data: any) => void
   onCancel: () => void
 }
 
-function EditProjectForm({ project, onSave, onCancel }: EditProjectFormProps) {
+function EditProjectForm({ project, categories, onSave, onCancel }: EditProjectFormProps) {
   const [title, setTitle] = useState(project.title)
   const [description, setDescription] = useState(project.description || '')
   const [location, setLocation] = useState(project.location || '')
@@ -276,9 +278,10 @@ function EditProjectForm({ project, onSave, onCancel }: EditProjectFormProps) {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
+            <option value="">Selecione uma categoria</option>
             {categories.map((cat) => (
-              <option key={cat.value} value={cat.value}>
-                {cat.label}
+              <option key={cat.id} value={cat.slug}>
+                {cat.name}
               </option>
             ))}
           </Select>
@@ -381,12 +384,23 @@ function EditProjectForm({ project, onSave, onCancel }: EditProjectFormProps) {
 
 export default function ProjectManagement() {
   const [projects, setProjects] = useState<Project[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedStatus, setSelectedStatus] = useState('all')
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [showAddForm, setShowAddForm] = useState(false)
   const [editingProject, setEditingProject] = useState<Project | null>(null)
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/categories')
+      const data = await response.json()
+      setCategories(data.categories || [])
+    } catch (error) {
+      console.error('Error fetching categories:', error)
+    }
+  }
 
   const fetchProjects = async () => {
     try {
@@ -404,6 +418,10 @@ export default function ProjectManagement() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
 
   useEffect(() => {
     fetchProjects()
@@ -517,13 +535,11 @@ export default function ProjectManagement() {
                 className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="all">Todas as Categorias</option>
-                {categories
-                  .filter(cat => cat.value !== '')
-                  .map((cat) => (
-                    <option key={cat.value} value={cat.value}>
-                      {cat.label}
-                    </option>
-                  ))}
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.slug}>
+                    {cat.name}
+                  </option>
+                ))}
               </select>
               
               <Input
@@ -545,6 +561,7 @@ export default function ProjectManagement() {
         {showAddForm && (
           <div className="mb-8">
             <AddProjectForm
+              categories={categories}
               onSave={handleAddProject}
               onCancel={() => setShowAddForm(false)}
             />
@@ -555,6 +572,7 @@ export default function ProjectManagement() {
           <div className="mb-8">
             <EditProjectForm
               project={editingProject}
+              categories={categories}
               onSave={handleUpdateProject}
               onCancel={() => setEditingProject(null)}
             />
@@ -635,7 +653,7 @@ export default function ProjectManagement() {
                     
                     {project.category && (
                       <p className="text-sm text-purple-600 mb-2">
-                        {categories.find(cat => cat.value === project.category)?.label || project.category}
+                        {categories.find(cat => cat.slug === project.category || cat.name === project.category)?.name || project.category}
                       </p>
                     )}
                     

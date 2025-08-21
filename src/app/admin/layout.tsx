@@ -20,6 +20,11 @@ export default function AdminLayout({
               </Link>
               
               <div className="hidden md:flex items-center space-x-4">
+                <Link href="/admin/categorias">
+                  <Button variant="ghost" size="sm">
+                    📁 Categorias
+                  </Button>
+                </Link>
                 <Link href="/admin/projects">
                   <Button variant="ghost" size="sm">
                     🏗️ Projetos

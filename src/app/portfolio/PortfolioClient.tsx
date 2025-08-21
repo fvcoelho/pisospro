@@ -28,14 +28,27 @@ function useCarousel(totalImages: number) {
   }
 }
 
-const categories = [
-  { id: 'all', name: 'Todos os Projetos', gradient: 'from-green-400 to-green-600' },
-  { id: 'hardwood', name: 'Madeira', gradient: 'from-wood-400 to-wood-600' },
-  { id: 'finish', name: 'Acabamento', gradient: 'from-gold-400 to-gold-600' },
-  { id: 'vinyl', name: 'Vinílico e LVT', gradient: 'from-blue-400 to-blue-600' },
-  { id: 'laminate', name: 'Laminado', gradient: 'from-wood-300 to-wood-500' },
-  { id: 'other', name: 'Outros', gradient: 'from-neutral-300 to-neutral-500' }
+// Gradient colors for categories (can be expanded)
+const categoryGradients = [
+  'from-wood-400 to-wood-600',
+  'from-gold-400 to-gold-600', 
+  'from-blue-400 to-blue-600',
+  'from-wood-300 to-wood-500',
+  'from-neutral-300 to-neutral-500',
+  'from-purple-400 to-purple-600',
+  'from-red-400 to-red-600',
+  'from-indigo-400 to-indigo-600',
+  'from-teal-400 to-teal-600',
+  'from-orange-400 to-orange-600'
 ]
+
+interface Category {
+  id: number
+  name: string
+  description: string | null
+  slug: string
+  imageUrl: string | null
+}
 
 interface GalleryImage {
   id: number
@@ -331,10 +344,11 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
 // ProjectModal component with image carousel
 interface ProjectModalProps {
   project: Project
+  categories: Category[]
   onClose: () => void
 }
 
-function ProjectModal({ project, onClose }: ProjectModalProps) {
+function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
   const images = project.galleryImages?.filter(img => img.isActive) || []
   const carousel = useCarousel(images.length)
   const modalVideoRef = useRef<HTMLVideoElement>(null)
@@ -613,7 +627,7 @@ function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <div className="flex flex-wrap gap-2">
                   {[...new Set(images.map(img => img.category))].filter(Boolean).map(category => (
                     <span key={category} className="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-medium">
-                      {categories.find(cat => cat.id === category)?.name || category}
+                      {categories.find(cat => cat.slug === category || cat.name === category)?.name || category}
                     </span>
                   ))}
                 </div>
@@ -660,7 +674,18 @@ export default function PortfolioClient() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [projects, setProjects] = useState<Project[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/categories')
+      const data = await response.json()
+      setCategories(data.categories || [])
+    } catch (error) {
+      console.error('❌ Error fetching categories:', error)
+    }
+  }
 
   const fetchProjects = async () => {
     try {
@@ -698,21 +723,28 @@ export default function PortfolioClient() {
       setProjects(data.projects || [])
     } catch (error) {
       console.error('❌ Error fetching projects:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchProjects()
+    const loadData = async () => {
+      setLoading(true)
+      await Promise.all([fetchCategories(), fetchProjects()])
+      setLoading(false)
+    }
+    loadData()
   }, [])
 
   // Filter projects based on project categories
   const filteredProjects = selectedCategory === 'all' 
     ? projects 
-    : projects.filter(project => 
-        project.category === selectedCategory
-      )
+    : projects.filter(project => {
+        // Match by category slug or name
+        const selectedCat = categories.find(cat => cat.slug === selectedCategory)
+        return project.category === selectedCategory || 
+               project.category === selectedCat?.name ||
+               project.category === selectedCat?.slug
+      })
 
   if (loading) {
     return (
@@ -747,22 +779,41 @@ export default function PortfolioClient() {
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
-                selectedCategory === category.id
-                  ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg`
-                  : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
-              }`}
-            >
-              <span className="relative z-10">{category.name}</span>
-              {selectedCategory === category.id && (
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
-              )}
-            </button>
-          ))}
+          {/* All Projects button */}
+          <button
+            onClick={() => setSelectedCategory('all')}
+            className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+              selectedCategory === 'all'
+                ? `bg-gradient-to-r from-green-400 to-green-600 text-white shadow-lg`
+                : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
+            }`}
+          >
+            <span className="relative z-10">Todos os Projetos</span>
+            {selectedCategory === 'all' && (
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
+            )}
+          </button>
+          
+          {/* Dynamic category buttons */}
+          {categories.map((category, index) => {
+            const gradient = categoryGradients[index % categoryGradients.length]
+            return (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.slug)}
+                className={`relative overflow-hidden px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  selectedCategory === category.slug
+                    ? `bg-gradient-to-r ${gradient} text-white shadow-lg`
+                    : 'bg-white text-gray-700 hover:bg-green-50 hover:text-green-700 shadow-md hover:shadow-lg'
+                }`}
+              >
+                <span className="relative z-10">{category.name}</span>
+                {selectedCategory === category.slug && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
+                )}
+              </button>
+            )
+          })}
         </div>
 
         {/* Project Grid */}
@@ -839,7 +890,8 @@ export default function PortfolioClient() {
         {/* Project Detail Modal */}
         {selectedProject && (
           <ProjectModal 
-            project={selectedProject} 
+            project={selectedProject}
+            categories={categories} 
             onClose={() => setSelectedProject(null)} 
           />
         )}
