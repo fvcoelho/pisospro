@@ -108,22 +108,22 @@ export const PROJECT_TYPE_MENU: WhatsAppInteractiveMessage = {
           title: 'Tipos de Piso',
           rows: [
             {
-              id: 'hardwood',
+              id: 'madeira',
               title: 'Madeira',
               description: 'Instalação de pisos de madeira'
             },
             {
-              id: 'finish',
+              id: 'acabamento',
               title: 'Acabamento',
               description: 'Serviços de acabamento em pisos'
             },
             {
-              id: 'laminate',
+              id: 'laminado',
               title: 'Laminado',
               description: 'Pisos laminados'
             },
             {
-              id: 'vinyl',
+              id: 'vinílico',
               title: 'Vinílico/LVT',
               description: 'Pisos vinílicos e LVT'
             }
@@ -138,12 +138,12 @@ export const PROJECT_TYPE_MENU: WhatsAppInteractiveMessage = {
             //   description: 'Instalação de carpetes'
             // },
             {
-              id: 'refinishing',
+              id: 'reacabamentoing',
               title: 'Restauração',
               description: 'Restauração de pisos existentes'
             },
             {
-              id: 'repair',
+              id: 'reparo',
               title: 'Reparo',
               description: 'Reparos em pisos'
             },
@@ -322,13 +322,13 @@ Cartão, boleto, PIX. Parcelamos em até 12x sem juros.`
 
 export function getProjectTypeDescription(projectType: string): string {
   const descriptions: Record<string, string> = {
-    hardwood: 'Instalação de Pisos de Madeira - Elegância e durabilidade para sua casa',
+    madeira: 'Instalação de Pisos de Madeira - Elegância e durabilidade para sua casa',
     //tile: 'Cerâmica e Pedra - Resistência e beleza para todos os ambientes',  
-    laminate: 'Piso Laminado - Praticidade e economia sem abrir mão do estilo',
-    vinyl: 'Vinílico e LVT - Tecnologia e conforto para ambientes modernos',
+    laminado: 'Piso Laminado - Praticidade e economia sem abrir mão do estilo',
+    vinílico: 'Vinílico e LVT - Tecnologia e conforto para ambientes modernos',
     other: 'Outros Serviços - Soluções especializadas para suas necessidades',
-    refinishing: 'Restauração de Pisos - Renovamos seus pisos como novos',
-    repair: 'Reparo de Pisos - Soluções rápidas para pequenos problemas',
+    reacabamentoing: 'Restauração de Pisos - Renovamos seus pisos como novos',
+    reparo: 'Reparo de Pisos - Soluções rápidas para pequenos problemas',
     multiple: 'Vários Serviços - Soluções completas para seu projeto'
   }
   return descriptions[projectType] || 'Serviço de pisos profissional'

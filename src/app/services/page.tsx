@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Serviços Profissionais de Pisos - Instalação e Reforma | Pisos Pró',
   description: 'Serviços especializados de instalação de pisos incluindo madeira, cerâmica, laminado, vinílico e carpete. Profissionais licenciados com mais de 15 anos de experiência. Orçamentos gratuitos disponíveis.',
-  keywords: 'instalação de pisos, instalação de madeira, instalação de cerâmica, piso laminado, piso vinílico, instalação de carpete, restauração de pisos, serviços profissionais de pisos',
+  keywords: 'instalação de pisos, instalação madeira, instalação de cerâmica, piso laminado, piso vinílico, instalação de carpete, restauração de pisos, serviços profissionais de pisos',
   openGraph: {
     title: 'Serviços Profissionais de Pisos | Pisos Pró',
     description: 'Transforme seu espaço com nossos serviços especializados de instalação e reforma de pisos.',
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    id: 'hardwood',
-    title: 'Instalação de Madeira',
+    id: 'madeira',
+    title: 'Instalação de Pisos de Madeira',
     description: 'Instalação premium de piso de madeira com artesanato especializado. Trabalhamos com todos os tipos de madeira incluindo carvalho, maple, cerejeira e espécies exóticas.',
     features: ['Acabamento no Local e Pré-acabado', 'Madeira Maciça e Engenheirada', 'Tingimento Personalizado', 'Lixamento Profissional'],
     price: 'A partir de R$ 120/m²',
@@ -32,7 +32,7 @@ const services = [
   //   popular: false
   // },
   {
-    id: 'laminate',
+    id: 'laminado',
     title: 'Piso Laminado',
     description: 'Piso laminado acessível e durável que imita a aparência da madeira e cerâmica por uma fração do custo.',
     features: ['Instalação Click', 'Opções Resistentes à Água', 'Múltiplos Acabamentos', 'Instalação Rápida'],
@@ -41,7 +41,7 @@ const services = [
     popular: false
   },
   {
-    id: 'vinyl',
+    id: 'vinílico',
     title: 'Vinílico e LVT',
     description: 'Piso vinílico de luxo em régua e manta perfeito para áreas de alta umidade e tráfego intenso.',
     features: ['100% À Prova d’Água', 'Vinílico de Luxo em Régua', 'Vinílico em Manta', 'Grau Comercial'],
@@ -50,7 +50,7 @@ const services = [
     popular: true
   },
   {
-    id: 'other',
+    id: 'outros',
     title: 'Outros Serviços',
     description: 'Soluções especializadas em pisos para atender suas necessidades específicas.',
     features: ['Consulta Personalizada', 'Projetos Especiais', 'Soluções Sob Medida', 'Acabamento Premium'],
@@ -59,7 +59,7 @@ const services = [
     popular: false
   },
   {
-    id: 'refinishing',
+    id: 'reacabamentoing',
     title: 'Restauração de Pisos',
     description: 'Restaure a beleza dos seus pisos de madeira existentes com lixamento, tingimento e acabamento profissionais.',
     features: ['Lixamento Completo', 'Tingimento Personalizado', 'Acabamento Poliuretano', 'Processo Sem Poeira'],
@@ -147,7 +147,7 @@ export default function ServicesPage() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">
+        {/* <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">
           <h2 className="font-cinzel text-4xl md:text-5xl font-bold mb-6">
             <span className="text-gradient-gold">
               Pronto para Transformar seu Espaço?
@@ -171,7 +171,7 @@ export default function ServicesPage() {
               <span className="relative z-10">Ligue (11) 94014-7157</span>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

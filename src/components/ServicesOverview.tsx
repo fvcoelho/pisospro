@@ -4,37 +4,37 @@ import Link from 'next/link'
 
 const services = [
   {
-    title: 'Instalação de Madeira',
+    title: 'Instalação de Pisos de Madeira',
     description: 'Instalação especializada de pisos de madeira premium com precisão artesanal e acabamento impecável.',
-    href: '/services/hardwood',
+    href: '/services/madeira',
     gradient: 'from-wood-400 to-wood-600',
     featured: true
   },
   {
     title: 'Restauração Premium',
     description: 'Restaure a beleza original dos seus pisos de madeira com técnicas profissionais de lixamento e envernizamento.',
-    href: '/services/refinishing',
+    href: '/services/reacabamentoing',
     gradient: 'from-gold-400 to-gold-600',
     featured: true
   },
   {
     title: 'Piso Laminado',
     description: 'Opções de laminado de alta qualidade, acessíveis e duráveis para todos os ambientes residenciais.',
-    href: '/services/laminate',
+    href: '/services/laminado',
     gradient: 'from-neutral-400 to-neutral-600',
     featured: false
   },
   {
     title: 'Vinílico Premium',
     description: 'Soluções impermeáveis em piso vinílico de luxo, ideais para áreas úmidas e alto tráfego.',
-    href: '/services/vinyl',
+    href: '/services/vinílico',
     gradient: 'from-wood-300 to-wood-500',
     featured: false
   },
   {
     title: 'Acabamentos Especiais',
     description: 'Rodapés, soleiras e acabamentos personalizados que complementam perfeitamente seu piso.',
-    href: '/services/finishing',
+    href: '/services/acabamentoing',
     gradient: 'from-gold-300 to-gold-500',
     featured: false
   },
@@ -115,7 +115,7 @@ export default function ServicesOverview() {
         </div>
         
         {/* Call to action */}
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <div className="glass-enhanced inline-block p-8 rounded-2xl">
             <h3 className="text-2xl font-bold text-wood-900 mb-4">
               Precisa de uma Solução Personalizada?
@@ -138,7 +138,7 @@ export default function ServicesOverview() {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )

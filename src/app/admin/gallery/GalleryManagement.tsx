@@ -34,11 +34,11 @@ interface GalleryImage {
 
 const categories = [
   { value: 'all', label: 'Todas as Categorias' },
-  { value: 'hardwood', label: 'Piso de Madeira' },
-  { value: 'finish', label: 'Acabamento' },
-  { value: 'vinyl', label: 'Piso Vinílico' },
-  { value: 'laminate', label: 'Piso Laminado' },
-  { value: 'other', label: 'Outros' }
+  { value: 'madeira', label: 'Piso de Madeira' },
+  { value: 'acabamento', label: 'Acabamento' },
+  { value: 'vinílico', label: 'Piso Vinílico' },
+  { value: 'laminado', label: 'Piso Laminado' },
+  { value: 'outros', label: 'Outros' }
 ]
 
 interface EditImageFormProps {
