@@ -48,20 +48,20 @@ export default function Navbar() {
             <NavLink href="/" scrolled={scrolled} data-track-id="nav-home">
               Início
             </NavLink>
-            <NavLink href="/services" scrolled={scrolled} data-track-id="nav-services">
-              Serviços
-            </NavLink>
-            <NavLink href="/products" scrolled={scrolled} data-track-id="nav-products">
-              Produtos
-            </NavLink>
-            <NavLink href="/portfolio" scrolled={scrolled} data-track-id="nav-portfolio">
+            <NavLink href="/#portfolio" scrolled={scrolled} data-track-id="nav-portfolio">
               Portfólio
             </NavLink>
-            <NavLink href="/about" scrolled={scrolled} data-track-id="nav-about">
+            <NavLink href="/#services" scrolled={scrolled} data-track-id="nav-services">
+              Serviços
+            </NavLink>
+            <NavLink href="/#products" scrolled={scrolled} data-track-id="nav-products">
+              Produtos
+            </NavLink>
+            <NavLink href="/#about" scrolled={scrolled} data-track-id="nav-about">
               Sobre
             </NavLink>
             <Link 
-              href="/contact" 
+              href="/#contact" 
               data-track-id="nav-quote" 
               className="ml-4 bg-gradient-gold text-wood-900 px-6 py-2.5 rounded-lg text-sm font-bold hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-gold-400/25"
             >
@@ -97,20 +97,20 @@ export default function Navbar() {
                 <MobileNavLink href="/" data-track-id="mobile-nav-home" onClick={() => setIsOpen(false)}>
                   Início
                 </MobileNavLink>
-                <MobileNavLink href="/services" data-track-id="mobile-nav-services" onClick={() => setIsOpen(false)}>
-                  Serviços
-                </MobileNavLink>
-                <MobileNavLink href="/products" data-track-id="mobile-nav-products" onClick={() => setIsOpen(false)}>
-                  Produtos
-                </MobileNavLink>
-                <MobileNavLink href="/portfolio" data-track-id="mobile-nav-portfolio" onClick={() => setIsOpen(false)}>
+                <MobileNavLink href="/#portfolio" data-track-id="mobile-nav-portfolio" onClick={() => setIsOpen(false)}>
                   Portfólio
                 </MobileNavLink>
-                <MobileNavLink href="/about" data-track-id="mobile-nav-about" onClick={() => setIsOpen(false)}>
+                <MobileNavLink href="/#services" data-track-id="mobile-nav-services" onClick={() => setIsOpen(false)}>
+                  Serviços
+                </MobileNavLink>
+                <MobileNavLink href="/#products" data-track-id="mobile-nav-products" onClick={() => setIsOpen(false)}>
+                  Produtos
+                </MobileNavLink>
+                <MobileNavLink href="/#about" data-track-id="mobile-nav-about" onClick={() => setIsOpen(false)}>
                   Sobre
                 </MobileNavLink>
                 <Link 
-                  href="/contact" 
+                  href="/#contact" 
                   data-track-id="mobile-nav-quote" 
                   onClick={() => setIsOpen(false)}
                   className="block bg-gradient-gold text-wood-900 px-4 py-3 rounded-lg text-base font-bold text-center hover:scale-105 transition-all duration-300 mt-4"

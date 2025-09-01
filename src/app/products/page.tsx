@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const productCategories = [
   {
-    id: 'hardwood',
+    id: 'madeira',
     name: 'Piso de Madeira',
     description: 'Madeira maciça e engenheirada premium dos principais fabricantes',
     gradient: 'from-wood-400 to-wood-600',
@@ -37,7 +37,7 @@ const productCategories = [
   //   ]
   // },
   {
-    id: 'laminate',
+    id: 'laminado',
     name: 'Piso Laminado',
     description: 'Laminado de alta qualidade com aparência de madeira e pedra verdadeiras',
     gradient: 'from-wood-300 to-wood-500',
@@ -49,7 +49,7 @@ const productCategories = [
     ]
   },
   {
-    id: 'vinyl',
+    id: 'vinílico',
     name: 'Vinílico e LVT',
     description: 'Piso vinílico de luxo em régua e manta com durabilidade superior',
     gradient: 'from-blue-400 to-blue-600',
@@ -61,7 +61,7 @@ const productCategories = [
     ]
   },
   {
-    id: 'other',
+    id: 'outros',
     name: 'Outros',
     description: 'Soluções especializadas e produtos sob medida',
     gradient: 'from-neutral-400 to-neutral-600',

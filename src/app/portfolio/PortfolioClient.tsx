@@ -202,11 +202,11 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
 
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
-      case 'hardwood': return 'from-wood-400 to-wood-600'
-      case 'vinyl': return 'from-blue-400 to-blue-600'
-      case 'laminate': return 'from-wood-300 to-wood-500'
-      case 'finish': return 'from-gold-400 to-gold-600'
-      case 'other': return 'from-neutral-300 to-neutral-500'
+      case 'madeira': return 'from-wood-400 to-wood-600'
+      case 'vinílico': return 'from-blue-400 to-blue-600'
+      case 'laminado': return 'from-wood-300 to-wood-500'
+      case 'acabamento': return 'from-gold-400 to-gold-600'
+      case 'outros': return 'from-neutral-300 to-neutral-500'
       default: return 'from-green-400 to-green-600'
     }
   }
@@ -446,11 +446,11 @@ function ProjectModal({ project, categories, onClose }: ProjectModalProps) {
   
   const getCategoryGradient = (category: string | null) => {
     switch (category) {
-      case 'hardwood': return 'from-wood-400 to-wood-600'
-      case 'vinyl': return 'from-blue-400 to-blue-600'
-      case 'laminate': return 'from-wood-300 to-wood-500'
-      case 'finish': return 'from-gold-400 to-gold-600'
-      case 'other': return 'from-neutral-300 to-neutral-500'
+      case 'madeira': return 'from-wood-400 to-wood-600'
+      case 'vinílico': return 'from-blue-400 to-blue-600'
+      case 'laminado': return 'from-wood-300 to-wood-500'
+      case 'acabamento': return 'from-gold-400 to-gold-600'
+      case 'outros': return 'from-neutral-300 to-neutral-500'
       default: return 'from-green-400 to-green-600'
     }
   }
@@ -828,7 +828,7 @@ export default function PortfolioClient() {
         </div>
 
         {/* Stats Section */}
-        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl shadow-xl p-12 mb-16">
+        {/* <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl shadow-xl p-12 mb-16">
           <h2 className="font-cinzel text-4xl font-bold text-center text-gray-900 mb-12">
             Nossa Experiência em Números
           </h2>
@@ -858,7 +858,7 @@ export default function PortfolioClient() {
               <div className="font-montserrat text-gray-700 font-medium">Anos de Experiência</div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* CTA Section */}
         <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">

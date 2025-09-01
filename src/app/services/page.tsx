@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    id: 'hardwood',
+    id: 'madeira',
     title: 'Instalação de Madeira',
     description: 'Instalação premium de piso de madeira com artesanato especializado. Trabalhamos com todos os tipos de madeira incluindo carvalho, maple, cerejeira e espécies exóticas.',
     features: ['Acabamento no Local e Pré-acabado', 'Madeira Maciça e Engenheirada', 'Tingimento Personalizado', 'Lixamento Profissional'],
@@ -32,7 +32,7 @@ const services = [
   //   popular: false
   // },
   {
-    id: 'laminate',
+    id: 'laminado',
     title: 'Piso Laminado',
     description: 'Piso laminado acessível e durável que imita a aparência da madeira e cerâmica por uma fração do custo.',
     features: ['Instalação Click', 'Opções Resistentes à Água', 'Múltiplos Acabamentos', 'Instalação Rápida'],
@@ -41,7 +41,7 @@ const services = [
     popular: false
   },
   {
-    id: 'vinyl',
+    id: 'vinílico',
     title: 'Vinílico e LVT',
     description: 'Piso vinílico de luxo em régua e manta perfeito para áreas de alta umidade e tráfego intenso.',
     features: ['100% À Prova d’Água', 'Vinílico de Luxo em Régua', 'Vinílico em Manta', 'Grau Comercial'],
@@ -50,7 +50,7 @@ const services = [
     popular: true
   },
   {
-    id: 'other',
+    id: 'outros',
     title: 'Outros Serviços',
     description: 'Soluções especializadas em pisos para atender suas necessidades específicas.',
     features: ['Consulta Personalizada', 'Projetos Especiais', 'Soluções Sob Medida', 'Acabamento Premium'],
@@ -59,7 +59,7 @@ const services = [
     popular: false
   },
   {
-    id: 'refinishing',
+    id: 'reacabamentoing',
     title: 'Restauração de Pisos',
     description: 'Restaure a beleza dos seus pisos de madeira existentes com lixamento, tingimento e acabamento profissionais.',
     features: ['Lixamento Completo', 'Tingimento Personalizado', 'Acabamento Poliuretano', 'Processo Sem Poeira'],
