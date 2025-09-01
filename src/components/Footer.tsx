@@ -21,7 +21,7 @@ export default function Footer() {
             </p>
             
             {/* Trust indicators */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
+            {/* <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="text-center glass-enhanced p-3 rounded-lg">
                 <div className="text-2xl font-bold text-gold-400">15+</div>
                 <div className="text-xs text-white/70">Anos</div>
@@ -34,20 +34,22 @@ export default function Footer() {
                 <div className="text-2xl font-bold text-gold-400">98%</div>
                 <div className="text-xs text-white/70">Satisfação</div>
               </div>
-            </div>
+            </div> */}
 
             {/* Social Links */}
             <div className="flex space-x-4">
               <a 
-                href="https://facebook.com/pisospro" 
+                href="https://www.facebook.com/pisosprobrasil" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110"
+                className="glass-enhanced w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600/20 transition-all duration-300 hover:scale-110"
               >
                 <span className="sr-only">Facebook</span>
-                📘
+                <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
               </a>
-              <a 
+              {/* <a 
                 href="https://instagram.com/pisospro" 
                 target="_blank"
                 rel="noopener noreferrer"
@@ -64,7 +66,7 @@ export default function Footer() {
               >
                 <span className="sr-only">LinkedIn</span>
                 💼
-              </a>
+              </a> */}
             </div>
           </div>
           
@@ -73,9 +75,9 @@ export default function Footer() {
             <h4 className="text-xl font-bold mb-6 text-white">Navegação</h4>
             <ul className="space-y-3">
               <li><FooterLink href="/">Início</FooterLink></li>
-              <li><FooterLink href="/services">Serviços</FooterLink></li>
-              <li><FooterLink href="/products">Produtos</FooterLink></li>
               <li><FooterLink href="/portfolio">Portfólio</FooterLink></li>
+              <li><FooterLink href="/services">Serviços</FooterLink></li>
+              {/* <li><FooterLink href="/products">Produtos</FooterLink></li> */}
               <li><FooterLink href="/about">Sobre Nós</FooterLink></li>
               <li><FooterLink href="/contact">Contato</FooterLink></li>
             </ul>
@@ -156,12 +158,12 @@ export default function Footer() {
               <Link href="/politica-privacidade" className="text-white/70 hover:text-white transition-colors text-sm">
                 Política de Privacidade
               </Link>
-              <Link href="/terms" className="text-white/70 hover:text-white transition-colors text-sm">
+              {/* <Link href="/terms" className="text-white/70 hover:text-white transition-colors text-sm">
                 Termos de Serviço
-              </Link>
-              <Link href="/sitemap" className="text-white/70 hover:text-white transition-colors text-sm">
+              </Link> */}
+              {/* <Link href="/sitemap" className="text-white/70 hover:text-white transition-colors text-sm">
                 Mapa do Site
-              </Link>
+              </Link> */}
             </div>
           </div>
 
