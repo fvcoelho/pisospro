@@ -165,7 +165,7 @@ export default function Home() {
     { id: 'services', component: ServicesSection },
     //{ id: 'products', component: ProductsSection },
     { id: 'about', component: AboutSection },
-    { id: 'contact', component: ContactSection }
+    //{ id: 'contact', component: ContactSection }
   ]
 
   // Intersection observer for the last visible section
@@ -252,11 +252,11 @@ export default function Home() {
       )}
       
       {/* End of content message */}
-      {visibleSections.length === sections.length && (
+      {/* {visibleSections.length === sections.length && (
         <div className="text-center py-12 text-gray-500">
           <p className="font-montserrat">Você chegou ao fim do conteúdo</p>
         </div>
-      )}
+      )} */}
     </div>
   )
 }

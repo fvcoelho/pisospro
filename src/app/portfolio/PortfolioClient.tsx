@@ -861,7 +861,7 @@ export default function PortfolioClient() {
         </div> */}
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">
+        {/* <div className="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white rounded-2xl p-12 text-center shadow-2xl">
           <h2 className="font-cinzel text-4xl md:text-5xl font-bold mb-6">
             <span className="text-gradient-gold">
               Pronto para Transformar seu Espaço?
@@ -885,7 +885,7 @@ export default function PortfolioClient() {
               <span className="relative z-10">Explorar Serviços</span>
             </a>
           </div>
-        </div>
+        </div> */}
 
         {/* Project Detail Modal */}
         {selectedProject && (
