@@ -4,6 +4,11 @@ import { useEffect, useState, useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Hero from '@/components/Hero'
 import ServicesOverview from '@/components/ServicesOverview'
+import ProductsShowcase from '@/components/ProductsShowcase'
+import VinylSection from '@/components/VinylSection'
+import SpecialtySection from '@/components/SpecialtySection'
+import FinishingsSection from '@/components/FinishingsSection'
+import SafetyFlooringSection from '@/components/SafetyFlooringSection'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -160,10 +165,14 @@ export default function Home() {
   // Define all sections
   const sections = [
     { id: 'hero', component: Hero },
-    { id: 'services-overview', component: ServicesOverview },
     { id: 'portfolio', component: PortfolioSection },
-    { id: 'services', component: ServicesSection },
-    //{ id: 'products', component: ProductsSection },
+    { id: 'services-overview', component: ServicesOverview },
+    { id: 'products-showcase', component: ProductsShowcase },
+    { id: 'vinyl-section', component: VinylSection },
+    { id: 'specialty-section', component: SpecialtySection },
+    { id: 'finishings-section', component: FinishingsSection },
+    { id: 'safety-flooring', component: SafetyFlooringSection },
+    
     { id: 'about', component: AboutSection },
     //{ id: 'contact', component: ContactSection }
   ]
@@ -912,16 +921,17 @@ function ContactSection() {
                 <div className="w-8 h-8 bg-white/20 rounded-full" />
               </div>
               <h3 className="font-cinzel text-xl font-bold mb-2">Telefone</h3>
-              <p className="font-montserrat text-white/90">(11) 94014-7157</p>
+              <p className="font-montserrat text-white/90">(11) 3113-7934</p>
+              <p className="font-montserrat text-white/70 text-sm mt-1">Tales</p>
             </div>
           </div>
           <div className="text-center">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-all duration-300">
-              <div className="bg-gradient-to-br from-wood-400 to-wood-600 rounded-xl p-4 mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+              <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-xl p-4 mb-4 mx-auto w-16 h-16 flex items-center justify-center">
                 <div className="w-8 h-8 bg-white/20 rounded-full" />
               </div>
-              <h3 className="font-cinzel text-xl font-bold mb-2">Email</h3>
-              <p className="font-montserrat text-white/90">contato@pisospro.com.br</p>
+              <h3 className="font-cinzel text-xl font-bold mb-2">WhatsApp</h3>
+              <p className="font-montserrat text-white/90">(11) 94014-7157</p>
             </div>
           </div>
           <div className="text-center">
@@ -950,6 +960,12 @@ function ContactSection() {
           >
             WhatsApp
           </Link>
+          <a 
+            href="tel:+551131137934"
+            className="bg-gradient-to-r from-wood-400 to-wood-600 text-white px-12 py-4 rounded-xl font-montserrat font-semibold hover:from-wood-500 hover:to-wood-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 text-center text-lg"
+          >
+            Ligar Agora
+          </a>
         </div>
       </div>
     </div>
