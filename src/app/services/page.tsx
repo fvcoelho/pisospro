@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Serviços Profissionais de Pisos - Instalação e Reforma | Pisos Pró',
   description: 'Serviços especializados de instalação de pisos incluindo madeira, cerâmica, laminado, vinílico e carpete. Profissionais licenciados com mais de 15 anos de experiência. Orçamentos gratuitos disponíveis.',
-  keywords: 'instalação de pisos, instalação de madeira, instalação de cerâmica, piso laminado, piso vinílico, instalação de carpete, restauração de pisos, serviços profissionais de pisos',
+  keywords: 'instalação de pisos, instalação madeira, instalação de cerâmica, piso laminado, piso vinílico, instalação de carpete, restauração de pisos, serviços profissionais de pisos',
   openGraph: {
     title: 'Serviços Profissionais de Pisos | Pisos Pró',
     description: 'Transforme seu espaço com nossos serviços especializados de instalação e reforma de pisos.',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const services = [
   {
     id: 'madeira',
-    title: 'Instalação de Madeira',
+    title: 'Instalação de Pisos de Madeira',
     description: 'Instalação premium de piso de madeira com artesanato especializado. Trabalhamos com todos os tipos de madeira incluindo carvalho, maple, cerejeira e espécies exóticas.',
     features: ['Acabamento no Local e Pré-acabado', 'Madeira Maciça e Engenheirada', 'Tingimento Personalizado', 'Lixamento Profissional'],
     price: 'A partir de R$ 120/m²',

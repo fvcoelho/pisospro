@@ -11,7 +11,7 @@ import Image from 'next/image'
 const services = [
   {
     id: 'madeira',
-    title: 'Instalação de Madeira',
+    title: 'Instalação de Pisos de Madeira',
     description: 'Instalação premium de piso de madeira com artesanato especializado. Trabalhamos com todos os tipos de madeira incluindo carvalho, maple, cerejeira e espécies exóticas.',
     features: ['Acabamento no Local e Pré-acabado', 'Madeira Maciça e Engenheirada', 'Tingimento Personalizado', 'Lixamento Profissional'],
     price: 'A partir de R$ 120/m²',
@@ -163,7 +163,7 @@ export default function Home() {
     { id: 'services-overview', component: ServicesOverview },
     { id: 'portfolio', component: PortfolioSection },
     { id: 'services', component: ServicesSection },
-    { id: 'products', component: ProductsSection },
+    //{ id: 'products', component: ProductsSection },
     { id: 'about', component: AboutSection },
     { id: 'contact', component: ContactSection }
   ]

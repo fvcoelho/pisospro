@@ -127,7 +127,7 @@ export default function QuoteForm() {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Selecione o tipo de projeto</option>
-            <option value="madeira">Instalação de Madeira</option>
+            <option value="madeira">Instalação de Pisos de Madeira</option>
             <option value="acabamento">Acabamento</option>
             <option value="laminado">Piso Laminado</option>
             <option value="vinílico">Vinílico e LVT</option>

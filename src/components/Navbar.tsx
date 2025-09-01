@@ -54,9 +54,9 @@ export default function Navbar() {
             <NavLink href="/#services" scrolled={scrolled} data-track-id="nav-services">
               Serviços
             </NavLink>
-            <NavLink href="/#products" scrolled={scrolled} data-track-id="nav-products">
+            {/* <NavLink href="/#products" scrolled={scrolled} data-track-id="nav-products">
               Produtos
-            </NavLink>
+            </NavLink> */}
             <NavLink href="/#about" scrolled={scrolled} data-track-id="nav-about">
               Sobre
             </NavLink>

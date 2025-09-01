@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const services = [
   {
-    title: 'Instalação de Madeira',
+    title: 'Instalação de Pisos de Madeira',
     description: 'Instalação especializada de pisos de madeira premium com precisão artesanal e acabamento impecável.',
     href: '/services/madeira',
     gradient: 'from-wood-400 to-wood-600',
