@@ -437,6 +437,18 @@ export default function AnalyticsPage() {
                     <div className="text-sm text-gray-500">
                       {getDeviceType(pageView.session.userAgent)}
                     </div>
+                    {pageView.session.ipAddress && (
+                      <div className="text-sm">
+                        <a
+                          href={`https://whatismyipaddress.com/ip/${pageView.session.ipAddress}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-purple-600 hover:text-purple-800"
+                        >
+                          {pageView.session.ipAddress}
+                        </a>
+                      </div>
+                    )}
                     <Link
                       href={`/admin/analytics/session/${pageView.session.sessionId}`}
                       className="text-xs text-blue-600 hover:text-blue-800"
